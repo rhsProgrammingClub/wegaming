@@ -1,13 +1,21 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
+import CharacterSelectScene.CharacterSelectScene;
 import ky.KYscreen;
 
 public class Main extends KYscreen {
 
     public static int width;
     public static int height;
+    private Character player1;
+    private Character player2;
     GameScene gameScene;
+    CharacterSelectScene csScene;
+    ArrayList <Character> characters;
+
+    boolean cSelect = true;
 
     public Main() {
         super(width, height, false);
@@ -19,8 +27,12 @@ public class Main extends KYscreen {
         setDebugMode(true);
         setFullScreen(true);
         setCursorVisible(false);
-        gameScene = new GameScene();
-        setScene(gameScene);
+
+        csScene = new CharacterSelectScene();
+        setScene(csScene);
+        // dispose();
+        // gameScene = new GameScene(player1, player2);
+        // setScene(gameScene);
         
     }
 

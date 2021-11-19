@@ -61,6 +61,5 @@ public class Scene {
 		return collisionEntities.toArray(new CollisionEntity[collisionEntities.size()]);
 	}
 
-
     
 }
