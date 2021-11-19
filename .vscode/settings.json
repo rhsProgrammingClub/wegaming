@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": [
+        ".",
+        "src",
+        "src\\Characters",
+        "src\\Scenes"
+    ]
+}
