@@ -6,7 +6,6 @@ import ky.Vector2D;
 public class Ground extends CollisionEntity {
 
     private Asset groundAsset;
-    private AnimationAsset ase;
 
     public Ground(double x, double y, int collisionBoxWidth, int collisionBoxHeight) {
         super(x, y, collisionBoxWidth, collisionBoxHeight, 3, "ground");
