@@ -26,8 +26,6 @@ public abstract class KYscreen extends JFrame {
 	
 	private ArrayList<CollisionEntity> collisionEntities = new ArrayList<CollisionEntity>(); // holds all collision entities to handle collisions easier
 
-	private Scene scene;
-	
 	public Entity[][] getEntityLayers(){
 		Entity[][] converted = new Entity[entityLayers.size()][];
 		for(int i = 0; i < entityLayers.size(); i++) {
@@ -153,78 +151,11 @@ public abstract class KYscreen extends JFrame {
 
 		Entity[][] allEntities = getEntityLayers();	// retrieve all our entities
 		Asset[][] allAssets = getAssetLayers();		// retrieve all our assets
-		Entity[][] sceneEntities = scene.getEntityLayers();
-		Asset[][] sceneAssets = scene.getAssetLayers();
 		boolean renderAssets = true;
 		boolean renderEntities = true;
-		boolean renderSceneAssets = true;
-		boolean renderSceneEntities = true;
 		int i = 0;										// this acts as the index for the layers, goes through all the layers to render
 		
-		while(renderAssets || renderEntities || renderSceneAssets || renderSceneEntities) {			// acts like a "for loop," stops when either entities or assets have been rendered
-
-			if(i < sceneEntities.length) {
-				if(sceneEntities[i].length != 0) {		// if entity layer is not empty
-					for(Entity e : sceneEntities[i]) {
-						if(e.isVisible()) {
-							for(Asset[] assetLayer : e.getAssetLayers()) {
-								for(Asset a : assetLayer) {
-									if(a.isVisible()) {
-										int renderXPos = (int) Math.round(a.getX() - (double) a.getWidth()/2 + e.getX() - getCameraPos().getX());
-										int renderYPos = (int) Math.round(a.getY() - (double) a.getHeight()/2 + e.getY() - getCameraPos().getY());
-										offg.drawImage(a.getImage(), renderXPos, renderYPos, a.getWidth(), a.getHeight(), null);
-										if(a.getDebugVisibility() || this.debug) {
-											offg.setColor(Color.red);
-											offg.drawRect(renderXPos, renderYPos, a.getWidth(), a.getHeight());
-										}
-									}
-								}
-							}
-							if(e instanceof CollisionEntity) {
-								if(((CollisionEntity) e).getCollisionBoxVisibility() || this.debug) {
-									CollisionBox cb = ((CollisionEntity) e).getCollisionBox();
-									CollisionBox xb = ((CollisionEntity) e).getXCollisionBox();
-									CollisionBox yb = ((CollisionEntity) e).getYCollisionBox();
-									offg.setColor(Color.black);
-									offg.drawRect(cb.x - (int) Math.round(getCameraPos().getX()), cb.y - (int) Math.round(getCameraPos().getY()), cb.width, cb.height);
-									offg.setColor(Color.green);
-									offg.drawRect(xb.x - (int) Math.round(getCameraPos().getX()), xb.y - (int) Math.round(getCameraPos().getY()), xb.width, xb.height);
-									offg.setColor(Color.blue);
-									offg.drawRect(yb.x - (int) Math.round(getCameraPos().getX()), yb.y - (int) Math.round(getCameraPos().getY()), yb.width, yb.height);
-								}
-							}
-						}
-					}
-				}
-			}
-			else {
-				renderSceneEntities = false;
-			}
-			
-			if(i < sceneAssets.length) {
-				if(sceneAssets[i].length != 0) {			// if asset layer is not empty
-					for(Asset a : sceneAssets[i]) {
-						
-						if(a.isVisible()) {
-							if(a instanceof Text) {
-								((Text) a).updateText();
-							}
-
-							int renderXPos = (int) Math.round(a.getX() - (double) a.getWidth()/2 - getCameraPos().getX());
-							int renderYPos = (int) Math.round(a.getY() - (double) a.getHeight()/2 - getCameraPos().getY());
-							offg.drawImage(a.getImage(), renderXPos, renderYPos, a.getWidth(), a.getHeight(), null);
-							if(a.getDebugVisibility() || this.debug) {
-								offg.setColor(Color.red);
-								offg.drawRect(renderXPos, renderYPos, a.getWidth(), a.getHeight());
-							}
-						}
-					}
-				}
-			}
-			else {
-				renderSceneAssets = false;
-			}
-
+		while(renderAssets || renderEntities) {			// acts like a "for loop," stops when either entities or assets have been rendered
 			
 			if(i < allEntities.length) {
 				if(allEntities[i].length != 0) {		// if entity layer is not empty
@@ -336,8 +267,20 @@ public abstract class KYscreen extends JFrame {
 		}
 	}
 
-	public void setScene (Scene scene) {
-		this.scene = scene;
+	public void add (Scene scene) {
+		for (Entity[] layer : scene.getEntityLayers()) {
+			for (Entity entity : layer) {
+				add(entity);
+			}
+		}
+		for (CollisionEntity entity : scene.getCollisionEntities()) {
+			add(entity);
+		}
+		for (Asset[] layer : scene.getAssetLayers()) {
+			for (Asset asset : layer) {
+				add(asset);
+			}
+		}
 	}
 	
 	public boolean getKeyStatus(int key) {
