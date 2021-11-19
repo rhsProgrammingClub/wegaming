@@ -1,32 +1,42 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
+import ky.Asset;
+import ky.CollisionEntity;
+import ky.Entity;
 import ky.KYscreen;
 
 public class Main extends KYscreen {
 
     public static int width;
     public static int height;
-    GameScene gameScene;
+    Scene currentScene;
 
     public Main() {
         super(width, height, false);
     }
 
+	public void setScene (Scene scene) {
+        assetLayers = scene.getAssetLayers();
+        entityLayers = scene.getEntityLayers();
+        collisionEntities = scene.getCollisionEntities();
+	}
 
     @Override
     public void start() {
         setDebugMode(true);
         setFullScreen(true);
         setCursorVisible(false);
-        gameScene = new GameScene();
-        add(gameScene);
+        currentScene = new GameScene();
+        setScene(currentScene);
         
     }
 
     @Override
     public void update() {
-
+        ArrayList <Integer> clonedKeyCodes = activeKeyCodes;
+        currentScene.update(deltaT, clonedKeyCodes);
     }
 
 
