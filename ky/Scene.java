@@ -61,6 +61,8 @@ public class Scene {
 		return collisionEntities.toArray(new CollisionEntity[collisionEntities.size()]);
 	}
 
-
+	public void update(double deltaT, ArrayList<Integer> keyCodes) {
+		
+	}
     
 }

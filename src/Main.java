@@ -20,7 +20,7 @@ public class Main extends KYscreen {
         setFullScreen(true);
         setCursorVisible(false);
         gameScene = new GameScene();
-        setScene(gameScene);
+        add(gameScene);
         
     }
 
