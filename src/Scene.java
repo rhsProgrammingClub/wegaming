@@ -1,6 +1,8 @@
-package ky;
-
 import java.util.ArrayList;
+
+import ky.Asset;
+import ky.CollisionEntity;
+import ky.Entity;
 
 public class Scene {
 
@@ -41,24 +43,16 @@ public class Scene {
 		}
 	}
 
-	public Entity[][] getEntityLayers(){
-		Entity[][] converted = new Entity[entityLayers.size()][];
-		for(int i = 0; i < entityLayers.size(); i++) {
-			converted[i] = entityLayers.get(i).toArray(new Entity[entityLayers.get(i).size()]);
-		}
-		return converted;
+	public ArrayList<ArrayList<Entity>> getEntityLayers(){
+		return entityLayers;
 	}
 	
-	public Asset[][] getAssetLayers(){ // gets all assets whilst keeping the layers
-		Asset[][] converted = new Asset[assetLayers.size()][];
-		for(int i = 0; i < assetLayers.size(); i++) {
-			converted[i] = assetLayers.get(i).toArray(new Asset[assetLayers.get(i).size()]);
-		}
-		return converted;
+	public ArrayList<ArrayList<Asset>> getAssetLayers (){ // gets all assets whilst keeping the layers
+		return assetLayers;
 	}
 	
-	public CollisionEntity[] getCollisionEntities() {
-		return collisionEntities.toArray(new CollisionEntity[collisionEntities.size()]);
+	public ArrayList<CollisionEntity> getCollisionEntities() {
+		return collisionEntities;
 	}
 
 	public void update(double deltaT, ArrayList<Integer> keyCodes) {

@@ -1,5 +1,4 @@
 import ky.CollisionEntity;
-import ky.Scene;
 
 public class GameScene extends Scene {
 
