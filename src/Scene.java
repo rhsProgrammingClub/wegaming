@@ -6,11 +6,18 @@ import ky.Entity;
 
 public class Scene {
 
+	public int changeScene () {
+		return 0;
+	}
+
     private ArrayList<ArrayList<Asset>> assetLayers = new ArrayList<ArrayList<Asset>>(); // this is a collection of arraylists, which are layers
 
 	private ArrayList<ArrayList<Entity>> entityLayers = new ArrayList<ArrayList<Entity>>(); // holds all the entities to be rendered
 	
 	private ArrayList<CollisionEntity> collisionEntities = new ArrayList<CollisionEntity>(); // holds all collision entities to handle collisions easier
+
+	int width = Main.width;
+	int height = Main.height;
 
 	public void add(Asset asset) {
 		int difference = asset.getLayer() + 1 - assetLayers.size();// check if the indicated layer exists or not
@@ -58,5 +65,4 @@ public class Scene {
 	public void update(double deltaT, ArrayList<Integer> keyCodes) {
 		
 	}
-    
 }

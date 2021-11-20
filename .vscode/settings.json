@@ -3,6 +3,8 @@
         ".",
         "src",
         "src\\Characters",
-        "src\\Scenes"
+        "src\\Scenes\\CharacterSelectScene",
+        "src\\Scenes\\GameScene",
+        "src\\Scenes\\MainMenuScene"
     ]
 }
