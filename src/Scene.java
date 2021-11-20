@@ -6,6 +6,10 @@ import ky.Entity;
 
 public class Scene {
 
+	public int changeScene () {
+		return 0;
+	}
+
     private ArrayList<ArrayList<Asset>> assetLayers = new ArrayList<ArrayList<Asset>>(); // this is a collection of arraylists, which are layers
 
 	private ArrayList<ArrayList<Entity>> entityLayers = new ArrayList<ArrayList<Entity>>(); // holds all the entities to be rendered

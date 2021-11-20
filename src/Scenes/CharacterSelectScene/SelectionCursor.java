@@ -1,8 +1,6 @@
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardUpLeftHandler;
-
 import ky.Asset;
 import ky.Entity;
 import ky.Vector2D;
@@ -16,6 +14,8 @@ public class SelectionCursor extends Entity {
     private boolean liftedRight = true;
     private int leftKey;
     private int rightKey;
+    private int selectKey;
+    public int characterIndex;
 
     public SelectionCursor(Vector2D position, int layer, int player) {
         super(position, layer, "cursor");
@@ -24,6 +24,7 @@ public class SelectionCursor extends Entity {
         cursorAsset = new Asset("assets/test.png", new Vector2D(0, 0), 4);
         // p1Cursor = new Asset("assets/misc/p1Cursor.png", new Vector2D(2, 2), 4);
         // p2Cursor = new Asset("assets/misc/p2Cursor.png", new Vector2D(2, 2), 4);
+        cursorAsset.rescale(2);
         cursorAsset.setVisible(true);
         add(cursorAsset);
         setVisible(true);
@@ -31,9 +32,13 @@ public class SelectionCursor extends Entity {
         if (player == 1) {
             leftKey = KeyEvent.VK_A;
             rightKey = KeyEvent.VK_D;
+            selectKey = KeyEvent.VK_E;
+            characterIndex = 1;
         } else if (player == 2) {
-            leftKey = KeyEvent.VK_LEFT;
-            rightKey = KeyEvent.VK_RIGHT;
+            leftKey = KeyEvent.VK_J;
+            rightKey = KeyEvent.VK_L;
+            selectKey = KeyEvent.VK_O;
+            characterIndex = 2;
         }
 
     }
@@ -46,14 +51,28 @@ public class SelectionCursor extends Entity {
         if (!keyCodes.contains(rightKey)) {
             liftedRight = true;
         }
+        if (keyCodes.contains(selectKey)) {
+            selected = true;
+            if (player == 1) {
+                Main.player1 = Main.characters[characterIndex];
+            } else if (player == 2) {
+                Main.player2 = Main.characters[characterIndex];
+            }
+        }
         if (!selected) {
             if (keyCodes.contains(rightKey) && liftedRight) {
-                this.addPos(100,0);
-                liftedRight = false;
+                if (characterIndex < 3) {
+                    this.addPos(cursorAsset.getWidth()+20,0);
+                    liftedRight = false;
+                    characterIndex++;
+                }
             }
             if (keyCodes.contains(leftKey) && liftedLeft) {
-                this.addPos(-100,0);
-                liftedLeft = false;
+                if (characterIndex > 0) {
+                    this.addPos(-(cursorAsset.getWidth()+20),0);
+                    liftedLeft = false;
+                    characterIndex--;
+                }
             }
         }
     }

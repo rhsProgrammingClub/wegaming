@@ -11,11 +11,13 @@ public class Main extends KYscreen {
 
     public static int width;
     public static int height;
-    private Character player1;
-    private Character player2;
+    public static Character player1;
+    public static Character player2;
     GameScene gameScene;
     CharacterSelectScene csScene;
-    ArrayList <Character> characters;
+    public static Character[] characters;
+    public static int sceneIndex = 1;
+    public static Scene[] scenes;
 
     boolean cSelect = true;
     Scene currentScene;
@@ -35,15 +37,25 @@ public class Main extends KYscreen {
         setDebugMode(true);
         setFullScreen(true);
         setCursorVisible(false);
-        currentScene = new CharacterSelectScene();
+
+        scenes = new Scene[3];
+        scenes[0] = new CharacterSelectScene();
+        scenes[1] = new CharacterSelectScene();
+        scenes[2] = new GameScene();
+
+        characters = new Character[4];  // different characters
+        currentScene = scenes[sceneIndex];
         setScene(currentScene);
-        
     }
 
     @Override
     public void update() {
         ArrayList <Integer> clonedKeyCodes = activeKeyCodes;
         currentScene.update(deltaT, clonedKeyCodes);
+        if (currentScene.changeScene() != sceneIndex) {
+            currentScene = scenes[currentScene.changeScene()];
+            setScene(currentScene);
+        }
     }
 
 
