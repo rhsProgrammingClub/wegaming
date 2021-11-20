@@ -57,7 +57,9 @@ public class Main extends KYscreen {
         ArrayList <Integer> clonedKeyCodes = activeKeyCodes;
         currentScene.update(deltaT, clonedKeyCodes);
         if (currentScene.changeScene() != sceneIndex) {
-            currentScene = scenes[currentScene.changeScene()];
+            System.out.println("Changed scenes.");
+            sceneIndex = currentScene.changeScene();
+            currentScene = scenes[sceneIndex];
             currentScene.initialize();
             setScene(currentScene);
         }
