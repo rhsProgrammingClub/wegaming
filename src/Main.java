@@ -14,8 +14,6 @@ public class Main extends KYscreen {
     public static Character[] characters;
     public static int sceneIndex = 1;
     public static Scene[] scenes;
-    int frames=0;
-    double time=0;
 
     boolean cSelect = true;
     Scene currentScene;
@@ -53,7 +51,6 @@ public class Main extends KYscreen {
 
     @Override
     public void update() {
-        time += deltaT;
         ArrayList <Integer> clonedKeyCodes = activeKeyCodes;
         currentScene.update(deltaT, clonedKeyCodes);
         if (currentScene.changeScene() != sceneIndex) {
@@ -63,12 +60,6 @@ public class Main extends KYscreen {
             currentScene.initialize();
             setScene(currentScene);
         }
-        if (time >= 1) {
-            System.out.println(frames);
-            time = 0;
-            frames=0;
-        }
-        frames++;
     }
 
 

@@ -8,25 +8,34 @@ import ky.Vector2D;
 
 public abstract class Character extends CollisionEntity {
 
-    double maxHP;
-    double HP;
-    double speed = 1000;
-    double jumpHeight = 1200;
     int player=1;
+    protected double maxHP;
+    protected double HP;
+    protected double speed = 1000;
+    protected double jumpHeight = 1200;
     protected double attackRange;
     protected double gravity = 3000;
 
     protected AnimationAsset characterAnimation;
     protected Asset icon;
 
-    protected int basicAttackKey;
-    protected int basicAbilityKey;
-    protected int ultimateKey;
-    protected int jumpKey;
-    protected int rightKey;
-    protected int leftKey;
-    protected int downKey;
-    protected boolean canJump = true;
+    private int basicAttackKey;
+    private int basicAbilityKey;
+    private int ultimateKey;
+    private int jumpKey;
+    private int rightKey;
+    private int leftKey;
+    private int downKey;
+    protected boolean canJump = false;
+
+
+    public Character(Vector2D position, int width, int height, double maxHp, int layer) {
+        super(position, width, height, layer, "character");
+        this.maxHP = maxHp;
+        HP = maxHp;
+        setCollision(false);
+        setPlayer(player);
+    }
 
     public void setPlayer (int player) {
         this.player = player;
@@ -51,12 +60,6 @@ public abstract class Character extends CollisionEntity {
         }
     }
 
-    public Character(int width, int height, double maxHp, String name, int layer, int player) {
-        super(0, 0, width, height, layer, name);
-        setCollision(false);
-        this.player = player;
-        setPlayer(player);
-    }
 
     public void setIcon (Asset icon) {
         this.icon = icon;
@@ -84,7 +87,8 @@ public abstract class Character extends CollisionEntity {
             addPos(new Vector2D(-deltaT * speed, 0));
         }
         
-        addVel(new Vector2D(0, deltaT * gravity));
+        if (!canJump)
+            addVel(new Vector2D(0, deltaT * gravity));
 
     }
 
