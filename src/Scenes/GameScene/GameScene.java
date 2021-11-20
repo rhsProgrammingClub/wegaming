@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
+import ky.Asset;
 import ky.Text;
 import ky.Vector2D;
 
@@ -13,6 +14,8 @@ public class GameScene extends Scene {
     Text fpsText;
     double tTime = 0;
     int frames = 0;
+    Asset p1HealthBar;
+    Asset p2HealthBar;
 
     public GameScene () {
     }
@@ -53,6 +56,11 @@ public class GameScene extends Scene {
         player2.setVisible(true);
         add(player1);
         add(player2);
+
+        // p1HealthBar = new Asset("assets/misc/healthBar.png", new Vector2D(0, 0), 4);
+        // p1HealthBar.setPos(p1HealthBar.getWidth()/2, p1HealthBar.getHeight()/2 + height*0.1);
+        // p2HealthBar = new Asset("assets/misc/healthBar.png", new Vector2D(width, height), 4);
+        // p2HealthBar.setPos(width-p1HealthBar.getWidth()/2, p1HealthBar.getHeight()/2 + height*0.1);
 
         fpsText = new Text("FPS: ", new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 30) 
                         ,Color.BLACK, new Vector2D(100, 20), 200, 40, 4);
