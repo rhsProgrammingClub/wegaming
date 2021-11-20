@@ -4,7 +4,7 @@ An amazing game made by the RHS Project Module
 
 Credits (subject to change):
 
-Art: Linus, Luke, Matthew, Terry, Alex
+Art: Eric, Linus, Luke, Matthew, Terry, Alex
 
 SoundFX: Matthew, Andy
 
