@@ -35,7 +35,7 @@ public class Main extends KYscreen {
         setDebugMode(true);
         setFullScreen(true);
         setCursorVisible(false);
-        currentScene = new GameScene();
+        currentScene = new CharacterSelectScene();
         setScene(currentScene);
         
     }

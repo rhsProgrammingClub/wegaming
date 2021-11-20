@@ -12,6 +12,9 @@ public class Scene {
 	
 	private ArrayList<CollisionEntity> collisionEntities = new ArrayList<CollisionEntity>(); // holds all collision entities to handle collisions easier
 
+	int width = Main.width;
+	int height = Main.height;
+
 	public void add(Asset asset) {
 		int difference = asset.getLayer() + 1 - assetLayers.size();// check if the indicated layer exists or not
 		if(difference > 0) { 							// if difference is greater than 0,
@@ -55,11 +58,7 @@ public class Scene {
 		return collisionEntities;
 	}
 
-<<<<<<<< HEAD:src/Scene.java
 	public void update(double deltaT, ArrayList<Integer> keyCodes) {
 		
 	}
-========
->>>>>>>> main:ky/Scene.java
-    
 }
