@@ -1,10 +1,6 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
-import ky.Asset;
-import ky.CollisionEntity;
-import ky.Entity;
 import ky.KYscreen;
 
 public class Main extends KYscreen {
@@ -44,7 +40,12 @@ public class Main extends KYscreen {
         scenes[2] = new GameScene();
 
         characters = new Character[4];  // different characters
+        characters[0] = new testCharacter();
+        characters[1] = new testCharacter();
+        characters[2] = new testCharacter();
+        characters[3] = new testCharacter();
         currentScene = scenes[sceneIndex];
+        currentScene.initialize();
         setScene(currentScene);
     }
 
@@ -53,7 +54,10 @@ public class Main extends KYscreen {
         ArrayList <Integer> clonedKeyCodes = activeKeyCodes;
         currentScene.update(deltaT, clonedKeyCodes);
         if (currentScene.changeScene() != sceneIndex) {
-            currentScene = scenes[currentScene.changeScene()];
+            System.out.println("Changed scenes.");
+            sceneIndex = currentScene.changeScene();
+            currentScene = scenes[sceneIndex];
+            currentScene.initialize();
             setScene(currentScene);
         }
     }

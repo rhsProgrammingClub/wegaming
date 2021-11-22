@@ -1,4 +1,3 @@
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import ky.Asset;
@@ -14,14 +13,6 @@ public class CharacterSelectScene extends Scene {
     int sceneIndex = 1;
 
     public CharacterSelectScene () {
-        p1Cursor = new SelectionCursor(new Vector2D(width*0.5 - 110, height*0.75), 4, 1);
-        p2Cursor = new SelectionCursor(new Vector2D(width*0.5 + 110, height*0.75), 4, 2);
-        // p1CharacterArt = new Asset(image, position, 1);
-        // p2CharacterArt = new Asset(image, position, 1);
-        p1Cursor.setVisible(true);
-        p2Cursor.setVisible(true);
-        add(p1Cursor);
-        add(p2Cursor);
     }
 
     @Override
@@ -34,6 +25,19 @@ public class CharacterSelectScene extends Scene {
     @Override
     public int changeScene() {
         return sceneIndex;
+    }
+
+    @Override
+    public void initialize() {
+        p1Cursor = new SelectionCursor(new Vector2D(width*0.5 - 110, height*0.75), 4, 1);
+        p2Cursor = new SelectionCursor(new Vector2D(width*0.5 + 110, height*0.75), 4, 2);
+        // p1CharacterArt = new Asset(image, position, 1);
+        // p2CharacterArt = new Asset(image, position, 1);
+        p1Cursor.setVisible(true);
+        p2Cursor.setVisible(true);
+        add(p1Cursor);
+        add(p2Cursor);
+        
     }
 
 }
