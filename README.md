@@ -6,7 +6,7 @@ Credits (subject to change):
 
 Art: Eric, Linus, Luke, Matthew, Terry, Alex
 
-SoundFX: Matthew, Andy
+SoundFX: Matthew
 
 Music: Luke, Andy
 
@@ -21,5 +21,3 @@ Collisions: Andy
 Combat system: Eric
 
 Character selection: Eric, Luke
-
-Basically everything was done by Eric and Sammy
