@@ -1,12 +1,17 @@
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import javax.swing.text.html.parser.Entity;
+
 import ky.AnimationAsset;
 import ky.Asset;
 import ky.CollisionEntity;
 import ky.Vector2D;
 
 public abstract class Character extends CollisionEntity {
+
+    // CollisionEn
+    ArrayList<CollisionEntity> entities = new ArrayList<CollisionEntity>();
 
     int player=1;
     protected double maxHP;
@@ -60,6 +65,13 @@ public abstract class Character extends CollisionEntity {
         }
     }
 
+    public CollisionEntity[] getEntities () {
+		return entities.toArray(new CollisionEntity[entities.size()]);
+    }
+
+    public void add (CollisionEntity entity) {
+        entities.add(entity);
+    }
 
     public void setIcon (Asset icon) {
         this.icon = icon;

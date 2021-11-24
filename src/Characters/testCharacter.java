@@ -4,20 +4,20 @@ import ky.Asset;
 import ky.CollisionEntity;
 import ky.Vector2D;
 
-public class testCharacter extends Character {
+public class TestCharacter extends Character {
 
-    Asset sword;
+    Sword sword;
     int status = 0; // nothing, basic attack, ablility, ult, jumping
 
-    public testCharacter () {
+    public TestCharacter () {
         super(new Vector2D(0, 0), 150, 275, 2000, 3);
-        sword = new Asset("assets/Characters/testcharacter/sword.png",
-                        new Vector2D(0, 0), 120, 40, 5);
+        // super(position, collisionBoxWidth, collisionBoxHeight, layer, "damageEntity");
+        sword = new Sword(new Vector2D(0,0), 120, 40, 5);
         sword.setVisible(true);
         add(sword);
     }
 
-    public testCharacter (Vector2D position) {
+    public TestCharacter (Vector2D position) {
         super(position, 250, 300, 2000, 3);
         // setIcon(new Asset("assets/Characters/testcharacter/icon.png", new Vector2D(0, 0), 3));
         /* 
