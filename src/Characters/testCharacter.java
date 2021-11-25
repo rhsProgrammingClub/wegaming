@@ -7,12 +7,13 @@ import ky.Vector2D;
 public class TestCharacter extends Character {
 
     Sword sword;
-    int status = 0; // nothing, basic attack, ablility, ult, jumping
+    Status status = Status.IDLE;
 
     public TestCharacter () {
         super(new Vector2D(0, 0), 150, 275, 2000, 3);
         // super(position, collisionBoxWidth, collisionBoxHeight, layer, "damageEntity");
-        sword = new Sword(new Vector2D(0,0), 120, 40, 5);
+        // sword = new Sword(new Vector2D(0,0), 120, 40, 5);
+        sword = new Sword(new Vector2D(getX(), getY()), 120, 40, 4);
         sword.setVisible(true);
         add(sword);
     }
@@ -25,6 +26,7 @@ public class TestCharacter extends Character {
         characterAnimation.setVisible(true);
         add(characterAnimation);
         */
+        sword = new Sword(new Vector2D(getX(), getY()), 120, 40, 4);
     }
 
     public void onCollision(CollisionEntity collidingEntity) {
@@ -41,24 +43,26 @@ public class TestCharacter extends Character {
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         super.update(deltaT, keyCodes);
-        if (status == 1) {
-            sword.setPos(new Vector2D(tempOffSet+eee*deltaT, 0));
-            
+        if (status == Status.ATTACKING) {
+            sword.setPos(new Vector2D(tempOffSet*direction.getValue() +eee*deltaT*direction.getValue(), 0));
+            sword.addPos(this.getPos());
             tempOffSet += eee*deltaT;
             if (tempOffSet >= 120) {
                 eee=-1000;
             }
             if (tempOffSet <= 0) {
                 eee=1000;
-                status=0;
+                status=Status.IDLE;
             }
+        } else {
+            sword.setPos(this.getPos());
         }
     }
 
     @Override
     protected void basicAttack() {
-        if (status == 0) {
-            status = 1;
+        if (status == Status.IDLE) {
+            status = Status.ATTACKING;
         }
     }
 
@@ -70,7 +74,7 @@ public class TestCharacter extends Character {
 
     @Override
     protected void ultimate() {
-        // TODO Auto-generated method stub
+
         
     }
     

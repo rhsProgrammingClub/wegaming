@@ -1,8 +1,5 @@
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-
-import javax.swing.text.html.parser.Entity;
-
 import ky.AnimationAsset;
 import ky.Asset;
 import ky.CollisionEntity;
@@ -32,6 +29,24 @@ public abstract class Character extends CollisionEntity {
     private int leftKey;
     private int downKey;
     protected boolean canJump = false;
+
+    protected enum Status {
+        IDLE, ATTACKING, ABILITY, ULTIMATE, JUMPING
+    }
+    protected enum Direction {
+        RIGHT(1), LEFT(-1);
+        private final int value;
+        private Direction(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
+    protected Status status = Status.ATTACKING;
+    protected Direction direction = Direction.RIGHT;
 
 
     public Character(Vector2D position, int width, int height, double maxHp, int layer) {
@@ -71,6 +86,8 @@ public abstract class Character extends CollisionEntity {
 
     public void add (CollisionEntity entity) {
         entities.add(entity);
+        // System.out.println(position.getX());
+        // entity.setPos(entity.getX() + position.getX(), entity.getY() + position.getY());
     }
 
     public void setIcon (Asset icon) {
@@ -83,6 +100,9 @@ public abstract class Character extends CollisionEntity {
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
+        // for (CollisionEntity e : entities) {
+        //     e.setPos(e.getX() + getX(), e.getY() + getY());
+        // }
         if (keyCodes.contains(jumpKey))
             jump();
         if (keyCodes.contains(basicAttackKey))
@@ -94,9 +114,11 @@ public abstract class Character extends CollisionEntity {
         
         if (keyCodes.contains(rightKey)) {
             addPos(new Vector2D(deltaT * speed, 0));
+            direction = Direction.RIGHT;
         }
         if (keyCodes.contains(leftKey)) {
             addPos(new Vector2D(-deltaT * speed, 0));
+            direction = Direction.LEFT;
         }
         
         if (!canJump)
