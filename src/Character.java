@@ -40,18 +40,18 @@ public abstract class Character extends CollisionEntity {
     public void setPlayer (int player) {
         this.player = player;
         if (player == 1) {
-            basicAttackKey = KeyEvent.VK_E;
-            basicAbilityKey = KeyEvent.VK_C;
-            ultimateKey = KeyEvent.VK_Q;
+            basicAttackKey = KeyEvent.VK_Q;
+            basicAbilityKey = KeyEvent.VK_E;
+            ultimateKey = KeyEvent.VK_R;
             jumpKey = KeyEvent.VK_W;
             rightKey = KeyEvent.VK_D;
             leftKey = KeyEvent.VK_A;
             downKey = KeyEvent.VK_S;
 
         } else if (player == 2) {
-            basicAttackKey = KeyEvent.VK_O;
-            basicAbilityKey = KeyEvent.VK_COMMA;
-            ultimateKey = KeyEvent.VK_U;
+            basicAttackKey = KeyEvent.VK_U;
+            basicAbilityKey = KeyEvent.VK_O;
+            ultimateKey = KeyEvent.VK_P;
             jumpKey = KeyEvent.VK_I;
             rightKey = KeyEvent.VK_L;
             leftKey = KeyEvent.VK_J;
