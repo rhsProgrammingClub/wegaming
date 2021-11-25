@@ -6,7 +6,7 @@ Credits (subject to change):
 
 Art: Eric, Linus, Luke, Matthew, Terry, Alex
 
-SoundFX: Matthew
+SoundFX: Andy
 
 Music: Luke, Andy
 
