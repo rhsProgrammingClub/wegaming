@@ -2,9 +2,9 @@
     "java.project.sourcePaths": [
         ".",
         "src",
-        "src\\Characters",
-        "src\\Scenes\\CharacterSelectScene",
-        "src\\Scenes\\GameScene",
-        "src\\Scenes\\MainMenuScene"
+        "src/Characters",
+        "src/Scenes/CharacterSelectScene",
+        "src/Scenes/GameScene",
+        "src/Scenes/MainMenuScene"
     ]
 }

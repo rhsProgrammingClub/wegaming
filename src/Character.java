@@ -19,13 +19,7 @@ public abstract class Character extends CollisionEntity {
     protected AnimationAsset characterAnimation;
     protected Asset icon;
 
-    private int basicAttackKey;
-    private int basicAbilityKey;
-    private int ultimateKey;
-    private int jumpKey;
-    private int rightKey;
-    private int leftKey;
-    private int downKey;
+    private PlayerInput playerInput;
     protected boolean canJump = false;
 
 
@@ -39,25 +33,8 @@ public abstract class Character extends CollisionEntity {
 
     public void setPlayer (int player) {
         this.player = player;
-        if (player == 1) {
-            basicAttackKey = KeyEvent.VK_E;
-            basicAbilityKey = KeyEvent.VK_C;
-            ultimateKey = KeyEvent.VK_Q;
-            jumpKey = KeyEvent.VK_W;
-            rightKey = KeyEvent.VK_D;
-            leftKey = KeyEvent.VK_A;
-            downKey = KeyEvent.VK_S;
-
-        } else if (player == 2) {
-            basicAttackKey = KeyEvent.VK_O;
-            basicAbilityKey = KeyEvent.VK_COMMA;
-            ultimateKey = KeyEvent.VK_U;
-            jumpKey = KeyEvent.VK_I;
-            rightKey = KeyEvent.VK_L;
-            leftKey = KeyEvent.VK_J;
-            downKey = KeyEvent.VK_K;
-
-        }
+        if(player == 1) {playerInput = PlayerInput.PLAYER_ONE_INPUT; }
+        else if(player == 2) {playerInput = PlayerInput.PLAYER_TWO_INPUT;}
     }
 
 
@@ -71,19 +48,19 @@ public abstract class Character extends CollisionEntity {
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        if (keyCodes.contains(jumpKey))
+        if (keyCodes.contains(playerInput.upKey))
             jump();
-        if (keyCodes.contains(basicAttackKey))
+        if (keyCodes.contains(playerInput.attackKey))
             basicAttack();
-        if (keyCodes.contains(basicAbilityKey))
+        if (keyCodes.contains(playerInput.basicAbilityKey))
             basicAbility();
-        if (keyCodes.contains(ultimateKey))
+        if (keyCodes.contains(playerInput.ultimateKey))
             ultimate();
         
-        if (keyCodes.contains(rightKey)) {
+        if (keyCodes.contains(playerInput.rightKey)) {
             addPos(new Vector2D(deltaT * speed, 0));
         }
-        if (keyCodes.contains(leftKey)) {
+        if (keyCodes.contains(playerInput.leftKey)) {
             addPos(new Vector2D(-deltaT * speed, 0));
         }
         

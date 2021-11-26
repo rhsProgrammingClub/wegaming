@@ -5,8 +5,8 @@ import ky.KYscreen;
 
 public class Main extends KYscreen {
 
-    public static int width;
-    public static int height;
+    public static int width = 1280;
+    public static int height = 720;
     public static Character player1;
     public static Character player2;
     GameScene gameScene;
@@ -82,11 +82,11 @@ public class Main extends KYscreen {
 
 
     public static void main (String[] args) {
-        System.setProperty("sun.java2d.uiScale", "1.0");
-        GraphicsEnvironment gEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        GraphicsDevice gDevice = gEnvironment.getDefaultScreenDevice();
-        width = gDevice.getDisplayMode().getWidth();
-        height = gDevice.getDisplayMode().getHeight();
+        // System.setProperty("sun.java2d.uiScale", "1.0");
+        // GraphicsEnvironment gEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        // GraphicsDevice gDevice = gEnvironment.getDefaultScreenDevice();
+        // width = gDevice.getDisplayMode().getWidth();
+        // height = gDevice.getDisplayMode().getHeight();
         new Main();
     }
 

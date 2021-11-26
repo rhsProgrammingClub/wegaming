@@ -22,27 +22,22 @@ public class SelectionCursor extends Entity {
         this.player = player;
 
         cursorAsset = new Asset("assets/test.png", new Vector2D(0, 0), 4);
-        // p1Cursor = new Asset("assets/misc/p1Cursor.png", new Vector2D(2, 2), 4);
-        // p2Cursor = new Asset("assets/misc/p2Cursor.png", new Vector2D(2, 2), 4);
         cursorAsset.rescale(2);
         cursorAsset.setVisible(true);
         add(cursorAsset);
         setVisible(true);
 
-        if (player == 1) {
-            leftKey = KeyEvent.VK_A;
-            rightKey = KeyEvent.VK_D;
-            selectKey = KeyEvent.VK_E;
-            characterIndex = 1;
-        } else if (player == 2) {
-            leftKey = KeyEvent.VK_J;
-            rightKey = KeyEvent.VK_L;
-            selectKey = KeyEvent.VK_O;
-            characterIndex = 2;
-        }
-
+        PlayerInput inputSystem = player == 1 ? PlayerInput.PLAYER_ONE_INPUT : PlayerInput.PLAYER_TWO_INPUT;
+        bindKeys(inputSystem);
     }
 
+    private void bindKeys(PlayerInput i) {
+        leftKey=i.leftKey;
+        rightKey=i.rightKey;
+        selectKey=i.attackKey;
+    }
+
+    // this probably needs some major refactoring 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (!keyCodes.contains(leftKey)) {
@@ -76,4 +71,5 @@ public class SelectionCursor extends Entity {
             }
         }
     }
+
 }
