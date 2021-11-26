@@ -11,11 +11,7 @@ public class TestCharacter extends Character {
 
     public TestCharacter () {
         super(new Vector2D(0, 0), 150, 275, 2000, 3);
-        // super(position, collisionBoxWidth, collisionBoxHeight, layer, "damageEntity");
-        // sword = new Sword(new Vector2D(0,0), 120, 40, 5);
-        sword = new Sword(new Vector2D(getX(), getY()), 120, 40, 4);
-        sword.setVisible(true);
-        add(sword);
+        initialize();
     }
 
     public TestCharacter (Vector2D position) {
@@ -26,15 +22,21 @@ public class TestCharacter extends Character {
         characterAnimation.setVisible(true);
         add(characterAnimation);
         */
-        sword = new Sword(new Vector2D(getX(), getY()), 120, 40, 4);
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
+        // super(position, collisionBoxWidth, collisionBoxHeight, layer, "damageEntity");
+        // sword = new Sword(new Vector2D(0,0), 120, 40, 5);
+        sword = new Sword(new Vector2D(getX(), getY()), 120, 40, 4, player, 100);
+        sword.setVisible(true);
+        add(sword);
+        
     }
 
     public void onCollision(CollisionEntity collidingEntity) {
-        if (collidingEntity.getName().equals("ground")) {
-            setVel(new Vector2D(0, 0));
-            setPos(new Vector2D(getX(), collidingEntity.getYCollisionBox().getY()-getCollisionBox().height/2));
-            canJump = true;
-        }
+        super.onCollision(collidingEntity);
     }
 
     double tempOffSet = 0;
@@ -63,6 +65,7 @@ public class TestCharacter extends Character {
     protected void basicAttack() {
         if (status == Status.IDLE) {
             status = Status.ATTACKING;
+            this.sword.canDamage=true;
         }
     }
 
