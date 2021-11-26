@@ -17,6 +17,7 @@ public abstract class Character extends CollisionEntity {
     protected double jumpHeight = 1200;
     protected double attackRange;
     protected double gravity = 3000;
+    private double maxVelocity = 50000;
 
     protected AnimationAsset characterAnimation;
     protected Asset icon;
@@ -103,7 +104,7 @@ public abstract class Character extends CollisionEntity {
     @Override
     public void onCollision(CollisionEntity ce) {
         if (ce.getName().equals("ground")) {
-            setVel(new Vector2D(0, 0));
+            setVel(new Vector2D(getVel().getX(), 0));
             setPos(new Vector2D(getX(), ce.getYCollisionBox().getY()-getCollisionBox().height/2));
             canJump = true;
         }
@@ -123,27 +124,38 @@ public abstract class Character extends CollisionEntity {
         // for (CollisionEntity e : entities) {
         //     e.setPos(e.getX() + getX(), e.getY() + getY());
         // }
-        if (player==2) {
-            System.out.println(HP);
-        }
-        // if (HP <= 0) {
+        // if (player==2) {
+        //     System.out.println(HP);
         // }
+        if (HP <= 0) {
+        }
         if (keyCodes.contains(jumpKey)) jump();
         if (keyCodes.contains(basicAttackKey)) basicAttack();
         if (keyCodes.contains(basicAbilityKey)) basicAbility();
         if (keyCodes.contains(ultimateKey)) ultimate();
 
-        if (getVel().getX() < 100) {
-            if (keyCodes.contains(rightKey)) {
-                addVel(new Vector2D(deltaT * speed, 0));
-                direction = Direction.RIGHT;
-            }
-            if (keyCodes.contains(leftKey)) {
-                addVel(new Vector2D(-deltaT * speed, 0));
-                direction = Direction.LEFT;
-            }
+        addVel(new Vector2D(-getVel().getX() * deltaT, 0));
+        if (Math.abs(getVel().getX()) <= 200) {
+            addVel(new Vector2D(-getVel().getX() * deltaT * 8, 0));
         }
-        // addVel(new Vector2D(-getVel().getX() * deltaT * 100, 0));
+        if (Math.abs(getVel().getX()) <= 50) {
+            setVel(new Vector2D(0, getVel().getY()));
+        }
+
+        // if (Math.abs(getVel().getX()) < 400) {
+        if (keyCodes.contains(rightKey)) {
+            addVel(new Vector2D(deltaT * speed, 0));
+            direction = Direction.RIGHT;
+        }
+        if (keyCodes.contains(leftKey)) {
+            addVel(new Vector2D(-deltaT * speed, 0));
+            direction = Direction.LEFT;
+        }
+
+        setVel((Math.abs(getVel().getX()) > maxVelocity*deltaT)
+                ? ((getVel().getX()>0) ? 1 : -1) * maxVelocity*deltaT : getVel().getX(),
+                getVel().getY());
+
         
         if (!canJump)
             addVel(new Vector2D(0, deltaT * gravity));
@@ -152,7 +164,7 @@ public abstract class Character extends CollisionEntity {
 
     protected void jump () {
         if (canJump) {
-            setVel(new Vector2D(0, -jumpHeight));
+            setVel(new Vector2D(getVel().getX(), -jumpHeight));
             canJump = false;
         }
     }
