@@ -6,8 +6,8 @@ import java.awt.event.KeyEvent;
 
 public class PlayerInput {
 
-    public static final PlayerInput PLAYER_ONE_INPUT = new PlayerInput(KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_E);
-    public static final PlayerInput PLAYER_TWO_INPUT = new PlayerInput(KeyEvent.VK_J, KeyEvent.VK_L, KeyEvent.VK_I, KeyEvent.VK_K, KeyEvent.VK_O);
+    public static final PlayerInput PLAYER_ONE_INPUT = new PlayerInput(KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_Q, KeyEvent.VK_E, KeyEvent.VK_R);
+    public static final PlayerInput PLAYER_TWO_INPUT = new PlayerInput(KeyEvent.VK_J, KeyEvent.VK_L, KeyEvent.VK_I, KeyEvent.VK_K, KeyEvent.VK_U, KeyEvent.VK_O, KeyEvent.VK_P);
 
     public int playerIndex = 0; // Player 1 and 2
     
@@ -20,11 +20,13 @@ public class PlayerInput {
     public int ultimateKey; // i really dont want to update the constructor. welp
     public int basicAbilityKey; // same here
 
-    public PlayerInput(int left, int right, int up, int down, int attack) {
+    public PlayerInput(int left, int right, int up, int down, int attack, int ability, int ultimate) {
         leftKey=left;
         rightKey=right;
         upKey=up;
         downKey=down;
         attackKey=attack;
+        basicAbilityKey = ability;
+        ultimateKey = ultimate;
     }
 }

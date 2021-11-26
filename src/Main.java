@@ -5,7 +5,7 @@ import ky.KYscreen;
 
 public class Main extends KYscreen {
 
-    public static int width = 1280;
+    public static int width = 1440;
     public static int height = 720;
     public static Character player1;
     public static Character player2;
