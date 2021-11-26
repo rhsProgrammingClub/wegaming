@@ -54,6 +54,8 @@ public class GameScene extends Scene {
 
         player1.setVisible(true);
         player2.setVisible(true);
+        player1.initialize();
+        player2.initialize();
         add(player1);
         add(player2);
 

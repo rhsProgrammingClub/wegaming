@@ -21,6 +21,14 @@ public abstract class Scene {
 	int width = Main.width;
 	int height = Main.height;
 
+	public void add(Character character) {
+		add((CollisionEntity)character);
+		CollisionEntity[] characterEntities = character.getEntities();
+		for (CollisionEntity entity : characterEntities) {
+			add(entity);
+		}
+	}
+
 	public void add(Asset asset) {
 		int difference = asset.getLayer() + 1 - assetLayers.size();// check if the indicated layer exists or not
 		if(difference > 0) { 							// if difference is greater than 0,

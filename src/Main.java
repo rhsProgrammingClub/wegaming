@@ -40,10 +40,10 @@ public class Main extends KYscreen {
         scenes[2] = new GameScene();
 
         characters = new Character[4];  // different characters
-        characters[0] = new testCharacter();
-        characters[1] = new testCharacter();
-        characters[2] = new testCharacter();
-        characters[3] = new testCharacter();
+        characters[0] = new TestCharacter();
+        characters[1] = new TestCharacter();
+        characters[2] = new TestCharacter();
+        characters[3] = new TestCharacter();
         currentScene = scenes[sceneIndex];
         currentScene.initialize();
         setScene(currentScene);
