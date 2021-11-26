@@ -82,11 +82,11 @@ public class Main extends KYscreen {
 
 
     public static void main (String[] args) {
-        // System.setProperty("sun.java2d.uiScale", "1.0");
-        // GraphicsEnvironment gEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        // GraphicsDevice gDevice = gEnvironment.getDefaultScreenDevice();
-        // width = gDevice.getDisplayMode().getWidth();
-        // height = gDevice.getDisplayMode().getHeight();
+        System.setProperty("sun.java2d.uiScale", "1.0");
+        GraphicsEnvironment gEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice gDevice = gEnvironment.getDefaultScreenDevice();
+        width = gDevice.getDisplayMode().getWidth();
+        height = gDevice.getDisplayMode().getHeight();
         new Main();
     }
 
