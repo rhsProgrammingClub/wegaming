@@ -13,11 +13,11 @@ public abstract class Character extends CollisionEntity {
     int player=1;
     protected double maxHP;
     protected double HP;
-    protected double speed = 10000;
+    protected double speed = 100000;
     protected double jumpHeight = 1200;
     protected double attackRange;
     protected double gravity = 3000;
-    private double maxVelocity = 50000;
+    private double maxVelocity = 80000;
 
     protected AnimationAsset characterAnimation;
     protected Asset icon;
@@ -111,10 +111,6 @@ public abstract class Character extends CollisionEntity {
         if (keyCodes.contains(playerInput.basicAbilityKey)) basicAbility();
         if (keyCodes.contains(playerInput.ultimateKey)) ultimate();
 
-        addVel(new Vector2D(-getVel().getX() * deltaT, 0));
-        if (Math.abs(getVel().getX()) <= 200) {
-            addVel(new Vector2D(-getVel().getX() * deltaT * 8, 0));
-        }
         if (Math.abs(getVel().getX()) <= 50) {
             setVel(new Vector2D(0, getVel().getY()));
         }
@@ -134,8 +130,13 @@ public abstract class Character extends CollisionEntity {
                 getVel().getY());
 
         
-        if (!canJump)
-            addVel(new Vector2D(0, deltaT * gravity));
+        if (!canJump) {
+            addVel(new Vector2D(-getVel().getX() * deltaT * 1.5, deltaT * gravity));
+        } else {
+            if (getVel().getX() != 0) {
+                addVel(new Vector2D(((getVel().getX() > 0) ? -1 : 1) * deltaT * 1000, 0));
+            }
+        }
 
     }
 
