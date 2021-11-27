@@ -32,7 +32,8 @@ public class TestCharacter extends Character {
         sword = new Sword(new Vector2D(getX(), getY()), 120, 40, 4, player, 100);
         sword.setVisible(true);
         add(sword);
-        
+        this.abilityCooldown = 5;
+        this.ultimateCooldown = 20;
     }
 
     public void onCollision(CollisionEntity collidingEntity) {
@@ -42,9 +43,24 @@ public class TestCharacter extends Character {
     double tempOffSet = 0;
     double eee=1000;
 
+    double abilityUpTime = 2;
+
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         super.update(deltaT, keyCodes);
+
+        if (abilityCooldown >= 0 && status != Status.ABILITY) abilityCooldown-=deltaT;
+
+        if (ultimateCooldown >= 0 && status != Status.ULTIMATE) ultimateCooldown-=deltaT;
+
+        if (sword.getDamage() == 200) {
+            abilityUpTime -= deltaT;
+            if (abilityUpTime <= 0) {
+                sword.setDamage(100);
+                abilityUpTime = 2;
+            }
+        }
+
         if (status == Status.ATTACKING) {
             sword.setPos(new Vector2D(tempOffSet*direction.getValue() +eee*deltaT*direction.getValue(), 0));
             sword.addPos(this.getPos());
@@ -72,14 +88,19 @@ public class TestCharacter extends Character {
 
     @Override
     protected void basicAbility() {
-        // TODO Auto-generated method stub
-        
+        if (abilityCooldown <= 0 && status == Status.IDLE) {
+            abilityUpTime = 2;
+            abilityCooldown = 5;
+            sword.setDamage(200);
+        }
     }
 
     @Override
     protected void ultimate() {
-
-        
+        if (abilityCooldown <= 0 && status == Status.IDLE) {
+            ultimateCooldown=20;
+            status = Status.ULTIMATE;
+        }
     }
     
 }
