@@ -55,6 +55,7 @@ public class TestCharacter extends Character {
             if (tempOffSet <= 0) {
                 eee=1000;
                 status=Status.IDLE;
+                sword.canDamage = false; // Reset the canDamage state so we can't just walk into the enemy after swinging to hit them
             }
         } else {
             sword.setPos(this.getPos());

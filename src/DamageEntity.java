@@ -9,7 +9,7 @@ public class DamageEntity extends CollisionEntity {
     private double knockback;
     private int player;
     private boolean breaks;
-    public boolean canDamage=true;
+    public boolean canDamage = false;
 
     public DamageEntity(Vector2D position, int collisionBoxWidth, int collisionBoxHeight, int layer, int player, double damage) {
         super(position, collisionBoxWidth, collisionBoxHeight, layer);
