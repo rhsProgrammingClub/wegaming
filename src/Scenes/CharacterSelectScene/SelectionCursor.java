@@ -28,6 +28,7 @@ public class SelectionCursor extends Entity {
         setVisible(true);
 
         PlayerInput inputSystem = player == 1 ? PlayerInput.PLAYER_ONE_INPUT : PlayerInput.PLAYER_TWO_INPUT;
+        characterIndex = player;
         bindKeys(inputSystem);
     }
 

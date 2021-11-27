@@ -1,3 +1,4 @@
+/*
 import ky;
 import java.awt.Font;
 
@@ -6,3 +7,5 @@ public static start extends Text{
   Font xfont = new Font("TimesRoman", Font.BOLD, 18);
   //rushed unfinished text 
 }  
+
+*/

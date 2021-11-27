@@ -14,22 +14,31 @@ public class GameScene extends Scene {
     Text fpsText;
     double tTime = 0;
     int frames = 0;
-    Asset p1HealthBar;
-    Asset p2HealthBar;
+    HealthBar p1HealthBar;
+    HealthBar p2HealthBar;
+    double lastHP1=0;
+    double lastHP2=0;
 
     public GameScene () {
     }
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        tTime += deltaT;
+        p1HealthBar.setHP(player1.HP);
+        if (lastHP1 != player1.HP) {
+        }
+        if (lastHP2 != player2.HP) {
+            p2HealthBar.setHP(player2.HP);
+        }
 
+        tTime += deltaT;
         if (tTime >= 1) {
             tTime = 0;
             fpsText.setText("FPS: " + frames);
             frames=0;
         }
         frames++;
+
     }
 
     @Override
@@ -59,13 +68,20 @@ public class GameScene extends Scene {
         add(player1);
         add(player2);
 
+        p1HealthBar = new HealthBar(new Vector2D(300, 80), player1.maxHP, false);
+        p2HealthBar = new HealthBar(new Vector2D(Main.width - 300, 80), player2.maxHP, true);
+        p1HealthBar.setVisible(true);
+        p2HealthBar.setVisible(true);
+        add(p1HealthBar);
+        add(p2HealthBar);
+
         // p1HealthBar = new Asset("assets/misc/healthBar.png", new Vector2D(0, 0), 4);
         // p1HealthBar.setPos(p1HealthBar.getWidth()/2, p1HealthBar.getHeight()/2 + height*0.1);
         // p2HealthBar = new Asset("assets/misc/healthBar.png", new Vector2D(width, height), 4);
         // p2HealthBar.setPos(width-p1HealthBar.getWidth()/2, p1HealthBar.getHeight()/2 + height*0.1);
 
         fpsText = new Text("FPS: ", new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 30) 
-                        ,Color.BLACK, new Vector2D(100, 20), 200, 40, 4);
+                        ,Color.BLACK, new Vector2D(120, 130), 200, 40, 4);
         fpsText.setVisible(true);
         add(fpsText);
         
