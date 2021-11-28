@@ -44,6 +44,7 @@ public class TestCharacter extends Character {
     double eee=1000;
 
     double abilityUpTime = 2;
+    double ultimateUpTime = 5;
 
     Direction lastDirection = Direction.RIGHT;
 
@@ -57,7 +58,6 @@ public class TestCharacter extends Character {
         }
 
         if (abilityCooldown >= 0 && status != Status.ABILITY) abilityCooldown-=deltaT;
-
         if (ultimateCooldown >= 0 && status != Status.ULTIMATE) ultimateCooldown-=deltaT;
 
         if (sword.getDamage() == 200) {
@@ -66,6 +66,15 @@ public class TestCharacter extends Character {
                 sword.setDamage(100);
                 sword.swordAsset.setImageIndex(0);
                 abilityUpTime = 2;
+            }
+        }
+        if (sword.getDamage() == 250) {
+            ultimateUpTime -= deltaT;
+            if (ultimateUpTime <= 0) {
+                sword.setDamage(100);
+                sword.swordAsset.setImageIndex(0);
+                sword.swordAsset.rescale(1);
+                ultimateUpTime=5;
             }
         }
 
@@ -96,7 +105,7 @@ public class TestCharacter extends Character {
 
     @Override
     protected void basicAbility() {
-        if (abilityCooldown <= 0 && status == Status.IDLE) {
+        if (abilityCooldown <= 0 && status == Status.IDLE && sword.getDamage() == 100) {
             sword.swordAsset.setImageIndex(1);
             abilityUpTime = 2;
             abilityCooldown = 5;
@@ -106,9 +115,11 @@ public class TestCharacter extends Character {
 
     @Override
     protected void ultimate() {
-        if (abilityCooldown <= 0 && status == Status.IDLE) {
+        if (ultimateCooldown <= 0 && status == Status.IDLE) {
             ultimateCooldown=20;
-            status = Status.ULTIMATE;
+            sword.setCollisionBoxDimensions(sword.getCollisionBox().width * 2, sword.getCollisionBox().height * 2);
+            sword.swordAsset.rescale(2);
+            sword.setDamage(250);
         }
     }
     
