@@ -17,7 +17,7 @@ public abstract class Character extends CollisionEntity {
     protected double jumpHeight = 1200;
     protected double attackRange;
     protected double gravity = 3000;
-    private double maxVelocity = 80000;
+    private double maxVelocity = 700;
     protected double abilityCooldown=-1;
     protected double ultimateCooldown=-1;
 
@@ -127,8 +127,8 @@ public abstract class Character extends CollisionEntity {
             direction = Direction.LEFT;
         }
 
-        setVel((Math.abs(getVel().getX()) > maxVelocity*deltaT)
-                ? ((getVel().getX()>0) ? 1 : -1) * maxVelocity*deltaT : getVel().getX(),
+        setVel((Math.abs(getVel().getX()) > maxVelocity)
+                ? ((getVel().getX()>0) ? 1 : -1) * maxVelocity: getVel().getX(),
                 getVel().getY());
 
         
