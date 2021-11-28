@@ -16,17 +16,17 @@ public class TestCharacter extends Character {
 
     public TestCharacter (Vector2D position) {
         super(position, 250, 300, 2000, 3);
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
         // setIcon(new Asset("assets/Characters/testcharacter/icon.png", new Vector2D(0, 0), 3));
         /* 
         characterAnimation = new AnimationAsset(images, position, animationTime, layer);
         characterAnimation.setVisible(true);
         add(characterAnimation);
         */
-        initialize();
-    }
-
-    @Override
-    public void initialize() {
         // super(position, collisionBoxWidth, collisionBoxHeight, layer, "damageEntity");
         // sword = new Sword(new Vector2D(0,0), 120, 40, 5);
         sword = new Sword(new Vector2D(getX(), getY()), 120, 40, 4, player, 100);
@@ -45,9 +45,16 @@ public class TestCharacter extends Character {
 
     double abilityUpTime = 2;
 
+    Direction lastDirection = Direction.RIGHT;
+
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         super.update(deltaT, keyCodes);
+        
+        if (direction != lastDirection) {
+            sword.swordAsset.flipHorizontal();
+            lastDirection = direction;
+        }
 
         if (abilityCooldown >= 0 && status != Status.ABILITY) abilityCooldown-=deltaT;
 
@@ -57,6 +64,7 @@ public class TestCharacter extends Character {
             abilityUpTime -= deltaT;
             if (abilityUpTime <= 0) {
                 sword.setDamage(100);
+                sword.swordAsset.setImageIndex(0);
                 abilityUpTime = 2;
             }
         }
@@ -89,6 +97,7 @@ public class TestCharacter extends Character {
     @Override
     protected void basicAbility() {
         if (abilityCooldown <= 0 && status == Status.IDLE) {
+            sword.swordAsset.setImageIndex(1);
             abilityUpTime = 2;
             abilityCooldown = 5;
             sword.setDamage(200);
