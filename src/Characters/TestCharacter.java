@@ -6,7 +6,8 @@ import ky.Vector2D;
 
 public class TestCharacter extends Character {
 
-    Sword sword;
+    DamageEntity sword;
+    Asset swordAsset;
     Status status = Status.IDLE;
 
     public TestCharacter () {
@@ -30,7 +31,16 @@ public class TestCharacter extends Character {
         // super(position, collisionBoxWidth, collisionBoxHeight, layer, "damageEntity");
         // sword = new Sword(new Vector2D(0,0), 120, 40, 5);
         sword = new Sword(new Vector2D(getX(), getY()), 120, 40, 4, player, 100);
+        swordAsset = new Asset(
+                        new String[] {"assets/Characters/testcharacter/sword.png", 
+                        "assets/Characters/testcharacter/swordBoosted.png",
+                        "assets/Characters/testcharacter/swordUlt.png"},
+                        new Vector2D(0, 0), 120, 40, 5);
+
+        swordAsset.setVisible(true);
+        sword.add(swordAsset);
         sword.setVisible(true);
+        sword.setBreaks(false);
         add(sword);
         this.abilityCooldown = 5;
         this.ultimateCooldown = 20;
@@ -53,7 +63,7 @@ public class TestCharacter extends Character {
         super.update(deltaT, keyCodes);
         
         if (direction != lastDirection) {
-            sword.swordAsset.flipHorizontal();
+            swordAsset.flipHorizontal();
             lastDirection = direction;
         }
 
@@ -64,7 +74,7 @@ public class TestCharacter extends Character {
             abilityUpTime -= deltaT;
             if (abilityUpTime <= 0) {
                 sword.setDamage(100);
-                sword.swordAsset.setImageIndex(0);
+                swordAsset.setImageIndex(0);
                 abilityUpTime = 2;
             }
         }
@@ -72,8 +82,9 @@ public class TestCharacter extends Character {
             ultimateUpTime -= deltaT;
             if (ultimateUpTime <= 0) {
                 sword.setDamage(100);
-                sword.swordAsset.setImageIndex(0);
-                sword.swordAsset.rescale(1);
+                sword.setCollisionBoxDimensions(sword.getCollisionBox().width/2, sword.getCollisionBox().height/2);
+                swordAsset.setImageIndex(0);
+                swordAsset.rescale(0.5);
                 ultimateUpTime=5;
             }
         }
@@ -106,7 +117,7 @@ public class TestCharacter extends Character {
     @Override
     protected void basicAbility() {
         if (abilityCooldown <= 0 && status == Status.IDLE && sword.getDamage() == 100) {
-            sword.swordAsset.setImageIndex(1);
+            swordAsset.setImageIndex(1);
             abilityUpTime = 2;
             abilityCooldown = 5;
             sword.setDamage(200);
@@ -118,7 +129,8 @@ public class TestCharacter extends Character {
         if (ultimateCooldown <= 0 && status == Status.IDLE) {
             ultimateCooldown=20;
             sword.setCollisionBoxDimensions(sword.getCollisionBox().width * 2, sword.getCollisionBox().height * 2);
-            sword.swordAsset.rescale(2);
+            swordAsset.rescale(2);
+            swordAsset.setImageIndex(2);
             sword.setDamage(250);
         }
     }
