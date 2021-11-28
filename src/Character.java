@@ -18,6 +18,8 @@ public abstract class Character extends CollisionEntity {
     protected double attackRange;
     protected double gravity = 3000;
     private double maxVelocity = 80000;
+    protected double abilityCooldown=-1;
+    protected double ultimateCooldown=-1;
 
     protected AnimationAsset characterAnimation;
     protected Asset icon;

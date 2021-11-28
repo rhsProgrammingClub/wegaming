@@ -16,23 +16,24 @@ public class TestCharacter extends Character {
 
     public TestCharacter (Vector2D position) {
         super(position, 250, 300, 2000, 3);
+        initialize();
+    }
+
+    @Override
+    public void initialize() {
         // setIcon(new Asset("assets/Characters/testcharacter/icon.png", new Vector2D(0, 0), 3));
         /* 
         characterAnimation = new AnimationAsset(images, position, animationTime, layer);
         characterAnimation.setVisible(true);
         add(characterAnimation);
         */
-        initialize();
-    }
-
-    @Override
-    public void initialize() {
         // super(position, collisionBoxWidth, collisionBoxHeight, layer, "damageEntity");
         // sword = new Sword(new Vector2D(0,0), 120, 40, 5);
         sword = new Sword(new Vector2D(getX(), getY()), 120, 40, 4, player, 100);
         sword.setVisible(true);
         add(sword);
-        
+        this.abilityCooldown = 5;
+        this.ultimateCooldown = 20;
     }
 
     public void onCollision(CollisionEntity collidingEntity) {
@@ -42,9 +43,41 @@ public class TestCharacter extends Character {
     double tempOffSet = 0;
     double eee=1000;
 
+    double abilityUpTime = 2;
+    double ultimateUpTime = 5;
+
+    Direction lastDirection = Direction.RIGHT;
+
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         super.update(deltaT, keyCodes);
+        
+        if (direction != lastDirection) {
+            sword.swordAsset.flipHorizontal();
+            lastDirection = direction;
+        }
+
+        if (abilityCooldown >= 0 && status != Status.ABILITY) abilityCooldown-=deltaT;
+        if (ultimateCooldown >= 0 && status != Status.ULTIMATE) ultimateCooldown-=deltaT;
+
+        if (sword.getDamage() == 200) {
+            abilityUpTime -= deltaT;
+            if (abilityUpTime <= 0) {
+                sword.setDamage(100);
+                sword.swordAsset.setImageIndex(0);
+                abilityUpTime = 2;
+            }
+        }
+        if (sword.getDamage() == 250) {
+            ultimateUpTime -= deltaT;
+            if (ultimateUpTime <= 0) {
+                sword.setDamage(100);
+                sword.swordAsset.setImageIndex(0);
+                sword.swordAsset.rescale(1);
+                ultimateUpTime=5;
+            }
+        }
+
         if (status == Status.ATTACKING) {
             sword.setPos(new Vector2D(tempOffSet*direction.getValue() +eee*deltaT*direction.getValue(), 0));
             sword.addPos(this.getPos());
@@ -72,14 +105,22 @@ public class TestCharacter extends Character {
 
     @Override
     protected void basicAbility() {
-        // TODO Auto-generated method stub
-        
+        if (abilityCooldown <= 0 && status == Status.IDLE && sword.getDamage() == 100) {
+            sword.swordAsset.setImageIndex(1);
+            abilityUpTime = 2;
+            abilityCooldown = 5;
+            sword.setDamage(200);
+        }
     }
 
     @Override
     protected void ultimate() {
-
-        
+        if (ultimateCooldown <= 0 && status == Status.IDLE) {
+            ultimateCooldown=20;
+            sword.setCollisionBoxDimensions(sword.getCollisionBox().width * 2, sword.getCollisionBox().height * 2);
+            sword.swordAsset.rescale(2);
+            sword.setDamage(250);
+        }
     }
     
 }
