@@ -22,7 +22,7 @@ public abstract class Character extends CollisionEntity {
     protected double ultimateCooldown=-1;
     protected int lives=3;
 
-    protected AnimationAsset characterAnimation;
+    protected Asset characterAsset;
     protected Asset icon;
 
     private PlayerInput playerInput;
@@ -69,8 +69,6 @@ public abstract class Character extends CollisionEntity {
 
     public void add (CollisionEntity entity) {
         entities.add(entity);
-        // System.out.println(position.getX());
-        // entity.setPos(entity.getX() + position.getX(), entity.getY() + position.getY());
     }
 
     public void setIcon (Asset icon) {
@@ -101,12 +99,6 @@ public abstract class Character extends CollisionEntity {
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        // for (CollisionEntity e : entities) {
-        //     e.setPos(e.getX() + getX(), e.getY() + getY());
-        // }
-        // if (player==2) {
-        //     System.out.println(HP);
-        // }
         if (HP <= 0) {
             if (lives > 0) {
                 lives--;
@@ -141,7 +133,7 @@ public abstract class Character extends CollisionEntity {
             addVel(new Vector2D(-getVel().getX() * deltaT * 1.5, deltaT * gravity));
         } else {
             if (getVel().getX() != 0) {
-                addVel(new Vector2D(((getVel().getX() > 0) ? -1 : 1) * deltaT * 1000, 0));
+                addVel(new Vector2D(((getVel().getX() > 0) ? -1 : 1) * deltaT * 1700, 0));
             }
         }
 
