@@ -5,6 +5,7 @@
         "src/Characters",
         "src/Scenes/CharacterSelectScene",
         "src/Scenes/GameScene",
-        "src/Scenes/MainMenuScene"
+        "src/Scenes/MainMenuScene",
+        "src/Scenes/EndScene"
     ]
 }

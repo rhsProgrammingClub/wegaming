@@ -20,6 +20,7 @@ public abstract class Character extends CollisionEntity {
     private double maxVelocity = 700;
     protected double abilityCooldown=-1;
     protected double ultimateCooldown=-1;
+    protected int lives=3;
 
     protected AnimationAsset characterAnimation;
     protected Asset icon;
@@ -107,6 +108,10 @@ public abstract class Character extends CollisionEntity {
         //     System.out.println(HP);
         // }
         if (HP <= 0) {
+            if (lives > 0) {
+                lives--;
+                HP = maxHP;
+            }
         }
         if (keyCodes.contains(playerInput.upKey)) jump();
         if (keyCodes.contains(playerInput.attackKey)) basicAttack();

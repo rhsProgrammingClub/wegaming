@@ -16,7 +16,7 @@ public class TestCharacter extends Character {
     }
 
     public TestCharacter (Vector2D position) {
-        super(position, 250, 300, 2000, 3);
+        super(position, 150, 275, 2000, 3);
         initialize();
     }
 
@@ -94,9 +94,11 @@ public class TestCharacter extends Character {
             sword.addPos(this.getPos());
             tempOffSet += eee*deltaT;
             if (tempOffSet >= 120) {
+                tempOffSet = 120;
                 eee=-1000;
             }
             if (tempOffSet <= 0) {
+                tempOffSet = 0;
                 eee=1000;
                 status=Status.IDLE;
                 sword.canDamage = false; // Reset the canDamage state so we can't just walk into the enemy after swinging to hit them

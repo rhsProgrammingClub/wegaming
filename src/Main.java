@@ -9,8 +9,6 @@ public class Main extends KYscreen {
     public static int height = 800;
     public static Character player1;
     public static Character player2;
-    GameScene gameScene;
-    CharacterSelectScene csScene;
     public static Character[] characters;
     public static int sceneIndex = 1;
     public static Scene[] scenes;
@@ -34,10 +32,11 @@ public class Main extends KYscreen {
         setResizable(false);
         setCursorVisible(false);
 
-        scenes = new Scene[3];
+        scenes = new Scene[4];
         scenes[0] = new CharacterSelectScene();
         scenes[1] = new CharacterSelectScene();
         scenes[2] = new GameScene();
+        scenes[3] = new EndScene();
 
         characters = new Character[4];  // different characters
         characters[0] = new TestCharacter();

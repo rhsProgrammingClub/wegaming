@@ -18,12 +18,16 @@ public class GameScene extends Scene {
     HealthBar p2HealthBar;
     double lastHP1=0;
     double lastHP2=0;
+    int sceneIndex = 2;
 
     public GameScene () {
     }
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
+        if (player1.lives <= 0 || player2.lives <= 0) {
+            sceneIndex = 3;
+        }
         p1HealthBar.setHP(player1.HP);
         if (lastHP1 != player1.HP) {
         }
@@ -43,7 +47,7 @@ public class GameScene extends Scene {
 
     @Override
     public int changeScene() {
-        return 2;
+        return sceneIndex;
     }
 
     @Override
