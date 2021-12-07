@@ -18,7 +18,6 @@ public class GameScene extends Scene {
     HealthBar p2HealthBar;
     double lastHP1=0;
     double lastHP2=0;
-    int sceneIndex = 2;
 
     public GameScene () {
     }
@@ -46,12 +45,8 @@ public class GameScene extends Scene {
     }
 
     @Override
-    public int changeScene() {
-        return sceneIndex;
-    }
-
-    @Override
     public void initialize() {
+        sceneIndex = 2;
         // ground = new Ground(Main.width/2, Main.height*0.75, (int)(Main.width*0.6), (int)(Main.height*0.1));
         ground = new Ground(width*0.5, height*0.9, width, (int)(height*0.2));
         add(ground);

@@ -10,7 +10,7 @@ public abstract class Character extends CollisionEntity {
     // CollisionEn
     ArrayList<CollisionEntity> entities = new ArrayList<CollisionEntity>();
 
-    int player=1;
+    private int player=1;
     protected double maxHP;
     protected double HP;
     protected double speed = 100000;
@@ -44,7 +44,7 @@ public abstract class Character extends CollisionEntity {
         }
     }
 
-    protected Status status = Status.ATTACKING;
+    protected Status status = Status.IDLE;
     protected Direction direction = Direction.RIGHT;
 
     public abstract void initialize ();
@@ -61,6 +61,10 @@ public abstract class Character extends CollisionEntity {
         this.player = player;
         if(player == 1) {playerInput = PlayerInput.PLAYER_ONE_INPUT; }
         else if(player == 2) {playerInput = PlayerInput.PLAYER_TWO_INPUT;}
+    }
+
+    public int getPlayer () {
+        return player;
     }
 
     public CollisionEntity[] getEntities () {
@@ -86,15 +90,18 @@ public abstract class Character extends CollisionEntity {
             setPos(new Vector2D(getX(), ce.getYCollisionBox().getY()-getCollisionBox().height/2));
             canJump = true;
         }
-        if (ce instanceof DamageEntity && ce.isVisible()) {
-            if (((DamageEntity)ce).getPlayer() != this.player) {
-                if (((DamageEntity)ce).canDamage) {
-                    this.HP-=((DamageEntity)ce).getDamage();
-                    ce.setVisible(!((DamageEntity)ce).getBreaks());
-                    ((DamageEntity)ce).canDamage=false;
-                }
-            }
-        }
+
+        // relys on damage entity instead
+
+        // if (ce instanceof DamageEntity && ce.isVisible()) {
+        //     if (((DamageEntity)ce).getPlayer() != this.player) {
+        //         if (((DamageEntity)ce).canDamage) {
+        //             this.HP-=((DamageEntity)ce).getDamage();
+        //             ce.setVisible(!((DamageEntity)ce).getBreaks());
+        //             ((DamageEntity)ce).canDamage=false;
+        //         }
+        //     }
+        // }
     }
 
     @Override

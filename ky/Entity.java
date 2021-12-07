@@ -136,6 +136,20 @@ public class Entity {
 	public void addVel(Vector2D deltaV) {
 		this.velocity.add(deltaV);
 	}
+
+	public void setRotation(double degrees) {
+		this.rotation = 0;
+		rotate(degrees);
+	}
+
+	public void rotate(double degrees) {
+		this.rotation += degrees;
+		for (ArrayList<Asset> assetLayer: entityAssetLayers) {
+			for (Asset asset : assetLayer) {
+				asset.setRotation(this.rotation);
+			}
+		}
+	}
 	
 	public Entity clone() {
 		Entity clone = new Entity(getPos().clone(), getLayer(), getName());

@@ -6,13 +6,11 @@ import ky.Entity;
 
 public abstract class Scene {
 
-	public int changeScene () {
-		return 0;
-	}
+	protected int sceneIndex=0;
 
 	public abstract void initialize ();
 
-    private ArrayList<ArrayList<Asset>> assetLayers = new ArrayList<ArrayList<Asset>>(); // this is a collection of arraylists, which are layers
+	private ArrayList<ArrayList<Asset>> assetLayers = new ArrayList<ArrayList<Asset>>(); // this is a collection of arraylists, which are layers
 
 	private ArrayList<ArrayList<Entity>> entityLayers = new ArrayList<ArrayList<Entity>>(); // holds all the entities to be rendered
 	
@@ -75,4 +73,9 @@ public abstract class Scene {
 	public void update(double deltaT, ArrayList<Integer> keyCodes) {
 		
 	}
+
+	public int changeScene () {
+		return sceneIndex;
+	}
+
 }

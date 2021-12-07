@@ -63,7 +63,19 @@ public class DamageEntity extends CollisionEntity {
 
     @Override
     public void onCollision(CollisionEntity collidingEntity) {
-
+        if (isVisible() && collidingEntity.isVisible()) {
+            if (collidingEntity instanceof Character) {
+                if (((Character)collidingEntity).getPlayer() != player) {
+                    if (canDamage) {
+                        ((Character)collidingEntity).HP -= damage;
+                        canDamage = false;
+                    }
+                    if (breaks) {
+                        setVisible(false);
+                    }
+                }
+            }
+        }
     }
     
 }

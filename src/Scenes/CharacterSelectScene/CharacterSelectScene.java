@@ -10,7 +10,6 @@ public class CharacterSelectScene extends Scene {
     Asset test;
     Asset p1CharacterArt;
     Asset p2CharacterArt;
-    int sceneIndex = 1;
 
     public CharacterSelectScene () {
     }
@@ -23,12 +22,8 @@ public class CharacterSelectScene extends Scene {
     }
 
     @Override
-    public int changeScene() {
-        return sceneIndex;
-    }
-
-    @Override
     public void initialize() {
+        sceneIndex = 1;
         p1Cursor = new SelectionCursor(new Vector2D(width*0.5 - 110, height*0.75), 4, 1);
         p2Cursor = new SelectionCursor(new Vector2D(width*0.5 + 110, height*0.75), 4, 2);
         // p1CharacterArt = new Asset(image, position, 1);

@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import ky.AudioPlayer;
 import ky.KYscreen;
 
 public class Main extends KYscreen {
@@ -12,6 +14,8 @@ public class Main extends KYscreen {
     public static Character[] characters;
     public static int sceneIndex = 1;
     public static Scene[] scenes;
+    public static AudioPlayer testAudio;
+    public static AudioPlayer backgroundMusic;
 
     boolean cSelect = true;
     Scene currentScene;
@@ -30,7 +34,12 @@ public class Main extends KYscreen {
     public void start() {
         setDebugMode(true);
         setResizable(false);
-        setCursorVisible(false);
+        testAudio = new AudioPlayer("assets/SFX/idk.wav");
+        testAudio.play();
+        backgroundMusic = new AudioPlayer("assets/SFX/background_music_test.wav");
+        backgroundMusic.setVolume(-8);
+        backgroundMusic.setLoop(true);
+        backgroundMusic.play();
 
         scenes = new Scene[4];
         scenes[0] = new CharacterSelectScene();
@@ -39,7 +48,7 @@ public class Main extends KYscreen {
         scenes[3] = new EndScene();
 
         characters = new Character[4];  // different characters
-        characters[0] = new TestCharacter();
+        characters[0] = new OtherTestCharacter();
         characters[1] = new TestCharacter();
         characters[2] = new TestCharacter();
         characters[3] = new TestCharacter();
@@ -53,9 +62,14 @@ public class Main extends KYscreen {
         ArrayList <Integer> clonedKeyCodes = activeKeyCodes;
         currentScene.update(deltaT, clonedKeyCodes);
         if (currentScene.changeScene() != sceneIndex) {
-            System.out.println("Changed scenes.");
+            System.out.println("Changed scenes: " + sceneIndex);
             sceneIndex = currentScene.changeScene();
             currentScene = scenes[sceneIndex];
+            if (currentScene instanceof GameScene || currentScene instanceof CharacterSelectScene) {
+                setCursorVisible(false);
+            } else {
+                setCursorVisible(true);
+            }
             currentScene.initialize();
             setScene(currentScene);
         }
