@@ -12,7 +12,7 @@ public class Main extends KYscreen {
     public static Character player1;
     public static Character player2;
     public static Character[] characters;
-    public static int sceneIndex = 1;
+    public static int sceneIndex = 0;
     public static Scene[] scenes;
     public static AudioPlayer testAudio;
     public static AudioPlayer backgroundMusic;
@@ -42,7 +42,7 @@ public class Main extends KYscreen {
         backgroundMusic.play();
 
         scenes = new Scene[4];
-        scenes[0] = new CharacterSelectScene();
+        scenes[0] = new StartScene();
         scenes[1] = new CharacterSelectScene();
         scenes[2] = new GameScene();
         scenes[3] = new EndScene();

@@ -9,6 +9,7 @@
         "src/Scenes/CharacterSelectScene",
         "src/Scenes/GameScene",
         "src/Scenes/MainMenuScene",
-        "src/Scenes/EndScene"
+        "src/Scenes/EndScene",
+        "src/Scenes/StartScene"
     ]
 }
