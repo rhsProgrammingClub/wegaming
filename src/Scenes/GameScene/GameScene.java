@@ -20,13 +20,10 @@ public class GameScene extends Scene {
     CooldownBar ultBarP1;
     CooldownBar ultBarP2;
 
-    public GameScene () {
-    }
-
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (player1.lives <= 0 || player2.lives <= 0) {
-            sceneIndex = 3;
+            sceneIndex = 4;
         }
 
         tTime += deltaT;
@@ -40,7 +37,8 @@ public class GameScene extends Scene {
 
     @Override
     public void initialize() {
-        sceneIndex = 2;
+        sceneIndex = 3;
+        Main.resetCharacters();
         // ground = new Ground(Main.width/2, Main.height*0.75, (int)(Main.width*0.6), (int)(Main.height*0.1));
         ground = new Ground(width*0.5, height*0.9, width, (int)(height*0.2));
         add(ground);

@@ -19,6 +19,12 @@ public abstract class Scene {
 	int width = Main.width;
 	int height = Main.height;
 
+	public void delete () {
+		assetLayers = new ArrayList<ArrayList<Asset>>();
+		entityLayers = new ArrayList<ArrayList<Entity>>();
+		collisionEntities = new ArrayList<CollisionEntity>();
+	}
+
 	public void add(Character character) {
 		add((CollisionEntity)character);
 		CollisionEntity[] characterEntities = character.getEntities();

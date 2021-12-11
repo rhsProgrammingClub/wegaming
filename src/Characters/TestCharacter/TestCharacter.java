@@ -30,7 +30,7 @@ public class TestCharacter extends Character {
         ultimateCooldown = 20;
         curAbilityCooldown = abilityCooldown;
         curUltCooldown = ultimateCooldown;
-        setDefense(0.8);
+        setDefense(0.25);
 
         abilityIcon = new Asset("assets/Characters/testcharacter/ability_icon.png", new Vector2D(0, 0), 4);
         ultIcon = new Asset("assets/Characters/testcharacter/ult_icon.png", new Vector2D(0, 0), 4);

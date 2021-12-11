@@ -48,6 +48,7 @@ public class OtherTestCharacter extends Character {
         abilityCooldown = 5;
         curUltCooldown = ultimateCooldown;
         curAbilityCooldown = abilityCooldown;
+        setDefense(0.1);
 
         characterAsset = new Asset(new String[] {
                                    "assets/characters/spaceship/spaceship_normal.png",
