@@ -1,5 +1,4 @@
 import ky.Asset;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.awt.event.KeyEvent;
 import ky.Vector2D;

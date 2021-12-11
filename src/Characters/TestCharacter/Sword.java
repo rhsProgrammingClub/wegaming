@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 import ky.Asset;
-import ky.CollisionEntity;
 import ky.Vector2D;
 
 public class Sword extends DamageEntity {

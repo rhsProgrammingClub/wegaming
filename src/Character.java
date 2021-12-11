@@ -1,6 +1,4 @@
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import ky.AnimationAsset;
 import ky.Asset;
 import ky.CollisionEntity;
 import ky.Vector2D;
@@ -22,9 +20,12 @@ public abstract class Character extends CollisionEntity {
     protected double curAbilityCooldown=-1;
     protected double curUltCooldown=-1;
     protected int lives=3;
+    private double defense = 0;
 
     protected Asset characterAsset;
     protected Asset icon;
+    protected Asset abilityIcon;
+    protected Asset ultIcon;
     private boolean flipped=false;
 
     private PlayerInput playerInput;
@@ -106,13 +107,18 @@ public abstract class Character extends CollisionEntity {
         // }
     }
 
+    public void setDefense (double val) {
+        defense = val;
+        if (val > 1) defense = 1;
+    }
+
+    public double getDefense () {return defense;}
+
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (HP <= 0) {
-            if (lives > 0) {
-                lives--;
-                HP = maxHP;
-            }
+            lives--;
+            HP = maxHP;
         }
         curAbilityCooldown-=deltaT;
         curUltCooldown-=deltaT;

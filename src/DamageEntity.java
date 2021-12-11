@@ -67,7 +67,8 @@ public class DamageEntity extends CollisionEntity {
             if (collidingEntity instanceof Character) {
                 if (((Character)collidingEntity).getPlayer() != player) {
                     if (canDamage) {
-                        ((Character)collidingEntity).HP -= damage;
+                        ((Character)collidingEntity).HP -= damage - damage * 
+                                            (((Character)collidingEntity).getDefense());
                         canDamage = false;
                     }
                     if (breaks) {

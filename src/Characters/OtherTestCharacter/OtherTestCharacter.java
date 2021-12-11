@@ -6,7 +6,9 @@ import ky.Vector2D;
 public class OtherTestCharacter extends Character {
 
     double attackTime;
+    double enrageTime=1;
     Rocket[] rockets;
+    Laser laser;
     int curRocket=0;
 
     public OtherTestCharacter() {
@@ -23,7 +25,17 @@ public class OtherTestCharacter extends Character {
         if (status == Status.ATTACKING) {
             attackTime-=deltaT;
             if (attackTime <= 0) {
+                laser.canDamage = false;
+                laser.setVisible(false);
                 status  = Status.IDLE;
+            }
+        }
+        
+        if (characterAsset.getImageIndex() == 1) {
+            enrageTime-=deltaT;
+            if (enrageTime <= 0) {
+                enrageTime = 1;
+                characterAsset.setImageIndex(0);
             }
         }
     }
@@ -35,7 +47,7 @@ public class OtherTestCharacter extends Character {
         ultimateCooldown = 1;
         abilityCooldown = 5;
         curUltCooldown = ultimateCooldown;
-        curAbilityCooldown = curAbilityCooldown;
+        curAbilityCooldown = abilityCooldown;
 
         characterAsset = new Asset(new String[] {
                                    "assets/Characters/otheTest/Spaceship_normal.png",
@@ -52,14 +64,18 @@ public class OtherTestCharacter extends Character {
             rockets[i] = new Rocket(new Vector2D(0, 0), getPlayer());
             add(rockets[i]);
         }
+        laser = new Laser(new Vector2D(0, 0), getPlayer());
+        add(laser);
     }
 
     @Override
     protected void basicAttack() {
         if (status == Status.IDLE) {
             status = Status.ATTACKING;
-            attackTime = 2;
-            // do something
+            attackTime = 0.3;
+            laser.setPos(new Vector2D(getX() + 1095 * direction.getValue(), getY()+15));
+            laser.setVisible(true);
+            laser.canDamage = true;
         }
     }
 
@@ -76,6 +92,7 @@ public class OtherTestCharacter extends Character {
 
     @Override
     protected void ultimate() {
+        characterAsset.setImageIndex(1);
         for (int i=0; i<5; i++) {
             if (curRocket >= rockets.length) {
                 curRocket = 0;

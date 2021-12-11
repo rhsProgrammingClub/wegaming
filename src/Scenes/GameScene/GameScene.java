@@ -2,7 +2,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
-import ky.Asset;
 import ky.Text;
 import ky.Vector2D;
 
@@ -69,13 +68,13 @@ public class GameScene extends Scene {
         add(p1HealthBar);
         add(p2HealthBar);
 
-        abilityBarP1 = new CooldownBar(new Vector2D(80, 730), player1, false, "xd");
+        abilityBarP1 = new CooldownBar(new Vector2D(80, 730), player1, false, player1.abilityIcon);
         add(abilityBarP1);
-        ultBarP1 = new CooldownBar(new Vector2D(220, 730), player1, true, "xd");
+        ultBarP1 = new CooldownBar(new Vector2D(220, 730), player1, true, player1.ultIcon);
         add(ultBarP1);
-        abilityBarP2 = new CooldownBar(new Vector2D(1500-220, 730), player2, false, "xd");
+        abilityBarP2 = new CooldownBar(new Vector2D(1500-220, 730), player2, false, player2.abilityIcon);
         add(abilityBarP2);
-        ultBarP2 = new CooldownBar(new Vector2D(1500-80, 730), player2, true, "xd");
+        ultBarP2 = new CooldownBar(new Vector2D(1500-80, 730), player2, true, player2.ultIcon);
         add(ultBarP2);
 
         fpsText = new Text("FPS: ", new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 30) 

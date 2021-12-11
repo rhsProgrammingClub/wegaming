@@ -11,13 +11,11 @@ public class CooldownBar extends Entity {
     private double maxCooldown;
     private double curCooldown;    
     private Asset[] cooldownCovers;
-    private Asset icon;
     private int numCovered=0;
     private Character character;
     private boolean isUltCooldown;
-    // private Character.Status lastStatus = Character.Status.IDLE;
 
-    public CooldownBar(Vector2D position, Character character, boolean isUlt, String icon) {
+    public CooldownBar(Vector2D position, Character character, boolean isUlt, Asset icon) {
         super(position, 5);
         this.character = character;
         this.isUltCooldown = isUlt;
@@ -27,9 +25,10 @@ public class CooldownBar extends Entity {
             this.maxCooldown = character.abilityCooldown;
         }
         this.curCooldown = this.maxCooldown;
-        // this.icon = new Asset(icon, new Vector2D(0, 0), 5);
-        // this.icon.setVisible(true);
-        // add(this.icon);
+        if (icon != null) {
+            icon.setVisible(true);
+            add(icon);
+        }
         setVisible(true);
         cooldownCovers = new Asset[totalCovers];
         for (int i=0; i<totalCovers; i++) {
@@ -37,33 +36,15 @@ public class CooldownBar extends Entity {
             cooldownCovers[i].rotate(i * (360/totalCovers) + (360/totalCovers/2));
             add(cooldownCovers[i]);
         }
-        countDown();
-    }
-
-    public void countDown () {
-        System.out.println("did something haha");
-        curCooldown = maxCooldown;
-        numCovered = totalCovers;
-        for (Asset asset : cooldownCovers) {
-            asset.setVisible(true);
-        }
     }
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        if (isUltCooldown) {
-            curCooldown = character.curUltCooldown;
-            if (character.curUltCooldown > 0 && curCooldown <= 0) {
-                countDown();
-            }
-        } else {
-            curCooldown = character.curAbilityCooldown;
-            if (character.curAbilityCooldown > 0 && curCooldown <= 0) {
-                countDown();
-            }
-        }
+
+        if (isUltCooldown) curCooldown = character.curUltCooldown;
+        else curCooldown = character.curAbilityCooldown;
+
         if (curCooldown >= 0) {
-            // curCooldown -= deltaT;
             if (numCovered != (int)(curCooldown / (maxCooldown/totalCovers))) {
                 numCovered = (int)(curCooldown / (maxCooldown/totalCovers));
                 for (int i=0; i<totalCovers; i++) {

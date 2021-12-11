@@ -24,14 +24,16 @@ public class TestCharacter extends Character {
         characterAnimation.setVisible(true);
         add(characterAnimation);
         */
-        // super(position, collisionBoxWidth, collisionBoxHeight, layer, "damageEntity");
-        // sword = new Sword(new Vector2D(0,0), 120, 40, 5);
         sword = new Sword(new Vector2D(getX(), getY()), 4, getPlayer(), 100);
         add(sword);
         abilityCooldown = 5;
         ultimateCooldown = 20;
         curAbilityCooldown = abilityCooldown;
         curUltCooldown = ultimateCooldown;
+        setDefense(0.8);
+
+        abilityIcon = new Asset("assets/Characters/testcharacter/abilityIcon.png", new Vector2D(0, 0), 4);
+        ultIcon = new Asset("assets/Characters/testcharacter/ultIcon.png", new Vector2D(0, 0), 4);
     }
 
     public void onCollision(CollisionEntity collidingEntity) {
