@@ -15,15 +15,17 @@ public abstract class Character extends CollisionEntity {
     protected double HP;
     protected double speed = 100000;
     protected double jumpHeight = 1200;
-    protected double attackRange;
     protected double gravity = 3000;
     private double maxVelocity = 700;
     protected double abilityCooldown=-1;
     protected double ultimateCooldown=-1;
+    protected double curAbilityCooldown=-1;
+    protected double curUltCooldown=-1;
     protected int lives=3;
 
     protected Asset characterAsset;
     protected Asset icon;
+    private boolean flipped=false;
 
     private PlayerInput playerInput;
     protected boolean canJump = false;
@@ -112,10 +114,22 @@ public abstract class Character extends CollisionEntity {
                 HP = maxHP;
             }
         }
+        curAbilityCooldown-=deltaT;
+        curUltCooldown-=deltaT;
         if (keyCodes.contains(playerInput.upKey)) jump();
         if (keyCodes.contains(playerInput.attackKey)) basicAttack();
-        if (keyCodes.contains(playerInput.basicAbilityKey)) basicAbility();
-        if (keyCodes.contains(playerInput.ultimateKey)) ultimate();
+        if (keyCodes.contains(playerInput.basicAbilityKey)) {
+            if (curAbilityCooldown <= 0) {
+                curAbilityCooldown = abilityCooldown;
+                basicAbility();
+            }
+        }
+        if (keyCodes.contains(playerInput.ultimateKey)) {
+            if (curUltCooldown <= 0) {
+                curUltCooldown = ultimateCooldown;
+                ultimate();
+            } 
+        }
 
         if (Math.abs(getVel().getX()) <= 50) {
             setVel(new Vector2D(0, getVel().getY()));
@@ -125,10 +139,18 @@ public abstract class Character extends CollisionEntity {
         if (keyCodes.contains(playerInput.rightKey)) {
             addVel(new Vector2D(deltaT * speed, 0));
             direction = Direction.RIGHT;
+            if (flipped && characterAsset != null) {
+                characterAsset.flipHorizontal();
+                flipped = false;
+            }
         }
         if (keyCodes.contains(playerInput.leftKey)) {
             addVel(new Vector2D(-deltaT * speed, 0));
             direction = Direction.LEFT;
+            if (!flipped && characterAsset != null) {
+                characterAsset.flipHorizontal();
+                flipped = true;
+            }
         }
 
         setVel((Math.abs(getVel().getX()) > maxVelocity)

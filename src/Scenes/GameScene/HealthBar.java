@@ -7,16 +7,15 @@ import ky.Vector2D;
 public class HealthBar extends Entity {
 
     private double maxHP;
-    private int player;
     private Asset[] healthBarAssets;
     private Asset healthBarBorder;
     private int numBars=100;
-    private boolean flipped = false;
+    private Character character;
+    private int lastBar;
 
-    public HealthBar(Vector2D position, double maxHP, boolean flipped) {
+    public HealthBar(Vector2D position, Character character) {
         super(position, 5);
-        this.maxHP = maxHP;
-        this.flipped = flipped;
+        this.maxHP = character.maxHP;
         healthBarAssets = new Asset[100];
         healthBarBorder = new Asset("assets/misc/healthBar.png", new Vector2D(0, 0), 4);
         healthBarBorder.setVisible(true);
@@ -26,27 +25,24 @@ public class HealthBar extends Entity {
             healthBarAssets[e].setVisible(true);
             add(healthBarAssets[e]);
         }
+        this.character = character;
     }
 
-    public void setHP (double HP) {
-        numBars = (int)(HP / (maxHP/100));
-        if (flipped) {
-            for (int e=0; e<100; e++) {
-                if (e <= numBars) {
-                    healthBarAssets[e].setVisible(true);
-                } else {
-                    healthBarAssets[e].setVisible(false);
-                }
-            }
-        } else {
-            for (int e=99; e>=0; e--) {
-                if (e>=numBars) {
-                    healthBarAssets[e].setVisible(false);
-                } else {
-                    healthBarAssets[e].setVisible(true);
-                }
+    @Override
+    public void update(double deltaT, ArrayList<Integer> keyCodes) {
+        numBars = (int)(character.HP / (maxHP/100));
+        if (numBars<0) {
+            numBars = 0;
+        }
+        if (numBars == 100) {
+            for (Asset healthBar : healthBarAssets) {
+                healthBar.setVisible(true);
             }
         }
+        for (int i=numBars; i<lastBar; i++) {
+            healthBarAssets[i].setVisible(false);
+        }
+        lastBar = (int)(character.HP / (maxHP/100));
     }
 
 }

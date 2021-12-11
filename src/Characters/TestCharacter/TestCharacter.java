@@ -7,7 +7,6 @@ import ky.Vector2D;
 public class TestCharacter extends Character {
 
     Sword sword;
-    Status status = Status.IDLE;
 
     public TestCharacter () {
         super(new Vector2D(0, 0), 150, 275, 2000, 3);
@@ -29,8 +28,10 @@ public class TestCharacter extends Character {
         // sword = new Sword(new Vector2D(0,0), 120, 40, 5);
         sword = new Sword(new Vector2D(getX(), getY()), 4, getPlayer(), 100);
         add(sword);
-        this.abilityCooldown = 5;
-        this.ultimateCooldown = 20;
+        abilityCooldown = 5;
+        ultimateCooldown = 20;
+        curAbilityCooldown = abilityCooldown;
+        curUltCooldown = ultimateCooldown;
     }
 
     public void onCollision(CollisionEntity collidingEntity) {
@@ -53,9 +54,6 @@ public class TestCharacter extends Character {
             sword.swordAsset.flipHorizontal();
             lastDirection = direction;
         }
-
-        if (abilityCooldown >= 0 && status != Status.ABILITY) abilityCooldown-=deltaT;
-        if (ultimateCooldown >= 0 && status != Status.ULTIMATE) ultimateCooldown-=deltaT;
 
         if (sword.getDamage() == 200) {
             abilityUpTime -= deltaT;
@@ -99,29 +97,27 @@ public class TestCharacter extends Character {
     protected void basicAttack() {
         if (status == Status.IDLE) {
             status = Status.ATTACKING;
-            this.sword.canDamage=true;
+            sword.canDamage=true;
         }
     }
 
     @Override
     protected void basicAbility() {
-        if (abilityCooldown <= 0 && status == Status.IDLE && sword.getDamage() == 100) {
+        if (sword.getDamage() == 100) {
             sword.swordAsset.setImageIndex(1);
             abilityUpTime = 2;
-            abilityCooldown = 5;
             sword.setDamage(200);
         }
     }
 
     @Override
     protected void ultimate() {
-        if (ultimateCooldown <= 0 && status == Status.IDLE) {
-            ultimateCooldown=20;
-            sword.setCollisionBoxDimensions(sword.getCollisionBox().width * 2, sword.getCollisionBox().height * 2);
-            sword.swordAsset.rescale(2);
-            sword.swordAsset.setImageIndex(2);
-            sword.setDamage(250);
-        }
+        ultimateCooldown=20;
+        sword.setCollisionBoxDimensions(sword.getCollisionBox().width * 2, sword.getCollisionBox().height * 2);
+        sword.swordAsset.rescale(2);
+        sword.swordAsset.setImageIndex(2);
+        sword.setDamage(250);
+        ultimateUpTime = 5;
     }
     
 }

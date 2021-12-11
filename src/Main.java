@@ -11,7 +11,7 @@ public class Main extends KYscreen {
     public static int height = 800;
     public static Character player1;
     public static Character player2;
-    public static Character[] characters;
+    public static Character[][] characters;
     public static int sceneIndex = 0;
     public static Scene[] scenes;
     public static AudioPlayer testAudio;
@@ -47,11 +47,15 @@ public class Main extends KYscreen {
         scenes[2] = new GameScene();
         scenes[3] = new EndScene();
 
-        characters = new Character[4];  // different characters
-        characters[0] = new OtherTestCharacter();
-        characters[1] = new TestCharacter();
-        characters[2] = new TestCharacter();
-        characters[3] = new TestCharacter();
+        characters = new Character[4][2];  // different characters
+        characters[0][0] = new OtherTestCharacter();
+        characters[1][0] = new TestCharacter();
+        characters[2][0] = new TestCharacter();
+        characters[3][0] = new TestCharacter();
+        characters[0][1] = new OtherTestCharacter();
+        characters[1][1] = new TestCharacter();
+        characters[2][1] = new TestCharacter();
+        characters[3][1] = new TestCharacter();
         currentScene = scenes[sceneIndex];
         currentScene.initialize();
         setScene(currentScene);

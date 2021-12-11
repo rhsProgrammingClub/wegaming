@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
+import ky.Asset;
 import ky.Vector2D;
 
 public class OtherTestCharacter extends Character {
 
-    double ultTime;
+    double attackTime;
     Rocket[] rockets;
     int curRocket=0;
 
@@ -19,14 +20,32 @@ public class OtherTestCharacter extends Character {
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         super.update(deltaT, keyCodes);
-        ultTime-=deltaT;
+        if (status == Status.ATTACKING) {
+            attackTime-=deltaT;
+            if (attackTime <= 0) {
+                status  = Status.IDLE;
+            }
+        }
     }
 
     @Override
     public void initialize() {
-        jumpHeight = 800;
-        gravity = 1200;
-        ultimateCooldown = 10;
+        jumpHeight = 600;
+        gravity = 800;
+        ultimateCooldown = 1;
+        abilityCooldown = 5;
+        curUltCooldown = ultimateCooldown;
+        curAbilityCooldown = curAbilityCooldown;
+
+        characterAsset = new Asset(new String[] {
+                                   "assets/Characters/otheTest/Spaceship_normal.png",
+                                   "assets/Characters/otheTest/Spaceship_enraged.png"
+                                }, new Vector2D(0, 0), 3);
+
+        characterAsset.setVisible(true);
+        characterAsset.rescale(2);
+        add(characterAsset);
+
         rockets = new Rocket[10];
         for (int i=0; i<10; i++)
         {
@@ -37,27 +56,35 @@ public class OtherTestCharacter extends Character {
 
     @Override
     protected void basicAttack() {
-        
+        if (status == Status.IDLE) {
+            status = Status.ATTACKING;
+            attackTime = 2;
+            // do something
+        }
     }
 
     @Override
     protected void basicAbility() {
-        
+        if (curRocket >= rockets.length) {
+            curRocket = 0;
+        }
+        rockets[curRocket].setPos(getPos());
+        rockets[curRocket].homing = false;
+        rockets[curRocket].setActive();
+        curRocket++;
     }
 
     @Override
     protected void ultimate() {
-        if (ultTime <= 0) {
-            for (int i=0; i<5; i++) {
-                if (curRocket >= rockets.length) {
-                    curRocket = 0;
-                }
-                rockets[curRocket].setPos(new Vector2D(getX(), getY() - 250 + i*100));
-                rockets[curRocket].setVisible(true);
-                rockets[curRocket].canDamage = true;
-                curRocket++;
+        for (int i=0; i<5; i++) {
+            if (curRocket >= rockets.length) {
+                curRocket = 0;
             }
-            ultTime = ultimateCooldown;
+            rockets[curRocket].setPos(new Vector2D(getX(), getY() - 250 + i*100));
+            rockets[curRocket].setVisible(true);
+            rockets[curRocket].canDamage = true;
+            rockets[curRocket].homing = true;
+            curRocket++;
         }
     }
     

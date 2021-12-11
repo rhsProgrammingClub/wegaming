@@ -16,8 +16,10 @@ public class GameScene extends Scene {
     int frames = 0;
     HealthBar p1HealthBar;
     HealthBar p2HealthBar;
-    double lastHP1=0;
-    double lastHP2=0;
+    CooldownBar abilityBarP1;
+    CooldownBar abilityBarP2;
+    CooldownBar ultBarP1;
+    CooldownBar ultBarP2;
 
     public GameScene () {
     }
@@ -27,12 +29,6 @@ public class GameScene extends Scene {
         if (player1.lives <= 0 || player2.lives <= 0) {
             sceneIndex = 3;
         }
-        p1HealthBar.setHP(player1.HP);
-        if (lastHP1 != player1.HP) {
-        }
-        if (lastHP2 != player2.HP) {
-            p2HealthBar.setHP(player2.HP);
-        }
 
         tTime += deltaT;
         if (tTime >= 1) {
@@ -41,7 +37,6 @@ public class GameScene extends Scene {
             frames=0;
         }
         frames++;
-
     }
 
     @Override
@@ -67,17 +62,21 @@ public class GameScene extends Scene {
         add(player1);
         add(player2);
 
-        p1HealthBar = new HealthBar(new Vector2D(300, 80), player1.maxHP, false);
-        p2HealthBar = new HealthBar(new Vector2D(Main.width - 300, 80), player2.maxHP, true);
+        p1HealthBar = new HealthBar(new Vector2D(300, 80), Main.player1);
+        p2HealthBar = new HealthBar(new Vector2D(Main.width - 300, 80), Main.player2);
         p1HealthBar.setVisible(true);
         p2HealthBar.setVisible(true);
         add(p1HealthBar);
         add(p2HealthBar);
 
-        // p1HealthBar = new Asset("assets/misc/healthBar.png", new Vector2D(0, 0), 4);
-        // p1HealthBar.setPos(p1HealthBar.getWidth()/2, p1HealthBar.getHeight()/2 + height*0.1);
-        // p2HealthBar = new Asset("assets/misc/healthBar.png", new Vector2D(width, height), 4);
-        // p2HealthBar.setPos(width-p1HealthBar.getWidth()/2, p1HealthBar.getHeight()/2 + height*0.1);
+        abilityBarP1 = new CooldownBar(new Vector2D(80, 730), player1, false, "xd");
+        add(abilityBarP1);
+        ultBarP1 = new CooldownBar(new Vector2D(220, 730), player1, true, "xd");
+        add(ultBarP1);
+        abilityBarP2 = new CooldownBar(new Vector2D(1500-220, 730), player2, false, "xd");
+        add(abilityBarP2);
+        ultBarP2 = new CooldownBar(new Vector2D(1500-80, 730), player2, true, "xd");
+        add(ultBarP2);
 
         fpsText = new Text("FPS: ", new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 30) 
                         ,Color.BLACK, new Vector2D(120, 130), 200, 40, 4);
