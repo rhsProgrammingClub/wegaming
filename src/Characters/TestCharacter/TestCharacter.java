@@ -32,8 +32,8 @@ public class TestCharacter extends Character {
         curUltCooldown = ultimateCooldown;
         setDefense(0.8);
 
-        abilityIcon = new Asset("assets/Characters/testcharacter/abilityIcon.png", new Vector2D(0, 0), 4);
-        ultIcon = new Asset("assets/Characters/testcharacter/ultIcon.png", new Vector2D(0, 0), 4);
+        abilityIcon = new Asset("assets/Characters/testcharacter/ability_icon.png", new Vector2D(0, 0), 4);
+        ultIcon = new Asset("assets/Characters/testcharacter/ult_icon.png", new Vector2D(0, 0), 4);
     }
 
     public void onCollision(CollisionEntity collidingEntity) {

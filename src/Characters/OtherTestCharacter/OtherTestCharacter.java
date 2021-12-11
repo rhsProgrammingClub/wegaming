@@ -50,8 +50,8 @@ public class OtherTestCharacter extends Character {
         curAbilityCooldown = abilityCooldown;
 
         characterAsset = new Asset(new String[] {
-                                   "assets/Characters/otheTest/Spaceship_normal.png",
-                                   "assets/Characters/otheTest/Spaceship_enraged.png"
+                                   "assets/characters/spaceship/spaceship_normal.png",
+                                   "assets/characters/spaceship/spaceship_enraged.png"
                                 }, new Vector2D(0, 0), 3);
 
         characterAsset.setVisible(true);

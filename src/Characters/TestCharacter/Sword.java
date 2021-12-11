@@ -11,8 +11,8 @@ public class Sword extends DamageEntity {
         super(position, 120, 40, layer, player, damage);
         swordAsset = new Asset(
                         new String[] {"assets/Characters/testcharacter/sword.png", 
-                        "assets/Characters/testcharacter/swordBoosted.png",
-                        "assets/Characters/testcharacter/swordUlt.png"},
+                        "assets/Characters/testcharacter/sword_boosted.png",
+                        "assets/Characters/testcharacter/sword_ult.png"},
                         new Vector2D(0, 0), 120, 40, 5);
 
         swordAsset.setVisible(true);

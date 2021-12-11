@@ -16,7 +16,7 @@ public class Rocket extends DamageEntity{
         super(position, 64, 128, 3, player, 750, 0);
         testChar = ((player==1) ? Main.player2 : Main.player1);
         setBreaks(true);
-        rocketAsset = new Asset("assets/Characters/otheTest/rocket.png", new Vector2D(0, 0), 3);
+        rocketAsset = new Asset("assets/characters/spaceship/rocket.png", new Vector2D(0, 0), 3);
         rocketAsset.setVisible(true);
         add(rocketAsset);
     }
