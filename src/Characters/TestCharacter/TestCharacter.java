@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import ky.Asset;
+import ky.AudioPlayer;
 import ky.CollisionEntity;
 import ky.Vector2D;
 
@@ -77,6 +78,8 @@ public class TestCharacter extends Character {
         }
 
         if (status == Status.ATTACKING) {
+            AudioPlayer knifesound = new AudioPlayer("assets/soundfx/knife.wav");
+            knifesound.play();
             sword.setPos(new Vector2D(tempOffSet*direction.getValue() +eee*deltaT*direction.getValue(), 0));
             sword.addPos(this.getPos());
             tempOffSet += eee*deltaT;
@@ -98,6 +101,9 @@ public class TestCharacter extends Character {
     @Override
     protected void basicAttack() {
         if (status == Status.IDLE) {
+            AudioPlayer knifesound = new AudioPlayer("assets/soundfx/knifeswing.wav");
+            knifesound.play();
+            //knifesound.reset();
             status = Status.ATTACKING;
             sword.canDamage=true;
         }

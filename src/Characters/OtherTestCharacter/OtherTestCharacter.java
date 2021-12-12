@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 import ky.Asset;
 import ky.Vector2D;
+import ky.AudioPlayer;
 
 public class OtherTestCharacter extends Character {
 
@@ -22,7 +23,10 @@ public class OtherTestCharacter extends Character {
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         super.update(deltaT, keyCodes);
-        if (status == Status.ATTACKING) {
+        AudioPlayer zapsound = new AudioPlayer ("assets/soundfx/zap.wav");
+        zapsound.setVolume(-30);
+        if (status == Status.ATTACKING) {   
+            zapsound.play();
             attackTime-=deltaT;
             if (attackTime <= 0) {
                 laser.canDamage = false;
@@ -77,6 +81,7 @@ public class OtherTestCharacter extends Character {
             laser.setPos(new Vector2D(getX() + 1095 * direction.getValue(), getY()+15));
             laser.setVisible(true);
             laser.canDamage = true;
+        
         }
     }
 
@@ -93,6 +98,8 @@ public class OtherTestCharacter extends Character {
 
     @Override
     protected void ultimate() {
+        AudioPlayer rocketwhoosh = new AudioPlayer ("assets/soundfx/rocket.wav");
+        rocketwhoosh.play();
         characterAsset.setImageIndex(1);
         for (int i=0; i<5; i++) {
             if (curRocket >= rockets.length) {

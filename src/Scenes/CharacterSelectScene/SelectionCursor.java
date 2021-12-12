@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import ky.Asset;
+import ky.AudioPlayer;
 import ky.Entity;
 import ky.Vector2D;
 
@@ -40,6 +41,7 @@ public class SelectionCursor extends Entity {
     // this probably needs some major refactoring 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
+        AudioPlayer charselect = new AudioPlayer("assets/soundfx/characterselect.wav");
         if (!keyCodes.contains(leftKey)) {
             liftedLeft = true;
         }
@@ -60,6 +62,7 @@ public class SelectionCursor extends Entity {
                     this.addPos(cursorAsset.getWidth()+20,0);
                     liftedRight = false;
                     characterIndex++;
+                    charselect.play();
                 }
             }
             if (keyCodes.contains(leftKey) && liftedLeft) {
@@ -67,6 +70,7 @@ public class SelectionCursor extends Entity {
                     this.addPos(-(cursorAsset.getWidth()+20),0);
                     liftedLeft = false;
                     characterIndex--;
+                    charselect.play();
                 }
             }
         }

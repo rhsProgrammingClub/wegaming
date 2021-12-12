@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
-
+import ky.Asset;
 import ky.Text;
 import ky.Vector2D;
 
@@ -39,6 +39,12 @@ public class GameScene extends Scene {
     public void initialize() {
         sceneIndex = 3;
         Main.resetCharacters();
+
+        Asset background = new Asset("assets/backgrounds/background-1.png", new Vector2D(750, 400), 1500, 800, 0);
+        add(background);
+        background.setVisible(true);
+
+       
         // ground = new Ground(Main.width/2, Main.height*0.75, (int)(Main.width*0.6), (int)(Main.height*0.1));
         ground = new Ground(width*0.5, height*0.9, width, (int)(height*0.2));
         add(ground);
