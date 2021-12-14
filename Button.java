@@ -16,13 +16,31 @@ public abstract class Button extends Entity {
     protected Text text;
     protected Asset buttonAsset;
 
-    public Button(String buttonAsset, Vector2D position) {
+    public Button (Vector2D position) {
+        super(position, 4);
+        this.buttonAsset = new Asset(
+                new String[]{"assets/misc/button.png", 
+                "assets/misc/button_hovered.png"}, 
+                new Vector2D(0, 0), 5);
+
+        this.buttonAsset.setVisible(true);
+        add(this.buttonAsset);
+        setVisible(true);
+    }
+
+    public Button(String buttonAsset, String hoveredButtonAsset, Vector2D position) {
         super(position, 4);
         try {
             ImageIO.read(new File(buttonAsset));
-            this.buttonAsset = new Asset(buttonAsset, new Vector2D(0, 0), 5);
+            ImageIO.read(new File(hoveredButtonAsset));
+            this.buttonAsset = new Asset(
+                    new String[]{buttonAsset, hoveredButtonAsset}, 
+                    new Vector2D(0, 0), 5);
         } catch (IOException ex) {
-            this.buttonAsset = new Asset("assets/misc/button.png", new Vector2D(0, 0), 5);
+            this.buttonAsset = new Asset(
+                    new String[]{"assets/misc/button.png", 
+                    "assets/misc/button_hovered.png"}, 
+                    new Vector2D(0, 0), 5);
         }
         this.buttonAsset.setVisible(true);
         add(this.buttonAsset);
@@ -49,13 +67,18 @@ public abstract class Button extends Entity {
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (Main.mousePos.getX() >= getX() - buttonAsset.getWidth()/2 && 
-            Main.mousePos.getX() <= getX() + buttonAsset.getWidth()/2) {
+                Main.mousePos.getX() <= getX() + buttonAsset.getWidth()/2) {
             if (Main.mousePos.getY() >= getY() - buttonAsset.getHeight()/2 && 
-            Main.mousePos.getY() <= getY() + buttonAsset.getHeight()/2) {
+                    Main.mousePos.getY() <= getY() + buttonAsset.getHeight()/2) {
                 if (!hasClicked && Main.mousePressed) {
                     action();
                 }
+                buttonAsset.setImageIndex(1);
+            } else {
+                buttonAsset.setImageIndex(0);
             }
+        } else {
+            buttonAsset.setImageIndex(0);
         }
         hasClicked = Main.mousePressed;
     }

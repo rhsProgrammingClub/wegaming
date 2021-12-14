@@ -10,6 +10,7 @@
         "src/Scenes/GameScene",
         "src/Scenes/MainMenuScene",
         "src/Scenes/EndScene",
-        "src/Scenes/StartScene"
+        "src/Scenes/StartScene",
+        "src/Scenes/InputSettingsScene"
     ]
 }

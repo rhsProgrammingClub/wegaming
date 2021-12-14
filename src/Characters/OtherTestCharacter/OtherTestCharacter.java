@@ -11,6 +11,8 @@ public class OtherTestCharacter extends Character {
     Rocket[] rockets;
     Laser laser;
     int curRocket=0;
+    AudioPlayer zapSound; 
+    AudioPlayer rocketwhoosh;
 
     public OtherTestCharacter() {
         super(new Vector2D(0, 0), 150, 200, 1000, 3);
@@ -23,10 +25,7 @@ public class OtherTestCharacter extends Character {
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         super.update(deltaT, keyCodes);
-        AudioPlayer zapsound = new AudioPlayer ("assets/soundfx/zap.wav");
-        zapsound.setVolume(-30);
         if (status == Status.ATTACKING) {   
-            zapsound.play();
             attackTime-=deltaT;
             if (attackTime <= 0) {
                 laser.canDamage = false;
@@ -48,8 +47,8 @@ public class OtherTestCharacter extends Character {
     public void initialize() {
         jumpHeight = 600;
         gravity = 800;
-        ultimateCooldown = 1;
-        abilityCooldown = 5;
+        ultimateCooldown = 15;
+        abilityCooldown = 3;
         curUltCooldown = ultimateCooldown;
         curAbilityCooldown = abilityCooldown;
         setDefense(0.1);
@@ -71,6 +70,11 @@ public class OtherTestCharacter extends Character {
         }
         laser = new Laser(new Vector2D(0, 0), getPlayer());
         add(laser);
+
+        zapSound = new AudioPlayer ("assets/SFX/zap.wav");
+        zapSound.setVolume(-30);
+
+        rocketwhoosh = new AudioPlayer ("assets/SFX/rocket.wav");
     }
 
     @Override
@@ -82,11 +86,15 @@ public class OtherTestCharacter extends Character {
             laser.setVisible(true);
             laser.canDamage = true;
         
+            zapSound.reset();
+            zapSound.play();
         }
     }
 
     @Override
     protected void basicAbility() {
+        rocketwhoosh.reset();
+        rocketwhoosh.play();
         if (curRocket >= rockets.length) {
             curRocket = 0;
         }
@@ -98,10 +106,10 @@ public class OtherTestCharacter extends Character {
 
     @Override
     protected void ultimate() {
-        AudioPlayer rocketwhoosh = new AudioPlayer ("assets/soundfx/rocket.wav");
+        rocketwhoosh.reset();
         rocketwhoosh.play();
         characterAsset.setImageIndex(1);
-        for (int i=0; i<5; i++) {
+        for (int i=0; i<4; i++) {
             if (curRocket >= rockets.length) {
                 curRocket = 0;
             }

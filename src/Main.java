@@ -48,12 +48,13 @@ public class Main extends KYscreen implements MouseInputListener {
         // backgroundMusic.setLoop(true);
         // backgroundMusic.play();
 
-        scenes = new Scene[5];
+        scenes = new Scene[6];
         scenes[0] = new StartScene();
         scenes[1] = new MainMenuScene();
         scenes[2] = new CharacterSelectScene();
         scenes[3] = new GameScene();
         scenes[4] = new EndScene();
+        scenes[5] = new InputSettingsScene();
 
         resetCharacters();
 
@@ -61,8 +62,6 @@ public class Main extends KYscreen implements MouseInputListener {
         currentScene.initialize();
         setScene(currentScene);
     }
-
-    boolean se=false;
 
     @Override
     public void update() {

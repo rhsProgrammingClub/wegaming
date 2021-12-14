@@ -8,6 +8,7 @@ import ky.Vector2D;
 public class TestCharacter extends Character {
 
     Sword sword;
+    AudioPlayer knifeSound;
 
     public TestCharacter () {
         super(new Vector2D(0, 0), 150, 275, 2000, 3);
@@ -25,7 +26,7 @@ public class TestCharacter extends Character {
         characterAnimation.setVisible(true);
         add(characterAnimation);
         */
-        sword = new Sword(new Vector2D(getX(), getY()), 4, getPlayer(), 100);
+        sword = new Sword(new Vector2D(getX(), getY()), 4, getPlayer(), 175);
         add(sword);
         abilityCooldown = 5;
         ultimateCooldown = 20;
@@ -35,6 +36,8 @@ public class TestCharacter extends Character {
 
         abilityIcon = new Asset("assets/Characters/testcharacter/ability_icon.png", new Vector2D(0, 0), 4);
         ultIcon = new Asset("assets/Characters/testcharacter/ult_icon.png", new Vector2D(0, 0), 4);
+
+        knifeSound = new AudioPlayer("assets/SFX/knife_swing.wav");
     }
 
     public void onCollision(CollisionEntity collidingEntity) {
@@ -42,7 +45,7 @@ public class TestCharacter extends Character {
     }
 
     double tempOffSet = 0;
-    double eee=1000;
+    double eee=500;
 
     double abilityUpTime = 2;
     double ultimateUpTime = 5;
@@ -58,18 +61,18 @@ public class TestCharacter extends Character {
             lastDirection = direction;
         }
 
-        if (sword.getDamage() == 200) {
+        if (sword.getDamage() == 275) {
             abilityUpTime -= deltaT;
             if (abilityUpTime <= 0) {
-                sword.setDamage(100);
+                sword.setDamage(175);
                 sword.swordAsset.setImageIndex(0);
                 abilityUpTime = 2;
             }
         }
-        if (sword.getDamage() == 250) {
+        if (sword.getDamage() == 400) {
             ultimateUpTime -= deltaT;
             if (ultimateUpTime <= 0) {
-                sword.setDamage(100);
+                sword.setDamage(175);
                 sword.setCollisionBoxDimensions(sword.getCollisionBox().width/2, sword.getCollisionBox().height/2);
                 sword.swordAsset.setImageIndex(0);
                 sword.swordAsset.rescale(0.5);
@@ -78,18 +81,16 @@ public class TestCharacter extends Character {
         }
 
         if (status == Status.ATTACKING) {
-            AudioPlayer knifesound = new AudioPlayer("assets/soundfx/knife.wav");
-            knifesound.play();
             sword.setPos(new Vector2D(tempOffSet*direction.getValue() +eee*deltaT*direction.getValue(), 0));
             sword.addPos(this.getPos());
             tempOffSet += eee*deltaT;
             if (tempOffSet >= 120) {
                 tempOffSet = 120;
-                eee=-1000;
+                eee=-500;
             }
             if (tempOffSet <= 0) {
                 tempOffSet = 0;
-                eee=1000;
+                eee=500;
                 status=Status.IDLE;
                 sword.canDamage = false; // Reset the canDamage state so we can't just walk into the enemy after swinging to hit them
             }
@@ -101,9 +102,8 @@ public class TestCharacter extends Character {
     @Override
     protected void basicAttack() {
         if (status == Status.IDLE) {
-            AudioPlayer knifesound = new AudioPlayer("assets/soundfx/knifeswing.wav");
-            knifesound.play();
-            //knifesound.reset();
+            knifeSound.reset();
+            knifeSound.play();
             status = Status.ATTACKING;
             sword.canDamage=true;
         }
@@ -111,10 +111,10 @@ public class TestCharacter extends Character {
 
     @Override
     protected void basicAbility() {
-        if (sword.getDamage() == 100) {
+        if (sword.getDamage() == 175) {
             sword.swordAsset.setImageIndex(1);
             abilityUpTime = 2;
-            sword.setDamage(200);
+            sword.setDamage(275);
         }
     }
 
@@ -124,7 +124,7 @@ public class TestCharacter extends Character {
         sword.setCollisionBoxDimensions(sword.getCollisionBox().width * 2, sword.getCollisionBox().height * 2);
         sword.swordAsset.rescale(2);
         sword.swordAsset.setImageIndex(2);
-        sword.setDamage(250);
+        sword.setDamage(400);
         ultimateUpTime = 5;
     }
     

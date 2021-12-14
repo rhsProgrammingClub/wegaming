@@ -16,6 +16,7 @@ public class SelectionCursor extends Entity {
     private int rightKey;
     private int selectKey;
     public int characterIndex;
+    private AudioPlayer charselect;
 
     public SelectionCursor(Vector2D position, int layer, int player) {
         super(position, layer, "cursor");
@@ -30,6 +31,7 @@ public class SelectionCursor extends Entity {
         PlayerInput inputSystem = player == 1 ? PlayerInput.PLAYER_ONE_INPUT : PlayerInput.PLAYER_TWO_INPUT;
         characterIndex = player;
         bindKeys(inputSystem);
+        charselect  = new AudioPlayer("assets/SFX/characterselect.wav");
     }
 
     private void bindKeys(PlayerInput i) {
@@ -41,7 +43,6 @@ public class SelectionCursor extends Entity {
     // this probably needs some major refactoring 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        AudioPlayer charselect = new AudioPlayer("assets/soundfx/characterselect.wav");
         if (!keyCodes.contains(leftKey)) {
             liftedLeft = true;
         }
