@@ -47,17 +47,40 @@ public abstract class Button extends Entity {
         setVisible(true);
     }
 
+    protected void setText (char text) {
+        if (this.text == null) {
+            this.text = new Text(
+                    String.valueOf(text),
+                    new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 50),
+                    Color.white,
+                    new Vector2D(20, 0), 
+                    200, 
+                    70, 
+                    5);
+            add(this.text);
+            this.text.setVisible(true);
+        } else {
+            this.text.setText(String.valueOf(text));
+            System.out.println("changed to " + text);
+        }
+    }
+
     protected void setText (String text) {
-        this.text = new Text(
-                text,
-                new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 50),
-                Color.white,
-                new Vector2D(20, 0), 
-                200, 
-                70, 
-                5);
-        add(this.text);
-        this.text.setVisible(true);
+        if (this.text == null) {
+            this.text = new Text(
+                    text,
+                    new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 50),
+                    Color.white,
+                    new Vector2D(20, 0), 
+                    200, 
+                    70, 
+                    5);
+            add(this.text);
+            this.text.setVisible(true);
+        } else {
+            this.text.setText(text);
+            System.out.println("changed to " + (text+'A'));
+        }
     }
 
     protected abstract void action ();

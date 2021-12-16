@@ -172,6 +172,16 @@ public abstract class Character extends CollisionEntity {
             }
         }
 
+        // cant go off map, might get rid of later
+        if (getX()+getVel().getX() * deltaT - getCollisionBox().width/2 < 0) {
+            setVel(new Vector2D(0, getVel().getY()));
+            setPos(new Vector2D(getCollisionBox().width/2, getY()));
+        }
+        if (getX()+getVel().getX() * deltaT + getCollisionBox().width/2 > Main.width) {
+            setVel(new Vector2D(0, getVel().getY()));
+            setPos(new Vector2D(Main.width-getCollisionBox().width/2, getY()));
+        }
+
     }
 
     protected void jump () {

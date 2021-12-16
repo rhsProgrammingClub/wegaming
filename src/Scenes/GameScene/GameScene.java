@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
+
+import ky.Asset;
 import ky.Text;
 import ky.Vector2D;
 
@@ -18,11 +20,22 @@ public class GameScene extends Scene {
     CooldownBar abilityBarP2;
     CooldownBar ultBarP1;
     CooldownBar ultBarP2;
+    Asset[] p1LivesDisplay;
+    Asset[] p2LivesDisplay;
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (player1.lives <= 0 || player2.lives <= 0) {
             sceneIndex = 4;
+        }
+
+        for (int i=2; i>=0; i--) {
+            if (player1.lives < i+1) {
+                p1LivesDisplay[i].setVisible(false);
+            }
+            if (player2.lives < i+1) {
+                p2LivesDisplay[i].setVisible(false);
+            }
         }
 
         tTime += deltaT;
@@ -81,5 +94,27 @@ public class GameScene extends Scene {
         fpsText.setVisible(true);
         add(fpsText);
         
+        p1LivesDisplay = new Asset[3];
+        p2LivesDisplay = new Asset[3];
+        for (int i=0; i<3; i++) {
+            p1LivesDisplay[i] = new Asset(
+                "assets/misc/life.png", 
+                new Vector2D(80 + i * 80, 200), 
+                5);
+            
+
+            p1LivesDisplay[i].setVisible(true);
+            add(p1LivesDisplay[i]);
+            
+            p2LivesDisplay[i] = new Asset(
+                "assets/misc/life.png", 
+                new Vector2D(1240 + i * 80, 200), 
+                5);
+
+
+            p2LivesDisplay[i].setVisible(true);
+            add(p2LivesDisplay[i]);
+
+        }
     }
 }

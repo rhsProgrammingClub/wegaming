@@ -43,9 +43,30 @@ public class PlayerInput {
         setUltimate(ultimate);
     }
 
-    
+    public char getKey (int keyNum) {
+        if (keyNum >= 7) keyNum-=7;
+        switch (keyNum) {
+            case 0:
+                return (char)leftKey;
+            case 1:
+                return (char)rightKey;
+            case 2:
+                return (char)upKey;
+            case 3:
+                return (char)downKey;
+            case 4:
+                return (char)attackKey;
+            case 5:
+                return (char)basicAbilityKey;
+            case 6:
+                return (char)ultimateKey;
+            default:
+                System.out.println("oh?");
+                return 'L';
+        }
+    }
 
-    boolean setKey (int keyNum, int key) {
+    public boolean setKey (int keyNum, int key) {
         if (keyNum >= 7) keyNum-=7;
         switch (keyNum) {
             case 0:
