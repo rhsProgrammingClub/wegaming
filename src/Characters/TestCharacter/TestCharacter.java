@@ -20,7 +20,7 @@ public class TestCharacter extends Character {
 
     @Override
     public void initialize() {
-        // setIcon(new Asset("assets/Characters/testcharacter/icon.png", new Vector2D(0, 0), 3));
+        // setIcon(new Asset("assets/characters/testcharacter/icon.png", new Vector2D(0, 0), 3));
         /* 
         characterAnimation = new AnimationAsset(images, position, animationTime, layer);
         characterAnimation.setVisible(true);
@@ -34,8 +34,8 @@ public class TestCharacter extends Character {
         curUltCooldown = ultimateCooldown;
         setDefense(0.25);
 
-        abilityIcon = new Asset("assets/Characters/testcharacter/ability_icon.png", new Vector2D(0, 0), 4);
-        ultIcon = new Asset("assets/Characters/testcharacter/ult_icon.png", new Vector2D(0, 0), 4);
+        abilityIcon = new Asset("assets/characters/testcharacter/ability_icon.png", new Vector2D(0, 0), 4);
+        ultIcon = new Asset("assets/characters/testcharacter/ult_icon.png", new Vector2D(0, 0), 4);
 
         knifeSound = new AudioPlayer("assets/SFX/knife_swing.wav");
     }
