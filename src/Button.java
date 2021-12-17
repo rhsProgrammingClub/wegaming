@@ -47,10 +47,10 @@ public abstract class Button extends Entity {
         setVisible(true);
     }
 
-    protected void setText (char text) {
+    protected void setText (char newText) {
         if (this.text == null) {
             this.text = new Text(
-                    String.valueOf(text),
+                    String.valueOf(newText),
                     new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 50),
                     Color.white,
                     new Vector2D(20, 0), 
@@ -60,15 +60,15 @@ public abstract class Button extends Entity {
             add(this.text);
             this.text.setVisible(true);
         } else {
-            this.text.setText(String.valueOf(text));
-            System.out.println("changed to " + text);
+            this.text.setText(String.valueOf(newText));
+            System.out.println("Char: changed to " + newText);
         }
     }
 
-    protected void setText (String text) {
+    protected void setText (String newText) {
         if (this.text == null) {
             this.text = new Text(
-                    text,
+                    newText,
                     new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 50),
                     Color.white,
                     new Vector2D(20, 0), 
@@ -78,8 +78,8 @@ public abstract class Button extends Entity {
             add(this.text);
             this.text.setVisible(true);
         } else {
-            this.text.setText(text);
-            System.out.println("changed to " + (text+'A'));
+            this.text.setText(newText);
+            System.out.println("String: changed to " + (newText));
         }
     }
 

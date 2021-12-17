@@ -115,7 +115,7 @@ public class InputSettingsScene extends Scene {
                     }
                 } else {
                     if (PlayerInput.PLAYER_TWO_INPUT.setKey(selectedButton, keyCodes.get(0))) {
-                        p2InputButtons[selectedButton - 7].setText(PlayerInput.PLAYER_TWO_INPUT.getKey(selectedButton));
+                        p2InputButtons[selectedButton - 7].setText(PlayerInput.PLAYER_ONE_INPUT.getKey(selectedButton));
                     } else {
                         System.out.println("Already a binded key");
                     }

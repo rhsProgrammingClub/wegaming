@@ -122,15 +122,15 @@ public abstract class Character extends CollisionEntity {
         }
         curAbilityCooldown-=deltaT;
         curUltCooldown-=deltaT;
-        if (keyCodes.contains(playerInput.upKey)) jump();
-        if (keyCodes.contains(playerInput.attackKey)) basicAttack();
-        if (keyCodes.contains(playerInput.basicAbilityKey)) {
+        if (keyCodes.contains(playerInput.upKey.get())) jump();
+        if (keyCodes.contains(playerInput.attackKey.get())) basicAttack();
+        if (keyCodes.contains(playerInput.basicAbilityKey.get())) {
             if (curAbilityCooldown <= 0) {
                 curAbilityCooldown = abilityCooldown;
                 basicAbility();
             }
         }
-        if (keyCodes.contains(playerInput.ultimateKey)) {
+        if (keyCodes.contains(playerInput.ultimateKey.get())) {
             if (curUltCooldown <= 0) {
                 curUltCooldown = ultimateCooldown;
                 ultimate();
@@ -142,7 +142,7 @@ public abstract class Character extends CollisionEntity {
         }
 
         // if (Math.abs(getVel().getX()) < 400) {
-        if (keyCodes.contains(playerInput.rightKey)) {
+        if (keyCodes.contains(playerInput.rightKey.get())) {
             addVel(new Vector2D(deltaT * speed, 0));
             direction = Direction.RIGHT;
             if (flipped && characterAsset != null) {
@@ -150,7 +150,7 @@ public abstract class Character extends CollisionEntity {
                 flipped = false;
             }
         }
-        if (keyCodes.contains(playerInput.leftKey)) {
+        if (keyCodes.contains(playerInput.leftKey.get())) {
             addVel(new Vector2D(-deltaT * speed, 0));
             direction = Direction.LEFT;
             if (!flipped && characterAsset != null) {
