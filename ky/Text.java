@@ -63,16 +63,18 @@ public class Text extends Asset {
 	
 	public void setText(String text) {
 		this.updateText = text;
+		updateText();
 	}
 	
 	public void setFont(Font font) {
 		this.updateFont = font;
+		updateText();
 	}
 	
 	public void setColor(Color color) {
 		this.updateColor = color;
+		updateText();
 	}
-	
 
 	public Text clone() {
 		Text clone = new Text(getText(), getFont(), getColor(), getPos(), getWidth(), getHeight(), getLayer(), getName());
@@ -80,8 +82,6 @@ public class Text extends Asset {
 		clone.setImageIndex(getImageIndex());
 		return clone; 
 	}
-	
-	
 	
 	public void updateText() {
 		if(!this.text.equals(this.updateText) || !this.font.equals(this.updateFont) || !this.color.equals(this.updateColor)) {

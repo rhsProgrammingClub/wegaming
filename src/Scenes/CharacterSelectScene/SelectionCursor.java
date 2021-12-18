@@ -35,9 +35,9 @@ public class SelectionCursor extends Entity {
     }
 
     private void bindKeys(PlayerInput i) {
-        leftKey=i.leftKey;
-        rightKey=i.rightKey;
-        selectKey=i.attackKey;
+        leftKey=i.leftKey.get();
+        rightKey=i.rightKey.get();
+        selectKey=i.attackKey.get();
     }
 
     // this probably needs some major refactoring 

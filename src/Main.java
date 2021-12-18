@@ -97,9 +97,9 @@ public class Main extends KYscreen implements MouseInputListener {
 
     @Override
     public void keyPressed(int keyCode) {
-        if (keyCode == KeyEvent.VK_ESCAPE) {
-            System.exit(0);
-        }
+        // if (keyCode == KeyEvent.VK_ESCAPE) { 
+        //     System.exit(0);
+        // }
     }
 
     @Override

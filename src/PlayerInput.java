@@ -1,39 +1,33 @@
 /*
     A class dedicated to managing the specific inputs for a player. A player should be bound by their index, not necessarily an object.
 */
-
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class PlayerInput {
 
-    public static PlayerInput PLAYER_ONE_INPUT = new PlayerInput(KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_U, KeyEvent.VK_I, KeyEvent.VK_O);
-    public static PlayerInput PLAYER_TWO_INPUT = new PlayerInput(KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_NUMPAD1, KeyEvent.VK_NUMPAD2, KeyEvent.VK_NUMPAD3);
+    public static PlayerInput PLAYER_ONE_INPUT = new PlayerInput(KeyEvent.VK_A, KeyEvent.VK_D, KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_Q, KeyEvent.VK_E, KeyEvent.VK_F);
+    public static PlayerInput PLAYER_TWO_INPUT = new PlayerInput(KeyEvent.VK_J, KeyEvent.VK_L, KeyEvent.VK_I, KeyEvent.VK_K, KeyEvent.VK_U, KeyEvent.VK_O, KeyEvent.VK_P);
 
     public static ArrayList<Integer> usedKeys;
 
     public int playerIndex = 0; // Player 1 and 2
     
-    public int leftKey = KeyEvent.VK_LEFT;
-    public int rightKey = KeyEvent.VK_RIGHT;
-    public int upKey = KeyEvent.VK_UP;
-    public int downKey = KeyEvent.VK_DOWN;
-    public int attackKey = KeyEvent.VK_F; 
+    public AtomicInteger leftKey = new AtomicInteger(KeyEvent.VK_LEFT);
+    public AtomicInteger rightKey = new AtomicInteger(KeyEvent.VK_RIGHT);
+    public AtomicInteger upKey = new AtomicInteger(KeyEvent.VK_UP);
+    public AtomicInteger downKey = new AtomicInteger(KeyEvent.VK_DOWN);
+    public AtomicInteger attackKey = new AtomicInteger(KeyEvent.VK_F); 
 
-    public int ultimateKey; // i really dont want to update the constructor. welp
-    public int basicAbilityKey; // same here
+    public AtomicInteger ultimateKey = new AtomicInteger(0); // i really dont want to update the constructor. welp
+    public AtomicInteger basicAbilityKey = new AtomicInteger(0); // same here
 
     public PlayerInput(int left, int right, int up, int down, int attack, int ability, int ultimate) {
         if (usedKeys == null) {
             usedKeys = new ArrayList<Integer>();
         }
-        // leftKey=left;
-        // rightKey=right;
-        // upKey=up;
-        // downKey=down;
-        // attackKey=attack;
-        // basicAbilityKey = ability;
-        // ultimateKey = ultimate;
+
         setLeft(left);
         setRight(right);
         setUp(up);
@@ -47,19 +41,19 @@ public class PlayerInput {
         if (keyNum >= 7) keyNum-=7;
         switch (keyNum) {
             case 0:
-                return (char)leftKey;
+                return KeyEvent.getKeyText(leftKey.get()).charAt(0);
             case 1:
-                return (char)rightKey;
+                return KeyEvent.getKeyText(rightKey.get()).charAt(0);
             case 2:
-                return (char)upKey;
+                return KeyEvent.getKeyText(upKey.get()).charAt(0);
             case 3:
-                return (char)downKey;
+                return KeyEvent.getKeyText(downKey.get()).charAt(0);
             case 4:
-                return (char)attackKey;
+                return KeyEvent.getKeyText(attackKey.get()).charAt(0);
             case 5:
-                return (char)basicAbilityKey;
+                return KeyEvent.getKeyText(basicAbilityKey.get()).charAt(0);
             case 6:
-                return (char)ultimateKey;
+                return KeyEvent.getKeyText(ultimateKey.get()).charAt(0);
             default:
                 System.out.println("oh?");
                 return 'L';
@@ -89,74 +83,42 @@ public class PlayerInput {
         }
     }
 
-    private boolean setLeft (int key) {
-        if (usedKeys.contains(key)) {
-            return false;
-        }
-        usedKeys.remove((Integer)leftKey);
-        leftKey = key;
-        usedKeys.add(leftKey);
+    private boolean setKey(AtomicInteger pointer, int newKey) {
+        if(usedKeys.contains(newKey)) return false;
+        pointer.set(newKey);
         return true;
     }
 
-    private boolean setRight (int key) {
-        if (usedKeys.contains(key)) {
-            return false;
-        }
-        usedKeys.remove((Integer)rightKey);
-        rightKey = key;
-        usedKeys.add(rightKey);
-        return true;
-    }
+    private boolean setLeft(int newKey) {
+        return setKey(leftKey, newKey);
+    } 
 
-    private boolean setUp (int key) {
-        if (usedKeys.contains(key)) {
-            return false;
-        }
-        usedKeys.remove((Integer)upKey);
-        upKey = key;
-        usedKeys.add(upKey);
-        return true;
-    }
+    private boolean setRight(int newKey) {
+        return setKey(rightKey, newKey);
+    } 
 
-    private boolean setDown (int key) {
-        if (usedKeys.contains(key)) {
-            return false;
-        }
-        usedKeys.remove((Integer)downKey);
-        downKey = key;
-        usedKeys.add(downKey);
-        return true;
-    }
+    private boolean setUp(int newKey) {
+        return setKey(upKey, newKey);
+    } 
 
-    private boolean setAttack (int key) {
-        if (usedKeys.contains(key)) {
-            return false;
-        }
-        usedKeys.remove((Integer)attackKey);
-        attackKey = key;
-        usedKeys.add(attackKey);
-        return true;
-    }
+    private boolean setDown(int newKey) {
+        return setKey(downKey, newKey);
+    } 
 
-    private boolean setAbility (int key) {
-        if (usedKeys.contains(key)) {
-            return false;
-        }
-        usedKeys.remove((Integer)basicAbilityKey);
-        basicAbilityKey = key;
-        usedKeys.add(basicAbilityKey);
-        return true;
-    }
+    private boolean setAttack(int newKey) {
+        return setKey(attackKey, newKey);
+    } 
 
-    private boolean setUltimate (int key) {
-        if (usedKeys.contains(key)) {
-            return false;
-        }
-        usedKeys.remove((Integer)ultimateKey);
-        ultimateKey = key;
-        usedKeys.add(ultimateKey);
-        return true;
+    private boolean setAbility(int newKey) {
+        return setKey(basicAbilityKey, newKey);
+    } 
+
+    private boolean setUltimate(int newKey) {
+        return setKey(ultimateKey, newKey);
+    } 
+
+    public AtomicInteger[] orderedInputs() {
+        return new AtomicInteger[] {leftKey, rightKey, upKey, downKey, attackKey, basicAbilityKey, ultimateKey};
     }
 
 }
