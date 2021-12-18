@@ -1,10 +1,8 @@
 /*
     A class dedicated to managing the specific inputs for a player. A player should be bound by their index, not necessarily an object.
 */
-
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import static java.awt.event.KeyEvent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class PlayerInput {
@@ -85,13 +83,6 @@ public class PlayerInput {
         }
     }
 
-    private boolean setKey(AtomicInteger pointer, char newKey) {
-        int newInt = charToInt(newKey);
-        if(usedKeys.contains(newInt)) {return false;}
-        pointer.set(newInt);
-        return true;
-    }
-
     private boolean setKey(AtomicInteger pointer, int newKey) {
         if(usedKeys.contains(newKey)) return false;
         pointer.set(newKey);
@@ -126,40 +117,8 @@ public class PlayerInput {
         return setKey(ultimateKey, newKey);
     } 
 
-    public int charToInt(char character) {
-        switch (character) {
-            case 'a': return (VK_A);
-            case 'b': return (VK_B);
-            case 'c': return (VK_C);
-            case 'd': return (VK_D);
-            case 'e': return (VK_E);
-            case 'f': return (VK_F);
-            case 'g': return (VK_G);
-            case 'h': return (VK_H);
-            case 'i': return (VK_I);
-            case 'j': return (VK_J);
-            case 'k': return (VK_K);
-            case 'l': return (VK_L);
-            case 'm': return (VK_M);
-            case 'n': return (VK_N);
-            case 'o': return (VK_O);
-            case 'p': return (VK_P);
-            case 'q': return (VK_Q);
-            case 'r': return (VK_R);
-            case 's': return (VK_S);
-            case 't': return (VK_T);
-            case 'u': return (VK_U);
-            case 'v': return (VK_V);
-            case 'w': return (VK_W);
-            case 'x': return (VK_X);
-            case 'y': return (VK_Y);
-            case 'z': return (VK_Z);
-        }
-        return 0;
-    }
-
-    public AtomicInteger charToAtomInt(char x) {
-        return new AtomicInteger(charToInt(x));
+    public AtomicInteger[] orderedInputs() {
+        return new AtomicInteger[] {leftKey, rightKey, upKey, downKey, attackKey, basicAbilityKey, ultimateKey};
     }
 
 }

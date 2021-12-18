@@ -1,39 +1,36 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import ky.Text;
 import ky.Vector2D;
+import ky.Entity;
+import ky.Asset;
 
 public class InputSettingsScene extends Scene {
 
-    private Text[] p1InputInfo;
-    private Text[] p2InputInfo;
-    private Button[] p1InputButtons;
-    private Button[] p2InputButtons;
-    private int selectedButton=-1;
+    private Text[] p1InputInfo =  new Text[7];
+    private Text[] p2InputInfo =  new Text[7];
+    private KeybindButton[] p1Buttons = new KeybindButton[7];
+    private KeybindButton[] p2Buttons = new KeybindButton[7];
     private Button exitButton;
+
+    public KeybindButton currentButton;
+    protected Entity selectedKeybind = new Entity(0,0,5);
 
     @Override
     public void initialize() {
+
         sceneIndex = 5;
-        p1InputButtons = new Button[7];
-        p2InputButtons = new Button[7];
-        p1InputInfo = new Text[7];
-        p2InputInfo = new Text[7];
+        AtomicInteger[] p1Binds = PlayerInput.PLAYER_ONE_INPUT.orderedInputs();
+        AtomicInteger[] p2Binds = PlayerInput.PLAYER_TWO_INPUT.orderedInputs();
 
-        int[] xd = { 0 }; // cancer workaround btw
+        // player 1 inputs
         for (int i = 0; i < 7; i++) {
-            p1InputButtons[i] = new Button(new Vector2D(400, 100 + i * 100)) {
-                int temp = xd[0];
-
-                @Override
-                protected void action() {
-                    selectedButton = temp;
-                }
-            };
-            p1InputButtons[i].setText(PlayerInput.PLAYER_ONE_INPUT.getKey(xd[0]));
-            add(p1InputButtons[i]);
+            p1Buttons[i] = new KeybindButton(new Vector2D(400, 100 + i * 100), this, p1Binds[i]);
+            add(p1Buttons[i]);
 
             p1InputInfo[i] = new Text(
                     "L",
@@ -47,20 +44,12 @@ public class InputSettingsScene extends Scene {
             p1InputInfo[i].setVisible(true);
             add(p1InputInfo[i]);
 
-            xd[0]++;
         }
-
+        
+        // player two inputs
         for (int i = 0; i < 7; i++) {
-            p2InputButtons[i] = new Button(new Vector2D(1100, 100 + i * 100)) {
-                int temp = xd[0];
-
-                @Override
-                protected void action() {
-                    selectedButton = temp;
-                }
-            };
-            p2InputButtons[i].setText(PlayerInput.PLAYER_TWO_INPUT.getKey(xd[0]));
-            add(p2InputButtons[i]);
+            p2Buttons[i] = new KeybindButton(new Vector2D(1100, 100 + i * 100), this, p2Binds[i]);
+            add(p2Buttons[i]);
 
             p2InputInfo[i] = new Text(
                     "L",
@@ -74,7 +63,11 @@ public class InputSettingsScene extends Scene {
             p2InputInfo[i].setVisible(true);
             add(p2InputInfo[i]);
 
-            xd[0]++;
+            Asset skAsset = new Asset("assets/misc/selected_keybind.png", new Vector2D(0,0), 0);
+            skAsset.setVisible(true);
+            selectedKeybind.add(skAsset);
+            add(selectedKeybind);
+            selectedKeybind.setVisible(true);
         }
 
         p1InputInfo[0].setText("LEFT");
@@ -105,24 +98,15 @@ public class InputSettingsScene extends Scene {
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        if (keyCodes.size() > 0) {
-            if (selectedButton != -1) {
-                if (selectedButton <= 6) {
-                    if (PlayerInput.PLAYER_ONE_INPUT.setKey(selectedButton, keyCodes.get(0))) {
-                        p1InputButtons[selectedButton].setText(PlayerInput.PLAYER_ONE_INPUT.getKey(selectedButton));
-                    } else {
-                        System.out.println("Already a binded key");
-                    }
-                } else {
-                    if (PlayerInput.PLAYER_TWO_INPUT.setKey(selectedButton, keyCodes.get(0))) {
-                        p2InputButtons[selectedButton - 7].setText(PlayerInput.PLAYER_ONE_INPUT.getKey(selectedButton));
-                    } else {
-                        System.out.println("Already a binded key");
-                    }
-                }
-                selectedButton = -1;
+        if (keyCodes.size() > 0 && currentButton != null) {
+            if(keyCodes.get(0) == KeyEvent.VK_ESCAPE) {
+                currentButton = null;
             }
-
+            else {
+                currentButton.setKey(keyCodes.get(0));
+                currentButton = null;
+                selectedKeybind.setVisible(false);
+            }
         }
     }
 
