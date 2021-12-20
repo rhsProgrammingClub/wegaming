@@ -19,10 +19,9 @@ public class KeybindButton extends Button{
 
     @Override
     protected void action() {
-        inScene.currentButton = this;
+        inScene.setKeybindbutton(this); // set the keybind button to us
 
-        // just positioning our visual
-        inScene.selectedKeybind.setVisible(true);
+        // positioning lol
         inScene.selectedKeybind.setPos(getPos());
         inScene.selectedKeybind.addPos(150, 0);
     }

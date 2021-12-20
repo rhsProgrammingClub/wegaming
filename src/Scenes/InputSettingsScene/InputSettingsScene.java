@@ -22,7 +22,6 @@ public class InputSettingsScene extends Scene {
 
     @Override
     public void initialize() {
-
         sceneIndex = 5;
         AtomicInteger[] p1Binds = PlayerInput.PLAYER_ONE_INPUT.orderedInputs();
         AtomicInteger[] p2Binds = PlayerInput.PLAYER_TWO_INPUT.orderedInputs();
@@ -62,12 +61,6 @@ public class InputSettingsScene extends Scene {
 
             p2InputInfo[i].setVisible(true);
             add(p2InputInfo[i]);
-
-            Asset skAsset = new Asset("assets/misc/selected_keybind.png", new Vector2D(0,0), 0);
-            skAsset.setVisible(true);
-            selectedKeybind.add(skAsset);
-            add(selectedKeybind);
-            selectedKeybind.setVisible(true);
         }
 
         p1InputInfo[0].setText("LEFT");
@@ -88,24 +81,35 @@ public class InputSettingsScene extends Scene {
         exitButton = new Button(new Vector2D(750, 600)) {
             @Override
             protected void action() {
+                setKeybindbutton(null);
                 sceneIndex = 1;
             }
         };
         exitButton.setText("Exit");
         add(exitButton);
 
+        Asset skAsset = new Asset("assets/misc/selected_keybind.png", new Vector2D(0,0), 0);
+        skAsset.setVisible(true);
+        selectedKeybind.add(skAsset);
+        add(selectedKeybind);
+        selectedKeybind.setVisible(false);
+
+    }
+
+    public void setKeybindbutton(KeybindButton newButton) {
+        currentButton = newButton;
+        selectedKeybind.setVisible(newButton == null ? false : true);
     }
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (keyCodes.size() > 0 && currentButton != null) {
             if(keyCodes.get(0) == KeyEvent.VK_ESCAPE) {
-                currentButton = null;
+                setKeybindbutton(null);
             }
             else {
                 currentButton.setKey(keyCodes.get(0));
-                currentButton = null;
-                selectedKeybind.setVisible(false);
+                setKeybindbutton(null);
             }
         }
     }

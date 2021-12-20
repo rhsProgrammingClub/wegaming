@@ -80,6 +80,10 @@ public abstract class Scene {
 		
 	}
 
+	public void onSceneLoad() {
+		
+	}
+
 	public int changeScene () {
 		return sceneIndex;
 	}

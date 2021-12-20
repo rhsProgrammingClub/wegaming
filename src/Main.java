@@ -1,4 +1,3 @@
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
@@ -72,6 +71,7 @@ public class Main extends KYscreen implements MouseInputListener {
             scenes[sceneIndex].delete();
             sceneIndex = currentScene.changeScene();
             currentScene = scenes[sceneIndex];
+            currentScene.onSceneLoad();
             if (currentScene instanceof GameScene || currentScene instanceof CharacterSelectScene) {
                 setCursorVisible(false);
             } else {
