@@ -8,6 +8,6 @@ Game engine: https://github.com/j-ackyao/KY-Engine
 
 Lead developer: Eric
 
-Support developer: Sammy
+Support developers: Sammy, Matthew, Andy
 
-Media production (Art, music, SFX): Eric, Linus, Luke, Matthew, Terry, Alex
+Media production (Art, music, SFX): Eric, Linus, Luke, Matthew, Terry, Alex, Andy
