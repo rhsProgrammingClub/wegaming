@@ -6,9 +6,7 @@ import ky.Entity;
 
 public class Scene {
 
-	protected int sceneIndex=0;
-
-	public void initialize () {}
+	public void initialize () { }
 
 	private ArrayList<ArrayList<Asset>> assetLayers = new ArrayList<ArrayList<Asset>>(); // this is a collection of arraylists, which are layers
 
@@ -20,6 +18,7 @@ public class Scene {
 	int height = Main.height;
 
 	protected Main main;
+	public boolean hasInitialized = false;
 
 	public Scene(Main main) {
 		this.main = main;
@@ -88,10 +87,6 @@ public class Scene {
 
 	public void onSceneLoad() {
 		
-	}
-
-	public int changeScene () {
-		return sceneIndex;
 	}
 
 }

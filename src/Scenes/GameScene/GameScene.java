@@ -27,11 +27,10 @@ public class GameScene extends Scene {
         super(main);
     }
 
-
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (player1.lives <= 0 || player2.lives <= 0) {
-            sceneIndex = 4;
+            main.setScene(4);
         }
 
         for (int i=2; i>=0; i--) {
@@ -54,7 +53,6 @@ public class GameScene extends Scene {
 
     @Override
     public void initialize() {
-        sceneIndex = 3;
         main.resetCharacters();
 
        
@@ -69,7 +67,6 @@ public class GameScene extends Scene {
 
         player1.setPos(new Vector2D(player1.getCollisionBox().getWidth()*0.6, height-player1.getCollisionBox().getHeight()*0.55));
         player2.setPos(new Vector2D(width-player2.getCollisionBox().getWidth()*0.6, height-player2.getCollisionBox().getHeight()*0.55));
-
 
         player1.setVisible(true);
         player2.setVisible(true);
@@ -121,5 +118,10 @@ public class GameScene extends Scene {
             add(p2LivesDisplay[i]);
 
         }
+
+        Asset background = new Asset("assets/backgrounds/background-1.png", new Vector2D(width/2,height/2-200), 1);
+        background.setVisible(true);
+        background.rescale(1.65);
+        add(background);
     }
 }

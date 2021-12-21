@@ -26,7 +26,6 @@ public class InputSettingsScene extends Scene {
 
     @Override
     public void initialize() {
-        sceneIndex = 5;
         AtomicInteger[] p1Binds = PlayerInput.PLAYER_ONE_INPUT.orderedInputs();
         AtomicInteger[] p2Binds = PlayerInput.PLAYER_TWO_INPUT.orderedInputs();
 
@@ -86,7 +85,7 @@ public class InputSettingsScene extends Scene {
             @Override
             protected void action() {
                 setKeybindbutton(null);
-                sceneIndex = 1;
+                main.setScene(1);
             }
         };
         exitButton.setText("Exit");

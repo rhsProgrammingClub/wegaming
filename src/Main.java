@@ -28,12 +28,6 @@ public class Main extends KYscreen implements MouseInputListener {
         super(width, height, false);
     }
 
-	public void setScene (Scene scene) {
-        assetLayers = scene.getAssetLayers();
-        entityLayers = scene.getEntityLayers();
-        collisionEntities = scene.getCollisionEntities();
-	}
-
     @Override
     public void start() {
         setDebugMode(true);
@@ -58,28 +52,14 @@ public class Main extends KYscreen implements MouseInputListener {
         resetCharacters();
 
         currentScene = scenes[sceneIndex];
-        currentScene.initialize();
         setScene(currentScene);
     }
 
     @Override
     public void update() {
+        if(currentScene == null) return; // we should probably throw and error
         ArrayList <Integer> clonedKeyCodes = activeKeyCodes;
         currentScene.update(deltaT, clonedKeyCodes);
-        if (currentScene.changeScene() != sceneIndex) {
-            System.out.println("Changed scenes: " + sceneIndex + " to " + currentScene.changeScene());
-            scenes[sceneIndex].delete();
-            sceneIndex = currentScene.changeScene();
-            currentScene = scenes[sceneIndex];
-            currentScene.onSceneLoad();
-            if (currentScene instanceof GameScene || currentScene instanceof CharacterSelectScene) {
-                setCursorVisible(false);
-            } else {
-                setCursorVisible(true);
-            }
-            currentScene.initialize();
-            setScene(currentScene);
-        }
     }
 
     public void resetCharacters () {
@@ -94,6 +74,30 @@ public class Main extends KYscreen implements MouseInputListener {
         characters[3][1] = new TestCharacter(this);
     }
 
+	public void setScene (Scene scene) {
+        // if(!scene.hasInitialized) {
+
+        scene.delete(); // just reload that stuff lmfao
+        scene.initialize(); // re-initialize it xD
+        
+        //     scene.hasInitialized = true;
+        // }
+
+        assetLayers = scene.getAssetLayers();
+        entityLayers = scene.getEntityLayers();
+        collisionEntities = scene.getCollisionEntities();
+        currentScene = scene;
+
+        if (currentScene instanceof GameScene || currentScene instanceof CharacterSelectScene) {
+            setCursorVisible(false);
+        } else {
+            setCursorVisible(true);
+        }
+	}
+
+    public void setScene(int index) {
+        setScene(scenes[index]);
+    }
 
     @Override
     public void keyPressed(int keyCode) {
@@ -137,7 +141,6 @@ public class Main extends KYscreen implements MouseInputListener {
     @Override
     public void mouseExited(MouseEvent e) {
         mousePressed = false;
-        
     }
 
     @Override

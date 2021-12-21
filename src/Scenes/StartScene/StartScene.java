@@ -20,7 +20,7 @@ public class StartScene extends Scene {
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (keyCodes.contains(KeyEvent.VK_SPACE)){
-            sceneIndex = 1;
+            main.setScene(1);
         }
     }
 }
