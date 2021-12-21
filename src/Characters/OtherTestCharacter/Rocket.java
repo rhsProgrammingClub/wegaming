@@ -12,9 +12,12 @@ public class Rocket extends DamageEntity{
     boolean homing = true;
     double angle = 0;
 
-    public Rocket(Vector2D position, int player) {
+    private Main main;
+
+    public Rocket(Vector2D position, int player, Main main) {
         super(position, 64, 128, 3, player, 750, 0);
-        testChar = ((player==1) ? Main.player2 : Main.player1);
+        this.main = main;
+        testChar = ((player==1) ? main.player2 : main.player1);
         setBreaks(true);
         rocketAsset = new Asset("assets/characters/spaceship/rocket.png", new Vector2D(0, 0), 3);
         rocketAsset.setVisible(true);
@@ -22,7 +25,7 @@ public class Rocket extends DamageEntity{
     }
 
     public void setActive() {
-        angle = ((testChar.equals(Main.player2)) ? Main.player1.direction.getValue() : Main.player2.direction.getValue());
+        angle = ((testChar.equals(main.player2)) ? main.player1.direction.getValue() : main.player2.direction.getValue());
         angle = ((angle == 1) ? 0 : -Math.PI);
         setVisible(true);
         canDamage = true;

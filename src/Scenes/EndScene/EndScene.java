@@ -12,13 +12,17 @@ public class EndScene extends Scene {
     Text winText;
     Text rematchText;
 
+    public EndScene(Main main) {
+        super(main);
+    }
+
+
     @Override
     public void initialize() {
-        sceneIndex = 4;
-        if (Main.player1.lives <= 0) {
+        if (main.player1.lives <= 0) {
             winningPlayer = 2;
         }
-        if (Main.player2.lives <= 0) {
+        if (main.player2.lives <= 0) {
             winningPlayer = 1;
         }
         winText = new Text(
@@ -54,7 +58,7 @@ public class EndScene extends Scene {
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (keyCodes.contains(KeyEvent.VK_SPACE)) {
-            sceneIndex = 1;
+            main.setScene(1);
         }
     }
     

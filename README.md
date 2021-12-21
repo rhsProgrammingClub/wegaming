@@ -4,20 +4,10 @@ An amazing game made by the RHS Project Module
 
 Credits (subject to change):
 
-Art: Eric, Linus, Luke, Matthew, Terry, Alex
+Game engine: https://github.com/j-ackyao/KY-Engine
 
-SoundFX: Andy
+Lead developer: Eric
 
-Music: Luke, Andy
+Support developers: Sammy, Matthew, Andy
 
-Input system, character controls: Eric
-
-UI: go make one urself
-
-Camera system: Sammy
-
-Collisions: Andy
-
-Combat system: Eric
-
-Character selection: Eric, Luke
+Media production (Art, music, SFX): Eric, Linus, Luke, Matthew, Terry, Alex, Andy

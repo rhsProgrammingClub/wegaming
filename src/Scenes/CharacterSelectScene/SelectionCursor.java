@@ -18,9 +18,12 @@ public class SelectionCursor extends Entity {
     public int characterIndex;
     private AudioPlayer charselect;
 
-    public SelectionCursor(Vector2D position, int layer, int player) {
+    private Main main;
+
+    public SelectionCursor(Vector2D position, int layer, int player, Main main) {
         super(position, layer, "cursor");
         this.player = player;
+        this.main = main;
 
         cursorAsset = new Asset("assets/test.png", new Vector2D(0, 0), 4);
         cursorAsset.rescale(2);
@@ -52,9 +55,9 @@ public class SelectionCursor extends Entity {
         if (keyCodes.contains(selectKey)) {
             selected = true;
             if (player == 1) {
-                Main.player1 = Main.characters[characterIndex][0];
+                main.player1 = main.characters[characterIndex][0];
             } else if (player == 2) {
-                Main.player2 = Main.characters[characterIndex][1];
+                main.player2 = main.characters[characterIndex][1];
             }
         }
         if (!selected) {

@@ -7,6 +7,10 @@ public class StartScene extends Scene {
 
     Asset startscene = new Asset("assets/startscene.png", new Vector2D(750,400), 1500, 800, 1);
 
+    public StartScene(Main main) {
+        super(main);
+    }
+
     @Override
     public void initialize(){
         add(startscene);
@@ -16,7 +20,7 @@ public class StartScene extends Scene {
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (keyCodes.contains(KeyEvent.VK_SPACE)){
-            sceneIndex = 1;
+            main.setScene(1);
         }
     }
 }

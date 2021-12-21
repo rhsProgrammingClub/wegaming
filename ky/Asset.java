@@ -278,7 +278,6 @@ public class Asset {
 		return this.position.clone().getY();
 	}
 
-	
 	public void rescale(double factor) {
 		this.rescaleFactor = factor;
 		this.width *= factor;
@@ -385,7 +384,6 @@ public class Asset {
 		clone.setImageIndex(getImageIndex());
 		return clone; 
 	}
-	
 	
 	public void setImageIndex(int index) {
 		imageIndex = index;
