@@ -8,8 +8,8 @@ public class KeybindButton extends Button{
     private AtomicInteger pointer;
     private InputSettingsScene inScene;
 
-    public KeybindButton(Vector2D position, InputSettingsScene inScene, AtomicInteger pointer) {
-        super(position);
+    public KeybindButton(Vector2D position, InputSettingsScene inScene, AtomicInteger pointer, Main main) {
+        super(position, main);
         this.pointer = pointer;
         this.inScene = inScene;
 

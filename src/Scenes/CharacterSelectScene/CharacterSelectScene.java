@@ -11,6 +11,10 @@ public class CharacterSelectScene extends Scene {
     Asset p1CharacterArt;
     Asset p2CharacterArt;
 
+    public CharacterSelectScene(Main main) {
+        super(main);
+    }
+
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (p1Cursor.selected && p2Cursor.selected) {
@@ -21,8 +25,8 @@ public class CharacterSelectScene extends Scene {
     @Override
     public void initialize() {
         sceneIndex = 2;
-        p1Cursor = new SelectionCursor(new Vector2D(width*0.5 - 110, height*0.75), 4, 1);
-        p2Cursor = new SelectionCursor(new Vector2D(width*0.5 + 110, height*0.75), 4, 2);
+        p1Cursor = new SelectionCursor(new Vector2D(width*0.5 - 110, height*0.75), 4, 1, main);
+        p2Cursor = new SelectionCursor(new Vector2D(width*0.5 + 110, height*0.75), 4, 2, main);
         // p1CharacterArt = new Asset(image, position, 1);
         // p2CharacterArt = new Asset(image, position, 1);
         p1Cursor.setVisible(true);

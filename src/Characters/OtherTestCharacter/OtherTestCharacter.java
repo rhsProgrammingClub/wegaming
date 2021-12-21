@@ -14,12 +14,12 @@ public class OtherTestCharacter extends Character {
     AudioPlayer zapSound; 
     AudioPlayer rocketwhoosh;
 
-    public OtherTestCharacter() {
-        super(new Vector2D(0, 0), 150, 200, 1000, 3);
+    public OtherTestCharacter(Main main) {
+        super(new Vector2D(0, 0), 150, 200, 1000, 3, main);
     }
 
-    public OtherTestCharacter(Vector2D position){
-        super(position, 150, 200, 1000, 3);
+    public OtherTestCharacter(Vector2D position, Main main){
+        super(position, 150, 200, 1000, 3, main);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class OtherTestCharacter extends Character {
         rockets = new Rocket[10];
         for (int i=0; i<10; i++)
         {
-            rockets[i] = new Rocket(new Vector2D(0, 0), getPlayer());
+            rockets[i] = new Rocket(new Vector2D(0, 0), getPlayer(), main);
             add(rockets[i]);
         }
         laser = new Laser(new Vector2D(0, 0), getPlayer());

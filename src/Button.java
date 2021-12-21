@@ -15,9 +15,11 @@ public abstract class Button extends Entity {
 
     protected Text text;
     protected Asset buttonAsset;
+    private Main main;
 
-    public Button (Vector2D position) {
+    public Button (Vector2D position, Main main) {
         super(position, 4);
+        this.main = main;
         this.buttonAsset = new Asset(
                 new String[]{"assets/misc/button.png", 
                 "assets/misc/button_hovered.png"}, 
@@ -89,11 +91,11 @@ public abstract class Button extends Entity {
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        if (Main.mousePos.getX() >= getX() - buttonAsset.getWidth()/2 && 
-                Main.mousePos.getX() <= getX() + buttonAsset.getWidth()/2) {
-            if (Main.mousePos.getY() >= getY() - buttonAsset.getHeight()/2 && 
-                    Main.mousePos.getY() <= getY() + buttonAsset.getHeight()/2) {
-                if (!hasClicked && Main.mousePressed) {
+        if (main.mousePos.getX() >= getX() - buttonAsset.getWidth()/2 && 
+                main.mousePos.getX() <= getX() + buttonAsset.getWidth()/2) {
+            if (main.mousePos.getY() >= getY() - buttonAsset.getHeight()/2 && 
+            main.mousePos.getY() <= getY() + buttonAsset.getHeight()/2) {
+                if (!hasClicked && main.mousePressed) {
                     action();
                 }
                 buttonAsset.setImageIndex(1);
@@ -103,7 +105,7 @@ public abstract class Button extends Entity {
         } else {
             buttonAsset.setImageIndex(0);
         }
-        hasClicked = Main.mousePressed;
+        hasClicked = main.mousePressed;
     }
 
 }

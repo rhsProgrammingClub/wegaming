@@ -23,6 +23,11 @@ public class GameScene extends Scene {
     Asset[] p1LivesDisplay;
     Asset[] p2LivesDisplay;
 
+    public GameScene(Main main) {
+        super(main);
+    }
+
+
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (player1.lives <= 0 || player2.lives <= 0) {
@@ -50,14 +55,14 @@ public class GameScene extends Scene {
     @Override
     public void initialize() {
         sceneIndex = 3;
-        Main.resetCharacters();
+        main.resetCharacters();
 
        
         // ground = new Ground(Main.width/2, Main.height*0.75, (int)(Main.width*0.6), (int)(Main.height*0.1));
         ground = new Ground(width*0.5, height*0.9, width, (int)(height*0.2));
         add(ground);
-        player1 = Main.player1;
-        player2 = Main.player2;
+        player1 = main.player1;
+        player2 = main.player2;
 
         player1.setPlayer(1);
         player2.setPlayer(2);
@@ -73,8 +78,8 @@ public class GameScene extends Scene {
         add(player1);
         add(player2);
 
-        p1HealthBar = new HealthBar(new Vector2D(300, 80), Main.player1);
-        p2HealthBar = new HealthBar(new Vector2D(Main.width - 300, 80), Main.player2);
+        p1HealthBar = new HealthBar(new Vector2D(300, 80), main.player1);
+        p2HealthBar = new HealthBar(new Vector2D(Main.width - 300, 80), main.player2);
         p1HealthBar.setVisible(true);
         p2HealthBar.setVisible(true);
         add(p1HealthBar);

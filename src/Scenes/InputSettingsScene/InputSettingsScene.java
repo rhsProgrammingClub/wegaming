@@ -20,6 +20,10 @@ public class InputSettingsScene extends Scene {
     public KeybindButton currentButton;
     protected Entity selectedKeybind = new Entity(0,0,5);
 
+    public InputSettingsScene(Main main) {
+        super(main);
+    }
+
     @Override
     public void initialize() {
         sceneIndex = 5;
@@ -28,7 +32,7 @@ public class InputSettingsScene extends Scene {
 
         // player 1 inputs
         for (int i = 0; i < 7; i++) {
-            p1Buttons[i] = new KeybindButton(new Vector2D(400, 100 + i * 100), this, p1Binds[i]);
+            p1Buttons[i] = new KeybindButton(new Vector2D(400, 100 + i * 100), this, p1Binds[i], main);
             add(p1Buttons[i]);
 
             p1InputInfo[i] = new Text(
@@ -47,7 +51,7 @@ public class InputSettingsScene extends Scene {
         
         // player two inputs
         for (int i = 0; i < 7; i++) {
-            p2Buttons[i] = new KeybindButton(new Vector2D(1100, 100 + i * 100), this, p2Binds[i]);
+            p2Buttons[i] = new KeybindButton(new Vector2D(1100, 100 + i * 100), this, p2Binds[i], main);
             add(p2Buttons[i]);
 
             p2InputInfo[i] = new Text(
@@ -78,7 +82,7 @@ public class InputSettingsScene extends Scene {
         p1InputInfo[6].setText("ULT");
         p2InputInfo[6].setText("ULT");
 
-        exitButton = new Button(new Vector2D(750, 600)) {
+        exitButton = new Button(new Vector2D(750, 600), main) {
             @Override
             protected void action() {
                 setKeybindbutton(null);

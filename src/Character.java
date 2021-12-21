@@ -30,6 +30,7 @@ public abstract class Character extends CollisionEntity {
 
     private PlayerInput playerInput;
     protected boolean canJump = false;
+    protected Main main;
 
     protected enum Status {
         IDLE, ATTACKING, ABILITY, ULTIMATE, JUMPING
@@ -52,8 +53,9 @@ public abstract class Character extends CollisionEntity {
 
     public abstract void initialize ();
 
-    public Character(Vector2D position, int width, int height, double maxHp, int layer) {
+    public Character(Vector2D position, int width, int height, double maxHp, int layer, Main main) {
         super(position, width, height, layer, "character");
+        this.main = main;
         this.maxHP = maxHp;
         HP = maxHp;
         setCollision(false);

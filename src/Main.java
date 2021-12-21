@@ -11,15 +11,15 @@ public class Main extends KYscreen implements MouseInputListener {
 
     public static int width = 1500;
     public static int height = 800;
-    public static Character player1;
-    public static Character player2;
-    public static Character[][] characters;
-    public static int sceneIndex = 0;
-    public static Scene[] scenes;
-    public static AudioPlayer testAudio;
-    public static AudioPlayer backgroundMusic;
-    public static Vector2D mousePos = new Vector2D(0,0);
-    public static boolean mousePressed=false;
+    public Character player1;
+    public Character player2;
+    public Character[][] characters;
+    public int sceneIndex = 0;
+    public Scene[] scenes;
+    public AudioPlayer testAudio;
+    public AudioPlayer backgroundMusic;
+    public Vector2D mousePos = new Vector2D(0,0);
+    public boolean mousePressed=false;
 
     boolean cSelect = true;
     Scene currentScene;
@@ -48,12 +48,12 @@ public class Main extends KYscreen implements MouseInputListener {
         // backgroundMusic.play();
 
         scenes = new Scene[6];
-        scenes[0] = new StartScene();
-        scenes[1] = new MainMenuScene();
-        scenes[2] = new CharacterSelectScene();
-        scenes[3] = new GameScene();
-        scenes[4] = new EndScene();
-        scenes[5] = new InputSettingsScene();
+        scenes[0] = new StartScene(this);
+        scenes[1] = new MainMenuScene(this);
+        scenes[2] = new CharacterSelectScene(this);
+        scenes[3] = new GameScene(this);
+        scenes[4] = new EndScene(this);
+        scenes[5] = new InputSettingsScene(this);
 
         resetCharacters();
 
@@ -82,16 +82,16 @@ public class Main extends KYscreen implements MouseInputListener {
         }
     }
 
-    public static void resetCharacters () {
+    public void resetCharacters () {
         characters = new Character[4][2];  // different characters
-        characters[0][0] = new OtherTestCharacter();
-        characters[1][0] = new TestCharacter();
-        characters[2][0] = new TestCharacter();
-        characters[3][0] = new TestCharacter();
-        characters[0][1] = new OtherTestCharacter();
-        characters[1][1] = new TestCharacter();
-        characters[2][1] = new TestCharacter();
-        characters[3][1] = new TestCharacter();
+        characters[0][0] = new OtherTestCharacter(this);
+        characters[1][0] = new TestCharacter(this);
+        characters[2][0] = new TestCharacter(this);
+        characters[3][0] = new TestCharacter(this);
+        characters[0][1] = new OtherTestCharacter(this);
+        characters[1][1] = new TestCharacter(this);
+        characters[2][1] = new TestCharacter(this);
+        characters[3][1] = new TestCharacter(this);
     }
 
 

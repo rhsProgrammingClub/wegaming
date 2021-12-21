@@ -4,11 +4,11 @@ import ky.Asset;
 import ky.CollisionEntity;
 import ky.Entity;
 
-public abstract class Scene {
+public class Scene {
 
 	protected int sceneIndex=0;
 
-	public abstract void initialize ();
+	public void initialize () {}
 
 	private ArrayList<ArrayList<Asset>> assetLayers = new ArrayList<ArrayList<Asset>>(); // this is a collection of arraylists, which are layers
 
@@ -18,6 +18,12 @@ public abstract class Scene {
 
 	int width = Main.width;
 	int height = Main.height;
+
+	protected Main main;
+
+	public Scene(Main main) {
+		this.main = main;
+	}
 
 	public void delete () {
 		assetLayers = new ArrayList<ArrayList<Asset>>();

@@ -10,12 +10,12 @@ public class TestCharacter extends Character {
     Sword sword;
     AudioPlayer knifeSound;
 
-    public TestCharacter () {
-        super(new Vector2D(0, 0), 150, 275, 2000, 3);
+    public TestCharacter (Main main) {
+        super(new Vector2D(0, 0), 150, 275, 2000, 3, main);
     }
 
-    public TestCharacter (Vector2D position) {
-        super(position, 150, 275, 2000, 3);
+    public TestCharacter (Vector2D position, Main main) {
+        super(position, 150, 275, 2000, 3, main);
     }
 
     @Override

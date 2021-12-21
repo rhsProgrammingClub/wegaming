@@ -7,6 +7,10 @@ public class StartScene extends Scene {
 
     Asset startscene = new Asset("assets/startscene.png", new Vector2D(750,400), 1500, 800, 1);
 
+    public StartScene(Main main) {
+        super(main);
+    }
+
     @Override
     public void initialize(){
         add(startscene);
