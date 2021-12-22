@@ -4,16 +4,16 @@ import ky.Asset;
 import ky.AudioPlayer;
 import ky.Vector2D;
 
-public class TestCharacter extends Character {
+public class StabbyRobot extends Character {
 
     Sword sword;
     AudioPlayer knifeSound;
 
-    public TestCharacter(Main main) {
+    public StabbyRobot(Main main) {
         super(new Vector2D(0, 0), 150, 275, 2000, main);
     }
 
-    public TestCharacter(Vector2D position, Main main) {
+    public StabbyRobot(Vector2D position, Main main) {
         super(position, 150, 275, 2000, main);
     }
 
