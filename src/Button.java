@@ -97,6 +97,7 @@ public abstract class Button extends Entity {
                     main.mousePos.getY() <= getY() + buttonAsset.getHeight() / 2) {
                 if (!hasClicked && main.mousePressed) {
                     action();
+                    main.mousePressed = false;
                 }
                 buttonAsset.setImageIndex(1);
             } else {

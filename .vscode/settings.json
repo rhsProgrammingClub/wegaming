@@ -1,11 +1,12 @@
 {
+    "java.autobuild.enabled": true,
     "java.project.sourcePaths": [
         ".",
         "src",
         "src/Characters",
         "src/Characters/StabbyRobot",
         "src/Characters/Spaceship",
-        "src/Characters/TempName",
+        "src/Characters/BoxRobot",
         "src/Scenes",
         "src/Scenes/CharacterSelectScene",
         "src/Scenes/GameScene",

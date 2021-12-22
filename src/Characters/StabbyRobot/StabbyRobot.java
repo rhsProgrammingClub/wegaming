@@ -10,16 +10,16 @@ public class StabbyRobot extends Character {
     AudioPlayer knifeSound;
 
     public StabbyRobot(Main main) {
-        super(new Vector2D(0, 0), 150, 275, 2000, main);
+        super(new Vector2D(0, 0), 150, 275, 1700, main);
     }
 
     public StabbyRobot(Vector2D position, Main main) {
-        super(position, 150, 275, 2000, main);
+        super(position, 150, 275, 1700, main);
     }
 
     @Override
     public void initialize() {
-        // setIcon(new Asset("assets/characters/testcharacter/icon.png", new Vector2D(0,
+        // setIcon(new Asset("assets/characters/stabbyrobot/icon.png", new Vector2D(0,
         // 0), 3));
         /*
          * characterAnimation = new AnimationAsset(images, position, animationTime,
@@ -35,8 +35,8 @@ public class StabbyRobot extends Character {
         curUltCooldown = ultimateCooldown;
         setDefense(0.25);
 
-        abilityIcon = new Asset("assets/characters/testcharacter/ability_icon.png", new Vector2D(0, 0), 4);
-        ultIcon = new Asset("assets/characters/testcharacter/ult_icon.png", new Vector2D(0, 0), 4);
+        abilityIcon = new Asset("assets/characters/stabbyrobot/ability_icon.png", new Vector2D(0, 0), 4);
+        ultIcon = new Asset("assets/characters/stabbyrobot/ult_icon.png", new Vector2D(0, 0), 4);
 
         knifeSound = new AudioPlayer("assets/SFX/knife_swing.wav");
     }

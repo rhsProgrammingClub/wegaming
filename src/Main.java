@@ -68,11 +68,11 @@ public class Main extends KYscreen implements MouseInputListener {
         characters = new Character[4][2]; // different characters
         characters[0][0] = new Spaceship(this);
         characters[1][0] = new StabbyRobot(this);
-        characters[2][0] = new TempName(this);
+        characters[2][0] = new BoxRobot(this);
         characters[3][0] = new StabbyRobot(this);
         characters[0][1] = new Spaceship(this);
         characters[1][1] = new StabbyRobot(this);
-        characters[2][1] = new TempName(this);
+        characters[2][1] = new BoxRobot(this);
         characters[3][1] = new StabbyRobot(this);
     }
 
@@ -103,7 +103,7 @@ public class Main extends KYscreen implements MouseInputListener {
 
     @Override
     public void keyPressed(int keyCode) {
-        //     System.exit(0);
+        // System.exit(0);
         // }
     }
 
