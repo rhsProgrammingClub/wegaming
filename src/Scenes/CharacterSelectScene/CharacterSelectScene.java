@@ -7,6 +7,7 @@ public class CharacterSelectScene extends Scene {
 
     SelectionCursor p1Cursor;
     SelectionCursor p2Cursor;
+
     Asset test;
     Asset p1CharacterArt;
     Asset p2CharacterArt;
@@ -24,15 +25,15 @@ public class CharacterSelectScene extends Scene {
 
     @Override
     public void initialize() {
-        p1Cursor = new SelectionCursor(new Vector2D(width*0.5 - 110, height*0.75), 4, 1, main);
-        p2Cursor = new SelectionCursor(new Vector2D(width*0.5 + 110, height*0.75), 4, 2, main);
+        p1Cursor = new SelectionCursor(new Vector2D(width * 0.5 - 110, height * 0.75), 4, 1, main);
+        p2Cursor = new SelectionCursor(new Vector2D(width * 0.5 + 110, height * 0.75), 4, 2, main);
         // p1CharacterArt = new Asset(image, position, 1);
         // p2CharacterArt = new Asset(image, position, 1);
         p1Cursor.setVisible(true);
         p2Cursor.setVisible(true);
         add(p1Cursor);
         add(p2Cursor);
-        
+
     }
 
 }

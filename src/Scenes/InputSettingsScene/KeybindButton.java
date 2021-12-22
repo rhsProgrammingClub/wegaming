@@ -3,7 +3,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.awt.Font;
 import ky.Vector2D;
 
-public class KeybindButton extends Button{
+public class KeybindButton extends Button {
 
     private AtomicInteger pointer;
     private InputSettingsScene inScene;
@@ -27,7 +27,10 @@ public class KeybindButton extends Button{
     }
 
     public void setKey(int keyEvent) {
-        pointer.set(keyEvent);
-        setText(KeyEvent.getKeyText(pointer.get()));
+        if (PlayerInput.setKey(pointer, keyEvent)) {
+            setText(KeyEvent.getKeyText(pointer.get()));
+        } else {
+            System.out.println(KeyEvent.getKeyText(keyEvent) + " is already binded.");
+        }
     }
 }

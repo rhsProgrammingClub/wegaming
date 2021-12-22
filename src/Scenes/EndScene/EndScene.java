@@ -16,7 +16,6 @@ public class EndScene extends Scene {
         super(main);
     }
 
-
     @Override
     public void initialize() {
         if (main.player1.lives <= 0) {
@@ -26,14 +25,14 @@ public class EndScene extends Scene {
             winningPlayer = 1;
         }
         winText = new Text(
-                "Player _ Wins", 
+                "Player _ Wins",
                 new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 50),
-                Color.BLACK, 
-                new Vector2D(600, 200), 
-                400, 
-                70, 
+                Color.BLACK,
+                new Vector2D(600, 200),
+                400,
+                70,
                 5);
-        
+
         if (winningPlayer == 1) {
             winText.setText("Player 1 Wins");
         }
@@ -47,13 +46,13 @@ public class EndScene extends Scene {
                 "Press SPACE to return to Main Menu.",
                 new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 40),
                 Color.darkGray,
-                new Vector2D(750, 600), 
-                800, 
-                60, 
+                new Vector2D(750, 600),
+                800,
+                60,
                 5);
         rematchText.setVisible(true);
         add(rematchText);
-}
+    }
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
@@ -61,5 +60,5 @@ public class EndScene extends Scene {
             main.setScene(1);
         }
     }
-    
+
 }

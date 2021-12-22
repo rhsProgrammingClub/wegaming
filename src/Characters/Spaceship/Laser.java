@@ -6,5 +6,5 @@ public class Laser extends DamageEntity {
         super(position, 2000, 10, 5, player, 150);
         setBreaks(false);
     }
-    
+
 }

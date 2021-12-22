@@ -9,9 +9,9 @@ public class CooldownBar extends Entity {
     private final int totalCovers = 12;
 
     private double maxCooldown;
-    private double curCooldown;    
+    private double curCooldown;
     private Asset[] cooldownCovers;
-    private int numCovered=0;
+    private int numCovered = 0;
     private Character character;
     private boolean isUltCooldown;
 
@@ -31,9 +31,9 @@ public class CooldownBar extends Entity {
         }
         setVisible(true);
         cooldownCovers = new Asset[totalCovers];
-        for (int i=0; i<totalCovers; i++) {
+        for (int i = 0; i < totalCovers; i++) {
             cooldownCovers[i] = new Asset("assets/misc/cooldown_bar.png", new Vector2D(0, 0), 5);
-            cooldownCovers[i].rotate(i * (360/totalCovers) + (360/totalCovers/2));
+            cooldownCovers[i].rotate(i * (360 / totalCovers) + (360 / totalCovers / 2));
             add(cooldownCovers[i]);
         }
     }
@@ -41,13 +41,15 @@ public class CooldownBar extends Entity {
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
 
-        if (isUltCooldown) curCooldown = character.curUltCooldown;
-        else curCooldown = character.curAbilityCooldown;
+        if (isUltCooldown)
+            curCooldown = character.curUltCooldown;
+        else
+            curCooldown = character.curAbilityCooldown;
 
         if (curCooldown >= 0) {
-            if (numCovered != (int)(curCooldown / (maxCooldown/totalCovers))) {
-                numCovered = (int)(curCooldown / (maxCooldown/totalCovers));
-                for (int i=0; i<totalCovers; i++) {
+            if (numCovered != (int) (curCooldown / (maxCooldown / totalCovers))) {
+                numCovered = (int) (curCooldown / (maxCooldown / totalCovers));
+                for (int i = 0; i < totalCovers; i++) {
                     if (i <= numCovered) {
                         cooldownCovers[i].setVisible(true);
                     } else {

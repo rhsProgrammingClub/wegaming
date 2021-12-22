@@ -18,8 +18,8 @@ public class Main extends KYscreen implements MouseInputListener {
     public Scene[] scenes;
     public AudioPlayer testAudio;
     public AudioPlayer backgroundMusic;
-    public Vector2D mousePos = new Vector2D(0,0);
-    public boolean mousePressed=false;
+    public Vector2D mousePos;
+    public boolean mousePressed = false;
 
     boolean cSelect = true;
     Scene currentScene;
@@ -30,6 +30,7 @@ public class Main extends KYscreen implements MouseInputListener {
 
     @Override
     public void start() {
+        mousePos = new Vector2D(0, 0);
         setDebugMode(true);
         setResizable(false);
         addMouseListener(this);
@@ -57,30 +58,31 @@ public class Main extends KYscreen implements MouseInputListener {
 
     @Override
     public void update() {
-        if(currentScene == null) return; // we should probably throw and error
-        ArrayList <Integer> clonedKeyCodes = activeKeyCodes;
+        if (currentScene == null)
+            return; // we should probably throw and error
+        ArrayList<Integer> clonedKeyCodes = activeKeyCodes;
         currentScene.update(deltaT, clonedKeyCodes);
     }
 
-    public void resetCharacters () {
-        characters = new Character[4][2];  // different characters
-        characters[0][0] = new OtherTestCharacter(this);
-        characters[1][0] = new TestCharacter(this);
-        characters[2][0] = new TestCharacter(this);
-        characters[3][0] = new TestCharacter(this);
-        characters[0][1] = new OtherTestCharacter(this);
-        characters[1][1] = new TestCharacter(this);
-        characters[2][1] = new TestCharacter(this);
-        characters[3][1] = new TestCharacter(this);
+    public void resetCharacters() {
+        characters = new Character[4][2]; // different characters
+        characters[0][0] = new Spaceship(this);
+        characters[1][0] = new StabbyRobot(this);
+        characters[2][0] = new TempName(this);
+        characters[3][0] = new StabbyRobot(this);
+        characters[0][1] = new Spaceship(this);
+        characters[1][1] = new StabbyRobot(this);
+        characters[2][1] = new TempName(this);
+        characters[3][1] = new StabbyRobot(this);
     }
 
-	public void setScene (Scene scene) {
+    public void setScene(Scene scene) {
         // if(!scene.hasInitialized) {
 
         scene.delete(); // just reload that stuff lmfao
         scene.initialize(); // re-initialize it xD
-        
-        //     scene.hasInitialized = true;
+
+        // scene.hasInitialized = true;
         // }
 
         assetLayers = scene.getAssetLayers();
@@ -93,7 +95,7 @@ public class Main extends KYscreen implements MouseInputListener {
         } else {
             setCursorVisible(true);
         }
-	}
+    }
 
     public void setScene(int index) {
         setScene(scenes[index]);
@@ -101,19 +103,18 @@ public class Main extends KYscreen implements MouseInputListener {
 
     @Override
     public void keyPressed(int keyCode) {
-        // if (keyCode == KeyEvent.VK_ESCAPE) { 
         //     System.exit(0);
         // }
     }
 
     @Override
     public void keyReleased(int keyCode) {
-        
+
     }
 
     @Override
     public void keyTyped(int keyCode) {
-        
+
     }
 
     @Override
@@ -155,7 +156,7 @@ public class Main extends KYscreen implements MouseInputListener {
         mousePressed = false;
     }
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         System.setProperty("sun.java2d.uiScale", "1.0");
         new Main();
     }

@@ -9,7 +9,7 @@ public class HealthBar extends Entity {
     private double maxHP;
     private Asset[] healthBarAssets;
     private Asset healthBarBorder;
-    private int numBars=100;
+    private int numBars = 100;
     private Character character;
     private int lastBar;
 
@@ -20,8 +20,8 @@ public class HealthBar extends Entity {
         healthBarBorder = new Asset("assets/misc/health_bar.png", new Vector2D(0, 0), 4);
         healthBarBorder.setVisible(true);
         add(healthBarBorder);
-        for (int e=0; e<100; e++) {
-            healthBarAssets[e] = new Asset("assets/misc/health.png", new Vector2D(-250+e*5, 0), 5);
+        for (int e = 0; e < 100; e++) {
+            healthBarAssets[e] = new Asset("assets/misc/health.png", new Vector2D(-250 + e * 5, 0), 5);
             healthBarAssets[e].setVisible(true);
             add(healthBarAssets[e]);
         }
@@ -30,8 +30,8 @@ public class HealthBar extends Entity {
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        numBars = (int)(character.HP / (maxHP/100));
-        if (numBars<0) {
+        numBars = (int) Math.round((character.HP / (maxHP / 100)));
+        if (numBars < 0) {
             numBars = 0;
         }
         if (numBars == 100) {
@@ -39,10 +39,10 @@ public class HealthBar extends Entity {
                 healthBar.setVisible(true);
             }
         }
-        for (int i=numBars; i<lastBar; i++) {
+        for (int i = numBars; i < lastBar; i++) {
             healthBarAssets[i].setVisible(false);
         }
-        lastBar = (int)(character.HP / (maxHP/100));
+        lastBar = (int) Math.round((character.HP / (maxHP / 100)));
     }
 
 }

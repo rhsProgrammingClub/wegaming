@@ -30,6 +30,4 @@ public class MainMenuScene extends Scene {
         add(inputSettingsButton);
     }
 
-    
-  
 }

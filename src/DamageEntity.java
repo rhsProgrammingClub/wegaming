@@ -11,25 +11,27 @@ public class DamageEntity extends CollisionEntity {
     private boolean breaks;
     public boolean canDamage = false;
 
-    public DamageEntity(Vector2D position, int collisionBoxWidth, int collisionBoxHeight, int layer, int player, double damage) {
+    public DamageEntity(Vector2D position, int collisionBoxWidth, int collisionBoxHeight, int layer, int player,
+            double damage) {
         super(position, collisionBoxWidth, collisionBoxHeight, layer);
         this.player = player;
-        this.damage=damage;
-        this.knockback=0;
+        this.damage = damage;
+        this.knockback = 0;
     }
 
-    public DamageEntity(Vector2D position, int collisionBoxWidth, int collisionBoxHeight, int layer, int player, double damage, double knockback) {
+    public DamageEntity(Vector2D position, int collisionBoxWidth, int collisionBoxHeight, int layer, int player,
+            double damage, double knockback) {
         super(position, collisionBoxWidth, collisionBoxHeight, layer);
         this.player = player;
         this.damage = damage;
         this.knockback = knockback;
     }
 
-    public boolean getBreaks () {
+    public boolean getBreaks() {
         return breaks;
     }
 
-    public void setBreaks (boolean breaks) {
+    public void setBreaks(boolean breaks) {
         this.breaks = breaks;
     }
 
@@ -65,10 +67,10 @@ public class DamageEntity extends CollisionEntity {
     public void onCollision(CollisionEntity collidingEntity) {
         if (isVisible() && collidingEntity.isVisible()) {
             if (collidingEntity instanceof Character) {
-                if (((Character)collidingEntity).getPlayer() != player) {
+                if (((Character) collidingEntity).getPlayer() != player) {
                     if (canDamage) {
-                        ((Character)collidingEntity).HP -= damage - damage * 
-                                            (((Character)collidingEntity).getDefense());
+                        ((Character) collidingEntity).HP -= damage - damage *
+                                (((Character) collidingEntity).getDefense());
                         canDamage = false;
                     }
                     if (breaks) {
@@ -78,5 +80,5 @@ public class DamageEntity extends CollisionEntity {
             }
         }
     }
-    
+
 }

@@ -11,14 +11,14 @@ import ky.Asset;
 
 public class InputSettingsScene extends Scene {
 
-    private Text[] p1InputInfo =  new Text[7];
-    private Text[] p2InputInfo =  new Text[7];
+    private Text[] p1InputInfo = new Text[7];
+    private Text[] p2InputInfo = new Text[7];
     private KeybindButton[] p1Buttons = new KeybindButton[7];
     private KeybindButton[] p2Buttons = new KeybindButton[7];
     private Button exitButton;
 
     public KeybindButton currentButton;
-    protected Entity selectedKeybind = new Entity(0,0,5);
+    protected Entity selectedKeybind = new Entity(0, 0, 5);
 
     public InputSettingsScene(Main main) {
         super(main);
@@ -47,7 +47,7 @@ public class InputSettingsScene extends Scene {
             add(p1InputInfo[i]);
 
         }
-        
+
         // player two inputs
         for (int i = 0; i < 7; i++) {
             p2Buttons[i] = new KeybindButton(new Vector2D(1100, 100 + i * 100), this, p2Binds[i], main);
@@ -91,7 +91,7 @@ public class InputSettingsScene extends Scene {
         exitButton.setText("Exit");
         add(exitButton);
 
-        Asset skAsset = new Asset("assets/misc/selected_keybind.png", new Vector2D(0,0), 0);
+        Asset skAsset = new Asset("assets/misc/selected_keybind.png", new Vector2D(0, 0), 0);
         skAsset.setVisible(true);
         selectedKeybind.add(skAsset);
         add(selectedKeybind);
@@ -107,10 +107,9 @@ public class InputSettingsScene extends Scene {
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (keyCodes.size() > 0 && currentButton != null) {
-            if(keyCodes.get(0) == KeyEvent.VK_ESCAPE) {
+            if (keyCodes.get(0) == KeyEvent.VK_ESCAPE) {
                 setKeybindbutton(null);
-            }
-            else {
+            } else {
                 currentButton.setKey(keyCodes.get(0));
                 setKeybindbutton(null);
             }

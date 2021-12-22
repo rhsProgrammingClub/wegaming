@@ -34,16 +34,16 @@ public class SelectionCursor extends Entity {
         PlayerInput inputSystem = player == 1 ? PlayerInput.PLAYER_ONE_INPUT : PlayerInput.PLAYER_TWO_INPUT;
         characterIndex = player;
         bindKeys(inputSystem);
-        charselect  = new AudioPlayer("assets/SFX/characterselect.wav");
+        charselect = new AudioPlayer("assets/SFX/characterselect.wav");
     }
 
     private void bindKeys(PlayerInput i) {
-        leftKey=i.leftKey.get();
-        rightKey=i.rightKey.get();
-        selectKey=i.attackKey.get();
+        leftKey = i.leftKey.get();
+        rightKey = i.rightKey.get();
+        selectKey = i.attackKey.get();
     }
 
-    // this probably needs some major refactoring 
+    // this probably needs some major refactoring
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (!keyCodes.contains(leftKey)) {
@@ -63,7 +63,7 @@ public class SelectionCursor extends Entity {
         if (!selected) {
             if (keyCodes.contains(rightKey) && liftedRight) {
                 if (characterIndex < 3) {
-                    this.addPos(cursorAsset.getWidth()+20,0);
+                    this.addPos(cursorAsset.getWidth() + 20, 0);
                     liftedRight = false;
                     characterIndex++;
                     charselect.play();
@@ -71,7 +71,7 @@ public class SelectionCursor extends Entity {
             }
             if (keyCodes.contains(leftKey) && liftedLeft) {
                 if (characterIndex > 0) {
-                    this.addPos(-(cursorAsset.getWidth()+20),0);
+                    this.addPos(-(cursorAsset.getWidth() + 20), 0);
                     liftedLeft = false;
                     characterIndex--;
                     charselect.play();
