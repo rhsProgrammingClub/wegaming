@@ -47,8 +47,8 @@ public class BoxRobot extends Character {
 
         lastDirection = direction.getValue();
 
-        abilityIcon = new Asset("assets/Characters/boxrobot/flame.png", new Vector2D(0,0), 4);
-        ultIcon = new Asset("assets/Characters/boxrobot/box_robot_armour.png", new Vector2D(0, 0), 130, 130, 4);
+        abilityIcon = new Asset("assets/characters/boxrobot/flame.png", new Vector2D(0, 0), 4);
+        ultIcon = new Asset("assets/characters/boxrobot/box_robot_armour.png", new Vector2D(0, 0), 130, 130, 4);
     }
 
     @Override

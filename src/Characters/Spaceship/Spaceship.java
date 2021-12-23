@@ -75,8 +75,8 @@ public class Spaceship extends Character {
 
         rocketwhoosh = new AudioPlayer("assets/SFX/rocket.wav");
 
-        abilityIcon = new Asset("assets/Characters/spaceship/ability_icon.png", new Vector2D(0,0), 4);
-        ultIcon = new Asset("assets/Characters/spaceship/ult_icon.png", new Vector2D(0,0), 4);
+        abilityIcon = new Asset("assets/characters/spaceship/ability_icon.png", new Vector2D(0, 0), 4);
+        ultIcon = new Asset("assets/characters/spaceship/ult_icon.png", new Vector2D(0, 0), 4);
     }
 
     @Override
