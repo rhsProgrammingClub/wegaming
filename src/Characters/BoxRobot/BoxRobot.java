@@ -22,11 +22,12 @@ public class BoxRobot extends Character {
 
     @Override
     public void initialize() {
-        setDefense(0.5);
+        setDefense(0.4);
         abilityCooldown = 4;
         ultimateCooldown = 8;
-        gravity = 6000;
-        speed = 80000;
+        jumpHeight = 0;
+        speed = 40000;
+        maxVelocity = 600;
         curAbilityCooldown = abilityCooldown;
         curUltCooldown = ultimateCooldown;
 

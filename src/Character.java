@@ -14,7 +14,7 @@ public abstract class Character extends CollisionEntity {
     protected double speed = 100000;
     protected double jumpHeight = 1200;
     protected double gravity = 3000;
-    private double maxVelocity = 700;
+    protected double maxVelocity = 700;
     protected double abilityCooldown = -1;
     protected double ultimateCooldown = -1;
     protected double curAbilityCooldown = -1;
