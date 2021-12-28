@@ -16,6 +16,7 @@ public class InputSettingsScene extends Scene {
     private KeybindButton[] p1Buttons = new KeybindButton[7];
     private KeybindButton[] p2Buttons = new KeybindButton[7];
     private Button exitButton;
+    private Font textFont;
 
     public KeybindButton currentButton;
     protected Entity selectedKeybind = new Entity(0, 0, 5);
@@ -29,6 +30,8 @@ public class InputSettingsScene extends Scene {
         AtomicInteger[] p1Binds = PlayerInput.PLAYER_ONE_INPUT.orderedInputs();
         AtomicInteger[] p2Binds = PlayerInput.PLAYER_TWO_INPUT.orderedInputs();
 
+        textFont = new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 46);
+
         // player 1 inputs
         for (int i = 0; i < 7; i++) {
             p1Buttons[i] = new KeybindButton(new Vector2D(400, 100 + i * 100), this, p1Binds[i], main);
@@ -36,7 +39,7 @@ public class InputSettingsScene extends Scene {
 
             p1InputInfo[i] = new Text(
                     "L",
-                    new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 46),
+                    textFont,
                     Color.black,
                     new Vector2D(200, 100 + i * 100),
                     200,
@@ -55,7 +58,7 @@ public class InputSettingsScene extends Scene {
 
             p2InputInfo[i] = new Text(
                     "L",
-                    new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 46),
+                    textFont,
                     Color.black,
                     new Vector2D(1330, 100 + i * 100),
                     200,
