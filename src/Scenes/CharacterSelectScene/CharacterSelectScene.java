@@ -14,6 +14,7 @@ public class CharacterSelectScene extends Scene {
     Asset spaceship;
     Asset stabby;
     Asset boxrobot;
+    Asset assassin;
 
     public CharacterSelectScene(Main main) {
         super(main);
@@ -39,15 +40,19 @@ public class CharacterSelectScene extends Scene {
         p1Cursor.setVisible(true);
         boxrobot = new Asset("assets/characters/boxrobot/box_robot.png", new Vector2D(width * 0.5 + 110, height * 0.75),
                 110, 110, 0);
+        assassin = new Asset("assets/characters/assassin/assassin.png", new Vector2D(width * 0.5 + 330, height * 0.75), 
+                110, 110, 0);
         p2Cursor.setVisible(true);
         spaceship.setVisible(true);
         stabby.setVisible(true);
         boxrobot.setVisible(true);
+        assassin.setVisible(true);
         add(p1Cursor);
         add(p2Cursor);
         add(spaceship);
         add(stabby);
         add(boxrobot);
+        add(assassin);
 
     }
 

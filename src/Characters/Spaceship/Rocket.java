@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import ky.Asset;
 import ky.CollisionEntity;
 import ky.Vector2D;
+//import java.awt.image.BufferedImage;
 
 public class Rocket extends DamageEntity {
 
@@ -14,12 +15,12 @@ public class Rocket extends DamageEntity {
 
     private Main main;
 
-    public Rocket(Vector2D position, int player, Main main) {
-        super(position, 64, 128, 3, player, 750, 0);
+    public Rocket(String image, Vector2D position, int player, Main main, double dmg, double pushback) {
+        super(position, 64, 128, 3, player, dmg, pushback);
         this.main = main;
         testChar = ((player == 1) ? main.player2 : main.player1);
         setBreaks(true);
-        rocketAsset = new Asset("assets/characters/spaceship/rocket.png", new Vector2D(0, 0), 3);
+        rocketAsset = new Asset(image, new Vector2D(0, 0), 3);
         rocketAsset.setVisible(true);
         add(rocketAsset);
     }

@@ -7,12 +7,14 @@
         "src/Characters/StabbyRobot",
         "src/Characters/Spaceship",
         "src/Characters/BoxRobot",
+        "src/Characters/Assassin",
         "src/Scenes",
         "src/Scenes/CharacterSelectScene",
         "src/Scenes/GameScene",
         "src/Scenes/MainMenuScene",
         "src/Scenes/EndScene",
         "src/Scenes/StartScene",
-        "src/Scenes/InputSettingsScene"
+        "src/Scenes/InputSettingsScene",
+        "src/Scenes/CharacterInfoScene"
     ]
 }

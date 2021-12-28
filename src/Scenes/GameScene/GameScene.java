@@ -102,16 +102,20 @@ public class GameScene extends Scene {
         p2LivesDisplay = new Asset[3];
         for (int i = 0; i < 3; i++) {
             p1LivesDisplay[i] = new Asset(
-                    "assets/misc/life.png",
+                    "assets/misc/heart.png",
                     new Vector2D(80 + i * 80, 200),
+                    64,
+                    64,
                     5);
 
             p1LivesDisplay[i].setVisible(true);
             add(p1LivesDisplay[i]);
 
             p2LivesDisplay[i] = new Asset(
-                    "assets/misc/life.png",
+                    "assets/misc/heart.png",
                     new Vector2D(1240 + i * 80, 200),
+                    64,
+                    64,
                     5);
 
             p2LivesDisplay[i].setVisible(true);

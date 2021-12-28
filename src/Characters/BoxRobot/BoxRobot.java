@@ -12,11 +12,11 @@ public class BoxRobot extends Character {
     private int lastDirection;
 
     public BoxRobot(Vector2D position, Main main) {
-        super(position, 256, 256, 1500, main);
+        super(position, 256, 256, 1800, main);
     }
 
     public BoxRobot(Main main) {
-        super(new Vector2D(0, 0), 256, 256, 1500, main);
+        super(new Vector2D(0, 0), 256, 256, 1800, main);
 
     }
 
@@ -25,7 +25,7 @@ public class BoxRobot extends Character {
         setDefense(0.4);
         abilityCooldown = 4;
         ultimateCooldown = 8;
-        jumpHeight = 0;
+        jumpHeight = 500;
         speed = 40000;
         maxVelocity = 600;
         curAbilityCooldown = abilityCooldown;

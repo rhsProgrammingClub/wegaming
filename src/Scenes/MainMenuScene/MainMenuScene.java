@@ -2,6 +2,7 @@ import ky.Vector2D;
 
 public class MainMenuScene extends Scene {
 
+    Button characterinfo;
     Button startButton;
     Button inputSettingsButton;
     Button exitButton;
@@ -12,6 +13,15 @@ public class MainMenuScene extends Scene {
 
     @Override
     public void initialize() {
+        characterinfo = new Button(new Vector2D(Main.width / 2, Main.height * 0.3), main) {
+            @Override
+            protected void action(){
+                main.setScene(6);
+            }
+        };
+        characterinfo.setText("CHAR INFO");
+        add(characterinfo);
+
         startButton = new Button(new Vector2D(Main.width / 2, Main.height * 0.5), main) {
             @Override
             protected void action() {

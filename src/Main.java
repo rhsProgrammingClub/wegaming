@@ -42,13 +42,14 @@ public class Main extends KYscreen implements MouseInputListener {
         // backgroundMusic.setLoop(true);
         // backgroundMusic.play();
 
-        scenes = new Scene[6];
+        scenes = new Scene[7];
         scenes[0] = new StartScene(this);
         scenes[1] = new MainMenuScene(this);
         scenes[2] = new CharacterSelectScene(this);
         scenes[3] = new GameScene(this);
         scenes[4] = new EndScene(this);
         scenes[5] = new InputSettingsScene(this);
+        scenes[6] = new CharacterInfoScene(this);
 
         resetCharacters();
 
@@ -65,15 +66,15 @@ public class Main extends KYscreen implements MouseInputListener {
     }
 
     public void resetCharacters() {
-        characters = new Character[4][2]; // different characters
+        characters = new Character[5][2]; // different characters
         characters[0][0] = new Spaceship(this);
         characters[1][0] = new StabbyRobot(this);
         characters[2][0] = new BoxRobot(this);
-        characters[3][0] = new StabbyRobot(this);
+        characters[3][0] = new Assassin(this);
         characters[0][1] = new Spaceship(this);
         characters[1][1] = new StabbyRobot(this);
         characters[2][1] = new BoxRobot(this);
-        characters[3][1] = new StabbyRobot(this);
+        characters[3][1] = new Assassin(this);
     }
 
     public void setScene(Scene scene) {

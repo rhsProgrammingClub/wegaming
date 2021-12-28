@@ -66,6 +66,7 @@ public class SelectionCursor extends Entity {
                     this.addPos(cursorAsset.getWidth() + 20, 0);
                     liftedRight = false;
                     characterIndex++;
+                    charselect.reset();
                     charselect.play();
                 }
             }
@@ -74,6 +75,7 @@ public class SelectionCursor extends Entity {
                     this.addPos(-(cursorAsset.getWidth() + 20), 0);
                     liftedLeft = false;
                     characterIndex--;
+                    charselect.reset();
                     charselect.play();
                 }
             }

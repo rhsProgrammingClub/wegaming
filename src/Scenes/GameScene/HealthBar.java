@@ -17,7 +17,7 @@ public class HealthBar extends Entity {
         super(position, 5);
         this.maxHP = character.maxHP;
         healthBarAssets = new Asset[100];
-        healthBarBorder = new Asset("assets/misc/health_bar.png", new Vector2D(0, 0), 4);
+        healthBarBorder = new Asset("assets/misc/healthborder.png", new Vector2D(0, 0), 4);
         healthBarBorder.setVisible(true);
         add(healthBarBorder);
         for (int e = 0; e < 100; e++) {
