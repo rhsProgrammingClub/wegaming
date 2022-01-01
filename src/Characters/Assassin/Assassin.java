@@ -117,6 +117,9 @@ public class Assassin extends Character {
         healthsfx.reset();
         healthsfx.play();
         HP+=300;
+        if (HP > maxHP) {
+            HP = maxHP;
+        }
         
     }
 
