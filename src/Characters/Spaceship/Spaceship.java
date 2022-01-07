@@ -64,7 +64,7 @@ public class Spaceship extends Character {
 
         rockets = new Rocket[10];
         for (int i = 0; i < 10; i++) {
-            rockets[i] = new Rocket("assets/characters/spaceship/rocket.png", new Vector2D(0, 0), getPlayer(), main, 500, 0);
+            rockets[i] = new Rocket("assets/characters/spaceship/rocket.png", new Vector2D(0, 0), getPlayer(), main, 500, 500);
             add(rockets[i]);
         }
         laser = new Laser(new Vector2D(0, 0), getPlayer());

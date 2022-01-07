@@ -19,6 +19,8 @@ public abstract class Character extends CollisionEntity {
     protected double ultimateCooldown = -1;
     protected double curAbilityCooldown = -1;
     protected double curUltCooldown = -1;
+    protected Vector2D movementVelocity;
+    public Vector2D outsideVelocity;
     protected int lives = 3;
     private double defense = 0;
 
@@ -62,6 +64,8 @@ public abstract class Character extends CollisionEntity {
         HP = maxHp;
         setCollision(false);
         setPlayer(player);
+        movementVelocity = new Vector2D(0, 0);
+        outsideVelocity = new Vector2D(0, 0);
     }
 
     public void setPlayer(int player) {
@@ -96,8 +100,11 @@ public abstract class Character extends CollisionEntity {
     @Override
     public void onCollision(CollisionEntity ce) {
         if (ce.getName().equals("ground")) {
-            setVel(new Vector2D(getVel().getX(), 0));
+            movementVelocity.set(movementVelocity.getX(), 0);
+            outsideVelocity.set(outsideVelocity.getX(), 0);
             setPos(new Vector2D(getX(), ce.getYCollisionBox().getY() - getCollisionBox().height / 2));
+            canJump = true;
+        } else if (ce.getName().equals("platform")) {
             canJump = true;
         }
 
@@ -149,13 +156,15 @@ public abstract class Character extends CollisionEntity {
             }
         }
 
-        if (Math.abs(getVel().getX()) <= 50) {
-            setVel(new Vector2D(0, getVel().getY()));
+        if (Math.abs(movementVelocity.getX()) <= 50) {
+            movementVelocity.set(0, movementVelocity.getY());
+        }
+        if (Math.abs(outsideVelocity.getX()) <= 50) {
+            outsideVelocity.set(0, outsideVelocity.getY());
         }
 
-        // if (Math.abs(getVel().getX()) < 400) {
         if (keyCodes.contains(playerInput.rightKey.get())) {
-            addVel(new Vector2D(deltaT * speed, 0));
+            movementVelocity.add(new Vector2D(deltaT * speed, 0));
             direction = Direction.RIGHT;
             if (flipped && characterAsset != null) {
                 characterAsset.flipHorizontal();
@@ -163,7 +172,7 @@ public abstract class Character extends CollisionEntity {
             }
         }
         if (keyCodes.contains(playerInput.leftKey.get())) {
-            addVel(new Vector2D(-deltaT * speed, 0));
+            movementVelocity.add(new Vector2D(-deltaT * speed, 0));
             direction = Direction.LEFT;
             if (!flipped && characterAsset != null) {
                 characterAsset.flipHorizontal();
@@ -171,18 +180,35 @@ public abstract class Character extends CollisionEntity {
             }
         }
 
-        setVel((Math.abs(getVel().getX()) > maxVelocity)
-                ? ((getVel().getX() > 0) ? 1 : -1) * maxVelocity
-                : getVel().getX(),
-                getVel().getY());
+        if (Math.abs(movementVelocity.getX()) > maxVelocity) {
+            movementVelocity.set(this.direction.getValue() * maxVelocity, movementVelocity.getY());
+        }
+        // setVel((Math.abs(getVel().getX()) > maxVelocity)
+        //         ? ((getVel().getX() > 0) ? 1 : -1) * maxVelocity
+        //         : getVel().getX(),
+        //         getVel().getY());
 
+
+        // reduce velocity
         if (!canJump) {
-            addVel(new Vector2D(-getVel().getX() * deltaT * 1.5, deltaT * gravity));
+            if (movementVelocity.getX() != 0) {
+                movementVelocity.add(new Vector2D((movementVelocity.getX() > 0 ? -1 : 1) * deltaT * 1200, 0));
+            }
+            movementVelocity.add(new Vector2D(0, deltaT*gravity));
+            if (outsideVelocity.getX() != 0) {
+                outsideVelocity.add(new Vector2D((outsideVelocity.getX() > 0 ? -1 : 1) * deltaT * 1200, 0));
+            }
         } else {
-            if (getVel().getX() != 0) {
-                addVel(new Vector2D(((getVel().getX() > 0) ? -1 : 1) * deltaT * 1700, 0));
+            if (movementVelocity.getX() != 0) {
+                movementVelocity.add(new Vector2D((movementVelocity.getX() > 0 ? -1 : 1) * deltaT * 1700, 0));
+            }
+            if (outsideVelocity.getX() != 0) {
+                outsideVelocity.add(new Vector2D((outsideVelocity.getX() > 0 ? -1 : 1) * deltaT * 1700, 0));
             }
         }
+
+        this.setVel(movementVelocity);
+        this.addVel(outsideVelocity);
 
         // cant go off map, might get rid of later
         if (getX() + getVel().getX() * deltaT - getCollisionBox().width / 2 < 0) {
@@ -198,7 +224,7 @@ public abstract class Character extends CollisionEntity {
 
     protected void jump() {
         if (canJump) {
-            setVel(new Vector2D(getVel().getX(), -jumpHeight));
+            movementVelocity.set(movementVelocity.getX(), -jumpHeight);
             canJump = false;
         }
     }
