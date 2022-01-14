@@ -42,7 +42,7 @@ public class Main extends KYscreen implements MouseInputListener {
         // backgroundMusic.setLoop(true);
         // backgroundMusic.play();
 
-        scenes = new Scene[7];
+        scenes = new Scene[8];
         scenes[0] = new StartScene(this);
         scenes[1] = new MainMenuScene(this);
         scenes[2] = new CharacterSelectScene(this);
@@ -50,6 +50,7 @@ public class Main extends KYscreen implements MouseInputListener {
         scenes[4] = new EndScene(this);
         scenes[5] = new InputSettingsScene(this);
         scenes[6] = new CharacterInfoScene(this);
+        scenes[7] = new MapSelectScene(this);
 
         resetCharacters();
 

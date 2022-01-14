@@ -17,11 +17,11 @@ public class Assassin extends Character {
     double temp = 1000;
 
     public Assassin(Main main){
-        super(new Vector2D(0, 0), 150, 200, 1000, main);
+        super(new Vector2D(0, 0), 75, 100, 1000, main);
     }
 
     public Assassin(Vector2D position, Main main){
-        super(position, 150, 200, 1000, main);
+        super(position, 75, 100, 1000, main);
     }
 
     @Override
@@ -46,10 +46,18 @@ public class Assassin extends Character {
         //add(rocket);
         //was originally gonna make a knockback rocket as ability but changed it to heal instead
 
-        characterAsset = new Asset(new String[]{
-            "assets/characters/assassin/assassin.png",
-            "assets/characters/assassin/assassinrage.png"
-        }, new Vector2D(0, 0), 256, 256, 3);
+        if(getPlayer() == 1){
+            characterAsset = new Asset(new String[]{
+                "assets/characters/assassin/assassinp1.png",
+                "assets/characters/assassin/assassinragep2.png"
+            }, new Vector2D(0, 0), 128, 128, 3);
+        }else{
+            characterAsset = new Asset(new String[]{
+                "assets/characters/assassin/assassinp2.png",
+                "assets/characters/assassin/assassinragep2.png"
+            }, new Vector2D(0, 0), 128, 128, 3);
+        }
+        
         characterAsset.setVisible(true);
         add(characterAsset);
         healthup = new Asset("assets/characters/assassin/healthup.png", new Vector2D(0, 0), 3);

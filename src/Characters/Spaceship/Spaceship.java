@@ -15,11 +15,11 @@ public class Spaceship extends Character {
     AudioPlayer rocketwhoosh;
 
     public Spaceship(Main main) {
-        super(new Vector2D(0, 0), 150, 200, 1200, main);
+        super(new Vector2D(0, 0), 75, 100, 1200, main);
     }
 
     public Spaceship(Vector2D position, Main main) {
-        super(position, 150, 200, 1200, main);
+        super(position, 75, 100, 1200, main);
     }
 
     @Override
@@ -53,10 +53,22 @@ public class Spaceship extends Character {
         curAbilityCooldown = abilityCooldown;
         setDefense(0.1);
 
-        characterAsset = new Asset(new String[] {
+        /*characterAsset = new Asset(new String[] {
                 "assets/characters/spaceship/spaceship_normal.png",
                 "assets/characters/spaceship/spaceship_enraged.png"
-        }, new Vector2D(0, 0), 3);
+        }, new Vector2D(0, 0), 3);*/
+
+        if(getPlayer() == 1){
+            characterAsset = new Asset(new String[] {
+                "assets/characters/spaceship/spaceship_p1.png",
+                "assets/characters/spaceship/spaceship_enraged_p1.png"
+            }, new Vector2D(0, 0), 64, 64, 3);
+        }else{
+            characterAsset = new Asset(new String[] {
+                "assets/characters/spaceship/spaceship_p2.png",
+                "assets/characters/spaceship/spaceship_enraged_p2.png"
+            }, new Vector2D(0, 0), 64, 64, 3);
+        }
 
         characterAsset.setVisible(true);
         characterAsset.rescale(2);
@@ -115,6 +127,7 @@ public class Spaceship extends Character {
             if (curRocket >= rockets.length) {
                 curRocket = 0;
             }
+            rockets[curRocket].setDamage(150);
             rockets[curRocket].setPos(new Vector2D(getX(), getY() - 250 + i * 100));
             rockets[curRocket].setVisible(true);
             rockets[curRocket].canDamage = true;

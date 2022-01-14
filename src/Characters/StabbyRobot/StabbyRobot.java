@@ -10,11 +10,11 @@ public class StabbyRobot extends Character {
     AudioPlayer knifeSound;
 
     public StabbyRobot(Main main) {
-        super(new Vector2D(0, 0), 150, 275, 1700, main);
+        super(new Vector2D(0, 0), 75, 140, 1700, main);
     }
 
     public StabbyRobot(Vector2D position, Main main) {
-        super(position, 150, 275, 1700, main);
+        super(position, 75, 140, 1700, main);
     }
 
     @Override

@@ -13,7 +13,7 @@ public class StartScene extends Scene {
 
     @Override
     public void initialize(){
-        startscene = new Asset("assets/startscene.png", new Vector2D(750,400), 1500, 800, 1);
+        startscene = new Asset("assets/startscene.png", new Vector2D(width*0.5,height*0.5), width, height, 1);
         add(startscene);
         startscene.setVisible(true);
     }

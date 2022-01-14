@@ -6,6 +6,7 @@ public class MainMenuScene extends Scene {
     Button startButton;
     Button inputSettingsButton;
     Button exitButton;
+    Button mapselect;
 
     public MainMenuScene(Main main) {
         super(main);
@@ -19,7 +20,7 @@ public class MainMenuScene extends Scene {
                 main.setScene(6);
             }
         };
-        characterinfo.setText("CHAR INFO");
+        characterinfo.setText("INFO");
         add(characterinfo);
 
         startButton = new Button(new Vector2D(Main.width / 2, Main.height * 0.5), main) {
@@ -48,6 +49,15 @@ public class MainMenuScene extends Scene {
         };
         exitButton.setText("EXIT");
         add(exitButton);
+
+        mapselect = new Button(new Vector2D(Main.width * 0.25, Main.height * 0.3), main){
+            @Override
+            protected void action(){
+                main.setScene(7);
+            }
+        };
+        mapselect.setText("MAPS");
+        add(mapselect);
     }
 
 }

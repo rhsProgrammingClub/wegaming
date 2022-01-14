@@ -101,6 +101,12 @@ public abstract class Character extends CollisionEntity {
             canJump = true;
         }
 
+        if(ce.getName().equals("platform")){
+            //setVel(new Vector2D(getVel().getX(), 0));
+            setPos(new Vector2D(getX(), ce.getYCollisionBox().getY() - getCollisionBox().height / 2));
+            canJump = true;
+        }
+
         // relys on damage entity instead
 
         // if (ce instanceof DamageEntity && ce.isVisible()) {
@@ -193,6 +199,12 @@ public abstract class Character extends CollisionEntity {
             setVel(new Vector2D(0, getVel().getY()));
             setPos(new Vector2D(Main.width - getCollisionBox().width / 2, getY()));
         }
+        if(getY() + getVel().getY() * deltaT - getCollisionBox().height / 2 < 0){
+            setVel(new Vector2D(getVel().getX(), 0));
+            setPos(new Vector2D(getX(), getCollisionBox().height /2 ));
+        }
+
+       
 
     }
 

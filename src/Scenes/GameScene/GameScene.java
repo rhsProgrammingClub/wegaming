@@ -9,6 +9,9 @@ import ky.Vector2D;
 public class GameScene extends Scene {
 
     static Ground ground;
+    static Ground ground1;
+    static Ground ground2;
+    static Ground ground3;
     static Character player1;
     static Character player2;
     Text fpsText;
@@ -22,6 +25,7 @@ public class GameScene extends Scene {
     CooldownBar ultBarP2;
     Asset[] p1LivesDisplay;
     Asset[] p2LivesDisplay;
+    int [] finalselect;
 
     public GameScene(Main main) {
         super(main);
@@ -57,8 +61,24 @@ public class GameScene extends Scene {
 
         // ground = new Ground(Main.width/2, Main.height*0.75, (int)(Main.width*0.6),
         // (int)(Main.height*0.1));
-        ground = new Ground(width * 0.5, height * 0.9, width, (int) (height * 0.2));
+        ground = new Ground(width * 0.5, height * 0.9, width, (int) (height * 0.2), "ground");
         add(ground);
+        
+        finalselect = MapSelectScene.getmap();
+        if(finalselect[0] == 0 && finalselect[1] == 1){
+            ground1 = new Ground(width * 0.15, height * 0.6, (int) (width * 0.2), (int) (height * 0.02), "platform");
+            ground2 = new Ground(width * 0.85, height * 0.6, (int) (width * 0.2), (int) (height * 0.02), "platform");
+            add(ground1);
+            add(ground2);
+        }else if(finalselect[0] == 0 && finalselect[1] == 2){
+            ground1 = new Ground(width * 0.15, height * 0.6, (int) (width * 0.2), (int) (height * 0.02), "platform");
+            ground2 = new Ground(width * 0.5, height * 0.4, (int) (width * 0.2), (int) (height * 0.02), "platform");
+            ground3 = new Ground(width * 0.85, height * 0.2, (int) (width * 0.2), (int) (height * 0.02), "platform");
+            add(ground1);
+            add(ground2);
+            add(ground3);
+        }
+
         player1 = main.player1;
         player2 = main.player2;
 
