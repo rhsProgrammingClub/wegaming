@@ -22,7 +22,7 @@ public abstract class Button extends Entity {
         this.main = main;
         this.buttonAsset = new Asset(
                 new String[] { "assets/misc/button.png",
-                        "assets/misc/button_hovered.png" },
+                        "assets/misc/button_hover.png" }, 
                 new Vector2D(0, 0), 5);
 
         this.buttonAsset.setVisible(true);
@@ -41,7 +41,7 @@ public abstract class Button extends Entity {
         } catch (IOException ex) {
             this.buttonAsset = new Asset(
                     new String[] { "assets/misc/button.png",
-                            "assets/misc/button_hovered.png" },
+                            "assets/misc/button_hover.png" },
                     new Vector2D(0, 0), 5);
         }
         this.buttonAsset.setVisible(true);

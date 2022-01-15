@@ -1,3 +1,4 @@
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import ky.Asset;
@@ -24,6 +25,10 @@ public class CharacterSelectScene extends Scene {
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         if (p1Cursor.selected && p2Cursor.selected) {
             main.setScene(3);
+        }
+
+        if(keyCodes.contains(KeyEvent.VK_ESCAPE)){
+            main.setScene(1);
         }
     }
 
