@@ -53,7 +53,7 @@ public abstract class Button extends Entity {
         if (this.text == null) {
             this.text = new Text(
                     String.valueOf(newText),
-                    new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 50),
+                    new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 40),
                     Color.white,
                     new Vector2D(20, 0),
                     200,
@@ -71,7 +71,7 @@ public abstract class Button extends Entity {
         if (this.text == null) {
             this.text = new Text(
                     newText,
-                    new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 50),
+                    new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 40),
                     Color.white,
                     new Vector2D(20, 0),
                     200,
