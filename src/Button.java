@@ -22,7 +22,7 @@ public abstract class Button extends Entity {
         this.main = main;
         this.buttonAsset = new Asset(
                 new String[] { "assets/misc/button.png",
-                        "assets/misc/button_hovered.png" },
+                        "assets/misc/button_hover.png" }, 
                 new Vector2D(0, 0), 5);
 
         this.buttonAsset.setVisible(true);
@@ -41,7 +41,7 @@ public abstract class Button extends Entity {
         } catch (IOException ex) {
             this.buttonAsset = new Asset(
                     new String[] { "assets/misc/button.png",
-                            "assets/misc/button_hovered.png" },
+                            "assets/misc/button_hover.png" },
                     new Vector2D(0, 0), 5);
         }
         this.buttonAsset.setVisible(true);
@@ -53,7 +53,7 @@ public abstract class Button extends Entity {
         if (this.text == null) {
             this.text = new Text(
                     String.valueOf(newText),
-                    new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 50),
+                    new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 40),
                     Color.white,
                     new Vector2D(20, 0),
                     200,
@@ -71,7 +71,7 @@ public abstract class Button extends Entity {
         if (this.text == null) {
             this.text = new Text(
                     newText,
-                    new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 50),
+                    new Font("assets/JetBrainsMono-Bold.ttf", Font.BOLD, 40),
                     Color.white,
                     new Vector2D(20, 0),
                     200,
