@@ -143,10 +143,10 @@ public class GameScene extends Scene {
 
         }
 
-        // Asset background = new Asset("assets/backgrounds/background-1.png", new
-        // Vector2D(width/2,height/2-200), 1);
-        // background.setVisible(true);
-        // background.rescale(1.65);
-        // add(background);
+        Asset background = new Asset("assets/backgrounds/background-1.png", new
+        Vector2D(width/2,height/2-200), 1);
+        background.setVisible(true);
+        background.rescale(1.65);
+        add(background);
     }
 }
