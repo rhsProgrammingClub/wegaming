@@ -20,12 +20,12 @@ public class SelectionCursor extends Entity {
 
     private Main main;
 
-    public SelectionCursor(Vector2D position, int layer, int player, Main main) {
+    public SelectionCursor(String filepath, Vector2D position, int layer, int player, Main main) {
         super(position, layer, "cursor");
         this.player = player;
         this.main = main;
 
-        cursorAsset = new Asset("assets/test.png", new Vector2D(0, 0), 4);
+        cursorAsset = new Asset(filepath, new Vector2D(0, 0), 4);
         cursorAsset.rescale(2);
         cursorAsset.setVisible(true);
         add(cursorAsset);

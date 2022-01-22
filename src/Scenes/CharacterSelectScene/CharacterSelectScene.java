@@ -34,8 +34,8 @@ public class CharacterSelectScene extends Scene {
 
     @Override
     public void initialize() {
-        p1Cursor = new SelectionCursor(new Vector2D(width * 0.5 - 110, height * 0.75), 4, 1, main);
-        p2Cursor = new SelectionCursor(new Vector2D(width * 0.5 + 110, height * 0.75), 4, 2, main);
+        p1Cursor = new SelectionCursor("assets/misc/charselect1.png", new Vector2D(width * 0.5 - 110, height * 0.75), 4, 1, main);
+        p2Cursor = new SelectionCursor("assets/misc/charselect2.png", new Vector2D(width * 0.5 + 110, height * 0.75), 4, 2, main);
         // p1CharacterArt = new Asset(image, position, 1);
         // p2CharacterArt = new Asset(image, position, 1);
         spaceship = new Asset("assets/characters/spaceship/spaceship_normal.png",
