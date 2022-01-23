@@ -58,6 +58,8 @@ public class StabbyRobot extends Character {
             lastDirection = direction;
         }
 
+        sword.knockbackDir = direction.getValue();
+
         if (sword.getDamage() == 275) {
             abilityUpTime -= deltaT;
             if (abilityUpTime <= 0) {
