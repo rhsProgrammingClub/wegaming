@@ -15,6 +15,7 @@
         "src/Scenes/EndScene",
         "src/Scenes/StartScene",
         "src/Scenes/InputSettingsScene",
-        "src/Scenes/CharacterInfoScene"
+        "src/Scenes/CharacterInfoScene",
+        "src/Scenes/MapSelectScene"
     ]
 }

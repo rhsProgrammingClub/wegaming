@@ -12,11 +12,11 @@ public class BoxRobot extends Character {
     private int lastDirection;
 
     public BoxRobot(Vector2D position, Main main) {
-        super(position, 256, 256, 1800, main);
+        super(position, 128, 128, 1800, main);
     }
 
     public BoxRobot(Main main) {
-        super(new Vector2D(0, 0), 256, 256, 1800, main);
+        super(new Vector2D(0, 0), 128, 128, 1800, main);
 
     }
 
@@ -31,10 +31,22 @@ public class BoxRobot extends Character {
         curAbilityCooldown = abilityCooldown;
         curUltCooldown = ultimateCooldown;
 
-        characterAsset = new Asset(new String[] {
+        /*characterAsset = new Asset(new String[] {
                 "assets/characters/boxrobot/box_robot.png",
                 "assets/characters/boxrobot/box_robot_armour.png"
-        }, new Vector2D(0, 0), 3);
+        }, new Vector2D(0, 0), 3);*/
+
+        if(getPlayer() == 1){
+            characterAsset = new Asset(new String[] {
+                "assets/characters/boxrobot/box_robot_p1.png",
+                "assets/characters/boxrobot/box_robot_armour_p1.png"
+            }, new Vector2D(0, 0), 128, 128,3);
+        }else{
+            characterAsset = new Asset(new String[] {
+                "assets/characters/boxrobot/box_robot_p2.png",
+                "assets/characters/boxrobot/box_robot_armour_p2.png"
+            }, new Vector2D(0, 0), 128, 128, 3);
+        }
 
         characterAsset.setVisible(true);
         add(characterAsset);
@@ -55,7 +67,7 @@ public class BoxRobot extends Character {
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
         super.update(deltaT, keyCodes);
-        saw.setPos(new Vector2D(getX() + 120 * direction.getValue(), getY() - 15));
+        saw.setPos(new Vector2D(getX() + 60 * direction.getValue(), getY() - 8));
 
         saw.setVisible(status != Status.ABILITY);
 
@@ -66,7 +78,7 @@ public class BoxRobot extends Character {
         }
 
         if (flameUpTime > 0 && status == Status.ABILITY) {
-            flame.setPos(new Vector2D(getX() + 228 * direction.getValue(), getY() - 30));
+            flame.setPos(new Vector2D(getX() + 114 * direction.getValue(), getY() - 15));
             flameUpTime -= deltaT;
         } else if (flame.isVisible()) {
             flame.setVisible(false);

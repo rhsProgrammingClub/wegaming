@@ -9,9 +9,9 @@ public class Saw extends DamageEntity {
     Asset sawAsset;
 
     public Saw(Vector2D position, int player) {
-        super(position, 128, 128, 2, player, 150);
+        super(position, 64, 64, 2, player, 150);
         sawAsset = new Asset("assets/characters/boxrobot/saw.png",
-                new Vector2D(0, 0), 2);
+                new Vector2D(0, 0), 64, 64, 2);
         sawAsset.setVisible(true);
         add(sawAsset);
     }
