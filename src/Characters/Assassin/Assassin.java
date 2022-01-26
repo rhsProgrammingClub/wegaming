@@ -11,6 +11,7 @@ public class Assassin extends Character {
     AudioPlayer teleport;
     Direction lastDirection;
     private Asset healthup;
+    boolean canReduceCD;
 
     double ultuptime;
     double offset = 0;
@@ -35,6 +36,8 @@ public class Assassin extends Character {
 
         curAbilityCooldown = abilityCooldown;
         curUltCooldown = ultimateCooldown;
+
+        canReduceCD = false;
 
         asword = new ASword(new Vector2D(0, 0), getPlayer());
         asword.setVisible(true);
@@ -72,11 +75,19 @@ public class Assassin extends Character {
 
         abilityIcon = new Asset("assets/characters/assassin/healthup.png", new Vector2D(0, 0), 130, 130, 3);
         ultIcon = new Asset("assets/characters/assassin/assassindash.png", new Vector2D(0, 0), 130, 130, 3);
+
     }
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes){
         super.update(deltaT, keyCodes);
+
+        if (!asword.canDamage && canReduceCD) {
+            curUltCooldown-=1.5;
+            if (curUltCooldown < 0)
+                curUltCooldown = 0;
+            canReduceCD = false;
+        }
 
         if(direction != lastDirection){
             asword.assassinsword.flipHorizontal();
@@ -97,6 +108,7 @@ public class Assassin extends Character {
                 temp = 500;
                 status = Status.IDLE;
                 asword.canDamage = false;
+                canReduceCD = false;
             }
         }else{
             asword.setPos(this.getPos());
@@ -116,6 +128,7 @@ public class Assassin extends Character {
             swordswing.reset();
             swordswing.play();
             status = Status.ATTACKING;
+            canReduceCD = true;
             asword.canDamage = true;
         }
     }

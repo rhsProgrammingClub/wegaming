@@ -96,7 +96,7 @@ public class Spaceship extends Character {
         if (status == Status.IDLE) {
             status = Status.ATTACKING;
             attackTime = 0.3;
-            laser.setPos(new Vector2D(getX() + 1095 * direction.getValue(), getY() + 15));
+            laser.setPos(new Vector2D(getX() + 1040 * direction.getValue(), getY() + 15));
             laser.setVisible(true);
             laser.canDamage = true;
 
