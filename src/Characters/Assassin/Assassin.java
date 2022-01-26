@@ -28,10 +28,10 @@ public class Assassin extends Character {
     public void initialize(){
         setDefense(0);
         jumpHeight = 800;
-        gravity = 1200;
-        ultimateCooldown = 16;
-        abilityCooldown = 8;
-        speed = 150000;
+        gravity = 1300;
+        ultimateCooldown = 15;
+        abilityCooldown = 6.9;
+        speed = 159000;
 
         curAbilityCooldown = abilityCooldown;
         curUltCooldown = ultimateCooldown;
@@ -105,7 +105,7 @@ public class Assassin extends Character {
         if(ultuptime > 0){
             ultuptime -= deltaT;
         }else if(asword.getDamage() >= 350){
-            asword.setDamage(200);
+            asword.setDamage(250);
             characterAsset.setImageIndex(0);
         }
     }
