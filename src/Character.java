@@ -5,7 +5,6 @@ import ky.Vector2D;
 
 public abstract class Character extends CollisionEntity {
 
-    // CollisionEn
     ArrayList<CollisionEntity> entities = new ArrayList<CollisionEntity>();
 
     private int player = 1;
@@ -108,18 +107,6 @@ public abstract class Character extends CollisionEntity {
             setPos(new Vector2D(getX(), ce.getYCollisionBox().getY() - getCollisionBox().height / 2));
             canJump = true;
         }
-
-        // relys on damage entity instead
-
-        // if (ce instanceof DamageEntity && ce.isVisible()) {
-        // if (((DamageEntity)ce).getPlayer() != this.player) {
-        // if (((DamageEntity)ce).canDamage) {
-        // this.HP-=((DamageEntity)ce).getDamage();
-        // ce.setVisible(!((DamageEntity)ce).getBreaks());
-        // ((DamageEntity)ce).canDamage=false;
-        // }
-        // }
-        // }
     }
 
     public void setDefense(double val) {
@@ -180,11 +167,6 @@ public abstract class Character extends CollisionEntity {
                 if (Math.abs(getVel().getX()) < maxVelocity) {
                     setVel(new Vector2D(-maxVelocity, getVel().getY()));
                 }
-                // double deltaVelocity = maxVelocity - Math.abs(getVel().getX());
-                // if (deltaVelocity < 0) {
-                //     deltaVelocity = 0;
-                // }
-                // addVel(new Vector2D(-deltaVelocity, 0));
             } else {
                 addVel(new Vector2D(-deltaT*speed, 0));
             }
@@ -194,11 +176,6 @@ public abstract class Character extends CollisionEntity {
                 flipped = true;
             }
         }
-
-        // setVel((Math.abs(getVel().getX()) > maxVelocity)
-        //         ? ((getVel().getX() > 0) ? 1 : -1) * maxVelocity
-        //         : getVel().getX(),
-        //         getVel().getY());
 
         // reduce velocity
         if (!canJump) {
