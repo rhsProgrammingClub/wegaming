@@ -92,14 +92,14 @@ public class Text extends Asset {
 			this.text = this.updateText;
 			this.font = this.updateFont;
 			this.color = this.updateColor;
-			
+
 			Graphics2D g = this.images[0].createGraphics();
 			g.setBackground(new Color(255, 255, 255, 0));
 			g.clearRect(0, 0, getWidth(), getHeight());
 			
 			g.setFont(this.font);
 			g.setColor(this.color);
-			g.drawString(this.text, 0, this.font.getSize());
+			drawString(g);
 			g.dispose();
 		}
 	}

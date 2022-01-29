@@ -5,7 +5,6 @@ import ky.Vector2D;
 
 public abstract class Character extends CollisionEntity {
 
-    // CollisionEn
     ArrayList<CollisionEntity> entities = new ArrayList<CollisionEntity>();
 
     private int player = 1;
@@ -96,8 +95,10 @@ public abstract class Character extends CollisionEntity {
     @Override
     public void onCollision(CollisionEntity ce) {
         if (ce.getName().equals("ground")) {
-            setVel(new Vector2D(getVel().getX(), 0));
+            setVel(getVel().getX(), 0);
             setPos(new Vector2D(getX(), ce.getYCollisionBox().getY() - getCollisionBox().height / 2));
+            canJump = true;
+        } else if (ce.getName().equals("platform")) {
             canJump = true;
         }
 
@@ -106,18 +107,6 @@ public abstract class Character extends CollisionEntity {
             setPos(new Vector2D(getX(), ce.getYCollisionBox().getY() - getCollisionBox().height / 2));
             canJump = true;
         }
-
-        // relys on damage entity instead
-
-        // if (ce instanceof DamageEntity && ce.isVisible()) {
-        // if (((DamageEntity)ce).getPlayer() != this.player) {
-        // if (((DamageEntity)ce).canDamage) {
-        // this.HP-=((DamageEntity)ce).getDamage();
-        // ce.setVisible(!((DamageEntity)ce).getBreaks());
-        // ((DamageEntity)ce).canDamage=false;
-        // }
-        // }
-        // }
     }
 
     public void setDefense(double val) {
@@ -156,12 +145,17 @@ public abstract class Character extends CollisionEntity {
         }
 
         if (Math.abs(getVel().getX()) <= 50) {
-            setVel(new Vector2D(0, getVel().getY()));
+            setVel(0, getVel().getY());
         }
 
-        // if (Math.abs(getVel().getX()) < 400) {
         if (keyCodes.contains(playerInput.rightKey.get())) {
-            addVel(new Vector2D(deltaT * speed, 0));
+            if (Math.abs(getVel().getX()) + deltaT*speed > maxVelocity) {
+                if (Math.abs(getVel().getX()) < maxVelocity) {
+                    setVel(new Vector2D(maxVelocity, getVel().getY()));
+                }
+            } else {
+                addVel(new Vector2D(deltaT*speed, 0));
+            }
             direction = Direction.RIGHT;
             if (flipped && characterAsset != null) {
                 characterAsset.flipHorizontal();
@@ -169,7 +163,13 @@ public abstract class Character extends CollisionEntity {
             }
         }
         if (keyCodes.contains(playerInput.leftKey.get())) {
-            addVel(new Vector2D(-deltaT * speed, 0));
+            if (Math.abs(getVel().getX()) + deltaT*speed > maxVelocity) {
+                if (Math.abs(getVel().getX()) < maxVelocity) {
+                    setVel(new Vector2D(-maxVelocity, getVel().getY()));
+                }
+            } else {
+                addVel(new Vector2D(-deltaT*speed, 0));
+            }
             direction = Direction.LEFT;
             if (!flipped && characterAsset != null) {
                 characterAsset.flipHorizontal();
@@ -177,16 +177,15 @@ public abstract class Character extends CollisionEntity {
             }
         }
 
-        setVel((Math.abs(getVel().getX()) > maxVelocity)
-                ? ((getVel().getX() > 0) ? 1 : -1) * maxVelocity
-                : getVel().getX(),
-                getVel().getY());
-
+        // reduce velocity
         if (!canJump) {
-            addVel(new Vector2D(-getVel().getX() * deltaT * 1.5, deltaT * gravity));
+            if (getVel().getX() != 0) {
+                addVel(new Vector2D((getVel().getX() > 0 ? -1 : 1) * deltaT * 1200, 0));
+            }
+            addVel(new Vector2D(0, deltaT*gravity));
         } else {
             if (getVel().getX() != 0) {
-                addVel(new Vector2D(((getVel().getX() > 0) ? -1 : 1) * deltaT * 1700, 0));
+                addVel(new Vector2D((getVel().getX() > 0 ? -1 : 1) * deltaT * 1700, 0));
             }
         }
 
@@ -210,7 +209,7 @@ public abstract class Character extends CollisionEntity {
 
     protected void jump() {
         if (canJump) {
-            setVel(new Vector2D(getVel().getX(), -jumpHeight));
+            setVel(getVel().getX(), -jumpHeight);
             canJump = false;
         }
     }

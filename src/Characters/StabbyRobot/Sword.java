@@ -8,7 +8,7 @@ public class Sword extends DamageEntity {
     public Asset swordAsset;
 
     public Sword(Vector2D position, int layer, int player, double damage) {
-        super(position, 60, 20, layer, player, damage);
+        super(position, 60, 20, layer, player, damage, 500);
         swordAsset = new Asset(
                 new String[] { "assets/characters/stabbyrobot/sword.png",
                         "assets/characters/stabbyrobot/sword_boosted.png",

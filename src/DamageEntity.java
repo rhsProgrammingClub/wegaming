@@ -9,6 +9,7 @@ public class DamageEntity extends CollisionEntity {
     private double knockback;
     private int player;
     private boolean breaks;
+    protected int knockbackDir = 0;
     public boolean canDamage = false;
 
     public DamageEntity(Vector2D position, int collisionBoxWidth, int collisionBoxHeight, int layer, int player,
@@ -72,7 +73,18 @@ public class DamageEntity extends CollisionEntity {
                         ((Character) collidingEntity).HP -= damage - damage *
                                 (((Character) collidingEntity).getDefense());
                         canDamage = false;
+                        if (knockback > 0) {
+                            ((Character) (collidingEntity)).setVel(((Character)(collidingEntity)).getVel().getX()*0.25, 0);
+                            if (knockbackDir == 0) { // if no explicit direction
+                                int dir = getVel().getX() > 0 ? 1 : -1;
+                                ((Character) (collidingEntity)).addVel(dir * knockback, 0);
+                            } else {
+                                ((Character) (collidingEntity)).addVel(knockbackDir * knockback, 0);
+                            }
+
+                        }
                     }
+
                     if (breaks) {
                         setVisible(false);
                     }

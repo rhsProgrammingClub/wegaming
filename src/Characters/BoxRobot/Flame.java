@@ -6,7 +6,7 @@ import ky.Vector2D;
 
 public class Flame extends DamageEntity {
 
-    private final double realDamage = 450;
+    private final double realDamage = 550;
     Asset flameAsset;
 
     public Flame(Vector2D position, int player) {
