@@ -74,11 +74,12 @@ public class DamageEntity extends CollisionEntity {
                                 (((Character) collidingEntity).getDefense());
                         canDamage = false;
                         if (knockback > 0) {
+                            ((Character) (collidingEntity)).setVel(((Character)(collidingEntity)).getVel().getX()*0.25, 0);
                             if (knockbackDir == 0) { // if no explicit direction
                                 int dir = getVel().getX() > 0 ? 1 : -1;
-                                ((Character) (collidingEntity)).outsideVelocity.add(dir * knockback, 0);
+                                ((Character) (collidingEntity)).addVel(dir * knockback, 0);
                             } else {
-                                ((Character) (collidingEntity)).outsideVelocity.add(knockbackDir * knockback, 0);
+                                ((Character) (collidingEntity)).addVel(knockbackDir * knockback, 0);
                             }
 
                         }

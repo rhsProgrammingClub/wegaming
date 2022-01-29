@@ -15,8 +15,8 @@ public class Rocket extends DamageEntity {
 
     private Main main;
 
-    public Rocket(String image, Vector2D position, int player, Main main, double dmg, double pushback) {
-        super(position, 32, 64, 3, player, dmg, pushback);
+    public Rocket(String image, Vector2D position, int player, Main main, double dmg) {
+        super(position, 32, 64, 3, player, dmg, 1500);
         this.main = main;
         testChar = ((player == 1) ? main.player2 : main.player1);
         setBreaks(true);
