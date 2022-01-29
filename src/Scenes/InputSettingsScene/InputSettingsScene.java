@@ -86,7 +86,7 @@ public class InputSettingsScene extends Scene {
 
         exitButton = new Button(new Vector2D(750, 600), main) {
             @Override
-            protected void action() {
+            protected void onClick() {
                 setKeybindbutton(null);
                 main.setScene(1);
             }

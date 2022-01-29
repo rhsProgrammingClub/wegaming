@@ -77,8 +77,7 @@ public class Assassin extends Character {
     }
 
     @Override
-    public void update(double deltaT, ArrayList<Integer> keyCodes){
-        super.update(deltaT, keyCodes);
+    public void updateCharacter(double deltaT, ArrayList<Integer> keyCodes){
 
         if (!asword.canDamage && canReduceCD) {
             curUltCooldown-=1.5;

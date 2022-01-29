@@ -63,8 +63,19 @@ public class DamageEntity extends CollisionEntity {
         this.player = player;
     }
 
+    public void updateEntity(double deltaT, ArrayList<Integer> keyCodes) {}
+
+    // do not override update in child classes, change updateEntity instead
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
+        if (main.currentScene instanceof GameScene) {
+            if (((GameScene)(main.currentScene)).paused) {
+                addPos(new Vector2D(-getVel().getX()*deltaT, -getVel().getY()*deltaT));
+                // setVel(new Vector2D(0, 0));
+                return;
+            }
+        }
+        updateEntity(deltaT, keyCodes);
     }
 
     @Override

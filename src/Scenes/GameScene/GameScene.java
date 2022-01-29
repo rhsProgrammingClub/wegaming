@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import ky.Asset;
@@ -25,52 +26,73 @@ public class GameScene extends Scene {
     CooldownBar ultBarP2;
     Asset[] p1LivesDisplay;
     Asset[] p2LivesDisplay;
-    int [] finalselect;
+    Asset pausedBackground;
+    int[] finalselect;
+    Button exitButton;
+    Button resumeButton;
+    Button resetButton;
+    boolean paused = false;
 
     public GameScene(Main main) {
         super(main);
     }
 
+    private void updatePauseMenu(boolean paused)
+    {
+        this.paused = paused;
+        exitButton.setVisible(paused);
+        resumeButton.setVisible(paused);
+        main.setCursorVisible(paused);
+        pausedBackground.setVisible(paused);
+    }
+
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        if (player1.lives <= 0 || player2.lives <= 0) {
-            main.setScene(4);
+        if (keyCodes.contains(KeyEvent.VK_ESCAPE)) {
+            updatePauseMenu(true);
         }
+        if (paused) {
 
-        for (int i = 2; i >= 0; i--) {
-            if (player1.lives < i + 1) {
-                p1LivesDisplay[i].setVisible(false);
+        } else {
+            if (player1.lives <= 0 || player2.lives <= 0) {
+                main.setScene(4);
             }
-            if (player2.lives < i + 1) {
-                p2LivesDisplay[i].setVisible(false);
-            }
-        }
 
-        tTime += deltaT;
-        if (tTime >= 1) {
-            tTime = 0;
-            fpsText.setText("FPS: " + frames);
-            frames = 0;
+            for (int i = 2; i >= 0; i--) {
+                if (player1.lives < i + 1) {
+                    p1LivesDisplay[i].setVisible(false);
+                }
+                if (player2.lives < i + 1) {
+                    p2LivesDisplay[i].setVisible(false);
+                }
+            }
+
+            tTime += deltaT;
+            if (tTime >= 1) {
+                tTime = 0;
+                fpsText.setText("FPS: " + frames);
+                frames = 0;
+            }
+            frames++;
+
         }
-        frames++;
     }
 
     @Override
     public void initialize() {
         main.resetCharacters();
-
         // ground = new Ground(Main.width/2, Main.height*0.75, (int)(Main.width*0.6),
         // (int)(Main.height*0.1));
         ground = new Ground(width * 0.5, height * 0.9, width, (int) (height * 0.2), "ground");
         add(ground);
-        
+
         finalselect = MapSelectScene.getmap();
-        if(finalselect[0] == 0 && finalselect[1] == 1){
+        if (finalselect[0] == 0 && finalselect[1] == 1) {
             ground1 = new Ground(width * 0.15, height * 0.6, (int) (width * 0.2), (int) (height * 0.02), "platform");
             ground2 = new Ground(width * 0.85, height * 0.6, (int) (width * 0.2), (int) (height * 0.02), "platform");
             add(ground1);
             add(ground2);
-        }else if(finalselect[0] == 0 && finalselect[1] == 2){
+        } else if (finalselect[0] == 0 && finalselect[1] == 2) {
             ground1 = new Ground(width * 0.15, height * 0.6, (int) (width * 0.2), (int) (height * 0.02), "platform");
             ground2 = new Ground(width * 0.5, height * 0.4, (int) (width * 0.2), (int) (height * 0.02), "platform");
             ground3 = new Ground(width * 0.85, height * 0.2, (int) (width * 0.2), (int) (height * 0.02), "platform");
@@ -126,7 +148,7 @@ public class GameScene extends Scene {
                     new Vector2D(80 + i * 80, 200),
                     64,
                     64,
-                    5);
+                    2);
 
             p1LivesDisplay[i].setVisible(true);
             add(p1LivesDisplay[i]);
@@ -136,17 +158,42 @@ public class GameScene extends Scene {
                     new Vector2D(1240 + i * 80, 200),
                     64,
                     64,
-                    5);
+                    2);
 
             p2LivesDisplay[i].setVisible(true);
             add(p2LivesDisplay[i]);
 
         }
 
-        Asset background = new Asset("assets/backgrounds/background-1.png", new
-        Vector2D(width/2,height/2-200), 1);
-        background.setVisible(true);
-        background.rescale(1.65);
-        add(background);
+        exitButton = new Button(new Vector2D(Main.width / 2, Main.height / 2 - 100), main) {
+            @Override
+            protected void onClick() {
+                updatePauseMenu(false);
+                main.setScene(1);
+            }
+        };
+        exitButton.setText("Exit");
+        
+        resumeButton = new Button(new Vector2D(Main.width / 2, Main.height / 2 + 50), main) {
+            @Override
+            protected void onClick() {
+                updatePauseMenu(false);
+            }
+        };
+        resumeButton.setText("Resume");
+
+        add(exitButton);
+        add(resumeButton);
+        exitButton.setVisible(false);
+        resumeButton.setVisible(false);
+
+        pausedBackground = new Asset("assets/misc/pausedBackground.png", new Vector2D(Main.width/2 + 1, Main.height/2), 3);
+        add(pausedBackground);
+
+        // Asset background = new Asset("assets/backgrounds/background-1.png", new
+        // Vector2D(width/2,height/2-200), 1);
+        // background.setVisible(true);
+        // background.rescale(1.65);
+        // add(background);
     }
 }

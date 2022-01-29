@@ -17,7 +17,7 @@ public class Saw extends DamageEntity {
     }
 
     @Override
-    public void update(double deltaT, ArrayList<Integer> keyCodes) {
+    public void updateEntity(double deltaT, ArrayList<Integer> keyCodes) {
         setDamage(realDamage * deltaT);
     }
 

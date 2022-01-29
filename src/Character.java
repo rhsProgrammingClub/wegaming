@@ -119,8 +119,18 @@ public abstract class Character extends CollisionEntity {
         return defense;
     }
 
+    public void updateCharacter(double deltaT, ArrayList<Integer> keyCodes) {}
+
+    // do not override update in child classes, change updateCharacter instead
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
+        if (main.currentScene instanceof GameScene) {
+            if (((GameScene) main.currentScene).paused) {
+                addPos(new Vector2D(-getVel().getX()*deltaT, -getVel().getY()*deltaT));
+                // this.setVel(new Vector2D(0, 0));
+                return;
+            }
+        }
         if (HP <= 0) {
             lives--;
             HP = maxHP;
@@ -198,12 +208,12 @@ public abstract class Character extends CollisionEntity {
             setVel(new Vector2D(0, getVel().getY()));
             setPos(new Vector2D(Main.width - getCollisionBox().width / 2, getY()));
         }
-        if(getY() + getVel().getY() * deltaT - getCollisionBox().height / 2 < 0){
+        if (getY() + getVel().getY() * deltaT - getCollisionBox().height / 2 < 0) {
             setVel(new Vector2D(getVel().getX(), 0));
-            setPos(new Vector2D(getX(), getCollisionBox().height /2 ));
+            setPos(new Vector2D(getX(), getCollisionBox().height / 2));
         }
 
-       
+        updateCharacter(deltaT, keyCodes);
 
     }
 

@@ -23,8 +23,7 @@ public class Spaceship extends Character {
     }
 
     @Override
-    public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        super.update(deltaT, keyCodes);
+    public void updateCharacter(double deltaT, ArrayList<Integer> keyCodes) {
         if (status == Status.ATTACKING) {
             attackTime -= deltaT;
             if (attackTime <= 0) {

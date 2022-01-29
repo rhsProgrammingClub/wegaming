@@ -16,7 +16,7 @@ public class MainMenuScene extends Scene {
     public void initialize() {
         characterinfo = new Button(new Vector2D(Main.width / 2, Main.height * 0.3), main) {
             @Override
-            protected void action(){
+            protected void onClick(){
                 main.setScene(6);
             }
         };
@@ -25,7 +25,7 @@ public class MainMenuScene extends Scene {
 
         startButton = new Button(new Vector2D(Main.width / 2, Main.height * 0.5), main) {
             @Override
-            protected void action() {
+            protected void onClick() {
                 main.setScene(2);
             }
         };
@@ -34,7 +34,7 @@ public class MainMenuScene extends Scene {
 
         inputSettingsButton = new Button(new Vector2D(Main.width / 2, Main.height * 0.7), main) {
             @Override
-            protected void action() {
+            protected void onClick() {
                 main.setScene(5);
             }
         };
@@ -43,7 +43,7 @@ public class MainMenuScene extends Scene {
 
         exitButton = new Button(new Vector2D(Main.width / 2, Main.height * 0.9), main) {
             @Override
-            protected void action() {
+            protected void onClick() {
                 System.exit(0);
             }
         };
@@ -52,7 +52,7 @@ public class MainMenuScene extends Scene {
 
         mapselect = new Button(new Vector2D(Main.width * 0.25, Main.height * 0.3), main){
             @Override
-            protected void action(){
+            protected void onClick(){
                 main.setScene(7);
             }
         };

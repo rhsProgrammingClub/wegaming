@@ -16,7 +16,7 @@ public class CooldownBar extends Entity {
     private boolean isUltCooldown;
 
     public CooldownBar(Vector2D position, Character character, boolean isUlt, Asset icon) {
-        super(position, 5);
+        super(position, 2);
         this.character = character;
         this.isUltCooldown = isUlt;
         if (isUlt) {

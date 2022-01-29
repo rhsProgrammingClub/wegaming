@@ -16,14 +16,14 @@ public class HealthBar extends Entity {
     private int lastBar;
 
     public HealthBar(Vector2D position, Character character) {
-        super(position, 5);
+        super(position, 2);
         this.maxHP = character.maxHP;
         healthBarAssets = new Asset[totalBars];
-        healthBarBorder = new Asset("assets/misc/healthborder.png", new Vector2D(0, 0), 4);
+        healthBarBorder = new Asset("assets/misc/healthborder.png", new Vector2D(0, 0), 0);
         healthBarBorder.setVisible(true);
         add(healthBarBorder);
         for (int i = 0; i < totalBars; i++) {
-            healthBarAssets[i] = new Asset("assets/misc/health.png", new Vector2D(-250 + i * (healthBarBorder.getWidth()/totalBars), 0), 5);
+            healthBarAssets[i] = new Asset("assets/misc/health.png", new Vector2D(-250 + i * (healthBarBorder.getWidth()/totalBars), 0), 0);
             healthBarAssets[i].setVisible(true);
             add(healthBarAssets[i]);
         }

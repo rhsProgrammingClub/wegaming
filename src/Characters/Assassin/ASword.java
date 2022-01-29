@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 import ky.Asset;
 import ky.Vector2D;
 public class ASword extends DamageEntity{
@@ -14,8 +12,5 @@ public class ASword extends DamageEntity{
         add(assassinsword);
     }
 
-    @Override
-    public void update(double deltaT, ArrayList<Integer> keyCodes) {
-    }
 }
 

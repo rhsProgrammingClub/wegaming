@@ -65,8 +65,7 @@ public class BoxRobot extends Character {
     }
 
     @Override
-    public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        super.update(deltaT, keyCodes);
+    public void updateCharacter(double deltaT, ArrayList<Integer> keyCodes) {
         saw.setPos(new Vector2D(getX() + 60 * direction.getValue(), getY() - 8));
 
         saw.setVisible(status != Status.ABILITY);

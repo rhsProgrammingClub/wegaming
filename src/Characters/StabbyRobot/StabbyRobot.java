@@ -27,7 +27,7 @@ public class StabbyRobot extends Character {
          * characterAnimation.setVisible(true);
          * add(characterAnimation);
          */
-        sword = new Sword(main, new Vector2D(getX(), getY()), 4, getPlayer(), 175);
+        sword = new Sword(main, new Vector2D(getX(), getY()), getPlayer(), 175);
         add(sword);
         abilityCooldown = 5;
         ultimateCooldown = 20;
@@ -50,8 +50,7 @@ public class StabbyRobot extends Character {
     Direction lastDirection = Direction.RIGHT;
 
     @Override
-    public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        super.update(deltaT, keyCodes);
+    public void updateCharacter(double deltaT, ArrayList<Integer> keyCodes) {
 
         if (direction != lastDirection) {
             sword.swordAsset.flipHorizontal();

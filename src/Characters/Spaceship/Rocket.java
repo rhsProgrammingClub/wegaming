@@ -32,7 +32,7 @@ public class Rocket extends DamageEntity {
     }
 
     @Override
-    public void update(double deltaT, ArrayList<Integer> keyCodes) {
+    public void updateEntity(double deltaT, ArrayList<Integer> keyCodes) {
         if (testChar != null && this.isVisible()) {
             if (homing) {
                 angle = Math.atan2(testChar.getY() - getY(),

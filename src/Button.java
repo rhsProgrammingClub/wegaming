@@ -85,7 +85,7 @@ public abstract class Button extends Entity {
         }
     }
 
-    protected abstract void action();
+    protected abstract void onClick();
 
     private boolean hasClicked = false;
 
@@ -96,7 +96,7 @@ public abstract class Button extends Entity {
             if (main.mousePos.getY() >= getY() - buttonAsset.getHeight() / 2 &&
                     main.mousePos.getY() <= getY() + buttonAsset.getHeight() / 2) {
                 if (!hasClicked && main.mousePressed) {
-                    action();
+                    onClick();
                     main.mousePressed = false;
                 }
                 buttonAsset.setImageIndex(1);

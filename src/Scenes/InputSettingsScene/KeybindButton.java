@@ -18,7 +18,7 @@ public class KeybindButton extends Button {
     }
 
     @Override
-    protected void action() {
+    protected void onClick() {
         inScene.setKeybindbutton(this); // set the keybind button to us
 
         // positioning lol

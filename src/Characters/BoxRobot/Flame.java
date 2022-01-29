@@ -22,7 +22,7 @@ public class Flame extends DamageEntity {
     }
 
     @Override
-    public void update(double deltaT, ArrayList<Integer> keyCodes) {
+    public void updateEntity(double deltaT, ArrayList<Integer> keyCodes) {
         setDamage(realDamage * deltaT);
     }
 
