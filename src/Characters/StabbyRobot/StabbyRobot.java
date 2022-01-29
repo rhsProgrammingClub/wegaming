@@ -27,7 +27,7 @@ public class StabbyRobot extends Character {
          * characterAnimation.setVisible(true);
          * add(characterAnimation);
          */
-        sword = new Sword(new Vector2D(getX(), getY()), 4, getPlayer(), 175);
+        sword = new Sword(main, new Vector2D(getX(), getY()), 4, getPlayer(), 175);
         add(sword);
         abilityCooldown = 5;
         ultimateCooldown = 20;

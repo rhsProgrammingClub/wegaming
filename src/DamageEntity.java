@@ -11,18 +11,21 @@ public class DamageEntity extends CollisionEntity {
     private boolean breaks;
     protected int knockbackDir = 0;
     public boolean canDamage = false;
+    public Main main;
 
-    public DamageEntity(Vector2D position, int collisionBoxWidth, int collisionBoxHeight, int layer, int player,
+    public DamageEntity(Main main, Vector2D position, int collisionBoxWidth, int collisionBoxHeight, int layer, int player,
             double damage) {
         super(position, collisionBoxWidth, collisionBoxHeight, layer);
+        this.main = main;
         this.player = player;
         this.damage = damage;
         this.knockback = 0;
     }
 
-    public DamageEntity(Vector2D position, int collisionBoxWidth, int collisionBoxHeight, int layer, int player,
+    public DamageEntity(Main main, Vector2D position, int collisionBoxWidth, int collisionBoxHeight, int layer, int player,
             double damage, double knockback) {
         super(position, collisionBoxWidth, collisionBoxHeight, layer);
+        this.main = main;
         this.player = player;
         this.damage = damage;
         this.knockback = knockback;

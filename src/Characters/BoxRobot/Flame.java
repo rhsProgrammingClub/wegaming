@@ -9,8 +9,8 @@ public class Flame extends DamageEntity {
     private final double realDamage = 550;
     Asset flameAsset;
 
-    public Flame(Vector2D position, int player) {
-        super(position, 128, 100, 2, player, 0);
+    public Flame(Main main, Vector2D position, int player) {
+        super(main, position, 128, 100, 2, player, 0);
         setBreaks(false);
         flameAsset = new Asset("assets/characters/boxrobot/flame.png",
                 new Vector2D(0, 0), 64, 64, 2);

@@ -51,10 +51,10 @@ public class BoxRobot extends Character {
         characterAsset.setVisible(true);
         add(characterAsset);
 
-        flame = new Flame(new Vector2D(0, 0), getPlayer());
+        flame = new Flame(main, new Vector2D(0, 0), getPlayer());
         add(flame);
 
-        saw = new Saw(new Vector2D(0, 0), getPlayer());
+        saw = new Saw(main, new Vector2D(0, 0), getPlayer());
         saw.setVisible(true);
         add(saw);
 

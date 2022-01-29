@@ -76,10 +76,10 @@ public class Spaceship extends Character {
 
         rockets = new Rocket[10];
         for (int i = 0; i < 10; i++) {
-            rockets[i] = new Rocket("assets/characters/spaceship/rocket.png", new Vector2D(0, 0), getPlayer(), main, 500);
+            rockets[i] = new Rocket(main, "assets/characters/spaceship/rocket.png", new Vector2D(0, 0), getPlayer(), 500);
             add(rockets[i]);
         }
-        laser = new Laser(new Vector2D(0, 0), getPlayer());
+        laser = new Laser(main, new Vector2D(0, 0), getPlayer());
         add(laser);
 
         zapSound = new AudioPlayer("assets/SFX/zap.wav");

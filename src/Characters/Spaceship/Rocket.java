@@ -13,11 +13,9 @@ public class Rocket extends DamageEntity {
     boolean homing = true;
     double angle = 0;
 
-    private Main main;
 
-    public Rocket(String image, Vector2D position, int player, Main main, double dmg) {
-        super(position, 32, 64, 3, player, dmg, 1500);
-        this.main = main;
+    public Rocket(Main main, String image, Vector2D position, int player, double dmg) {
+        super(main, position, 32, 64, 3, player, dmg, 1500);
         testChar = ((player == 1) ? main.player2 : main.player1);
         setBreaks(true);
         rocketAsset = new Asset(image, new Vector2D(0, 0), 64, 64, 3);

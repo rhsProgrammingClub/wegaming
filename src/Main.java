@@ -158,6 +158,10 @@ public class Main extends KYscreen implements MouseInputListener {
         mousePressed = false;
     }
 
+    public Character getOtherPlayer(int player) {
+        return player == 1 ? player1 : player2;
+    }
+
     public static void main(String[] args) {
         System.setProperty("sun.java2d.uiScale", "1.0");
         new Main();

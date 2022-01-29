@@ -37,9 +37,7 @@ public class Assassin extends Character {
         curAbilityCooldown = abilityCooldown;
         curUltCooldown = ultimateCooldown;
 
-        canReduceCD = false;
-
-        asword = new ASword(new Vector2D(0, 0), getPlayer());
+        asword = new ASword(main, new Vector2D(0, 0), getPlayer());
         asword.setVisible(true);
         add(asword);
 
