@@ -10,4 +10,6 @@ Lead developer: Eric
 
 Support developers: Sammy, Matthew, Andy
 
+Bug tester: Matthew
+
 Media production (Art, music, SFX): Eric, Linus, Luke, Matthew, Terry, Alex, Andy
