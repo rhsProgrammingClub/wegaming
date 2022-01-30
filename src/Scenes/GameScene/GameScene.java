@@ -48,34 +48,29 @@ public class GameScene extends Scene {
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        if (keyCodes.contains(KeyEvent.VK_ESCAPE)) {
-            updatePauseMenu(true);
+        if(paused) return;
+
+        if (player1.lives <= 0 || player2.lives <= 0) {
+            main.setScene(4);
         }
-        if (paused) {
 
-        } else {
-            if (player1.lives <= 0 || player2.lives <= 0) {
-                main.setScene(4);
+        for (int i = 2; i >= 0; i--) {
+            if (player1.lives < i + 1) {
+                p1LivesDisplay[i].setVisible(false);
             }
-
-            for (int i = 2; i >= 0; i--) {
-                if (player1.lives < i + 1) {
-                    p1LivesDisplay[i].setVisible(false);
-                }
-                if (player2.lives < i + 1) {
-                    p2LivesDisplay[i].setVisible(false);
-                }
+            if (player2.lives < i + 1) {
+                p2LivesDisplay[i].setVisible(false);
             }
-
-            tTime += deltaT;
-            if (tTime >= 1) {
-                tTime = 0;
-                fpsText.setText("FPS: " + frames);
-                frames = 0;
-            }
-            frames++;
-
         }
+
+        tTime += deltaT;
+        if (tTime >= 1) {
+            tTime = 0;
+            fpsText.setText("FPS: " + frames);
+            frames = 0;
+        }
+        frames++;
+
     }
 
     @Override
@@ -188,6 +183,7 @@ public class GameScene extends Scene {
         resumeButton.setVisible(false);
 
         pausedBackground = new Asset("assets/misc/pausedBackground.png", new Vector2D(Main.width/2 + 1, Main.height/2), 3);
+        pausedBackground.rescale(1.2);
         add(pausedBackground);
 
         // Asset background = new Asset("assets/backgrounds/background-1.png", new
@@ -195,5 +191,13 @@ public class GameScene extends Scene {
         // background.setVisible(true);
         // background.rescale(1.65);
         // add(background);
+    }
+
+
+    @Override
+    public void keyPressed(int keyCode) {
+        if(keyCode == KeyEvent.VK_ESCAPE) {
+            updatePauseMenu(!paused);
+        }
     }
 }

@@ -90,4 +90,16 @@ public class Scene {
 
 	}
 
+    public void keyPressed(int keyCode) {
+
+    }
+
+    public void keyReleased(int keyCode) {
+
+    }
+
+    public void keyTyped(int keyCode) {
+
+    }
+
 }

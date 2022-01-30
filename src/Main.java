@@ -105,18 +105,17 @@ public class Main extends KYscreen implements MouseInputListener {
 
     @Override
     public void keyPressed(int keyCode) {
-        // System.exit(0);
-        // }
+        currentScene.keyPressed(keyCode);
     }
 
     @Override
     public void keyReleased(int keyCode) {
-
+        currentScene.keyReleased(keyCode);
     }
 
     @Override
     public void keyTyped(int keyCode) {
-
+        currentScene.keyTyped(keyCode);
     }
 
     @Override
