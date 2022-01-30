@@ -91,6 +91,8 @@ public abstract class Button extends Entity {
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
+        if (!isVisible())
+            return;
         if (main.mousePos.getX() >= getX() - buttonAsset.getWidth() / 2 &&
                 main.mousePos.getX() <= getX() + buttonAsset.getWidth() / 2) {
             if (main.mousePos.getY() >= getY() - buttonAsset.getHeight() / 2 &&

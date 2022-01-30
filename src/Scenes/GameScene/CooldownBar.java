@@ -11,6 +11,7 @@ public class CooldownBar extends Entity {
     private double maxCooldown;
     private double curCooldown;
     private Asset[] cooldownCovers;
+    private Asset background;
     private int numCovered = 0;
     private Character character;
     private boolean isUltCooldown;
@@ -29,6 +30,9 @@ public class CooldownBar extends Entity {
             icon.setVisible(true);
             add(icon);
         }
+        background = new Asset("assets/misc/cooldown_bar_background.png", new Vector2D(0, 0), 2);
+        background.setVisible(true);
+        add(background);
         setVisible(true);
         cooldownCovers = new Asset[totalCovers];
         for (int i = 0; i < totalCovers; i++) {
