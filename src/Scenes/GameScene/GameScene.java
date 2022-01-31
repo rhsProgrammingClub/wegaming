@@ -103,7 +103,7 @@ public class GameScene extends Scene {
             add(ground3);
         }
 
-        /*player1 = main.player1;
+        player1 = main.player1;
         player2 = main.player2;
 
         player1.setPlayer(1);
@@ -198,7 +198,7 @@ public class GameScene extends Scene {
         // background.setVisible(true);
         // background.rescale(1.65);
         // add(background);
-        */
+        
     }
 
 
