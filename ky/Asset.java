@@ -254,6 +254,10 @@ public class Asset {
 		return this.visible;
 	}
 	
+	public void setImage(String filename){
+		this.images = new BufferedImage[] {readImage(filename)};
+		this.originalImages = this.images.clone();
+	}
 
 	// transformation related methods
 	

@@ -94,9 +94,16 @@ public class GameScene extends Scene {
             add(ground1);
             add(ground2);
             add(ground3);
+        } else if(finalselect[0] == 0 && finalselect[1] == 3){
+            ground1 = new Ground(width * 0.15, height * 0.2, (int) (width * 0.2), (int) (height * 0.02), "platform");
+            ground2 = new Ground(width * 0.5, height * 0.4, (int) (width * 0.2), (int) (height * 0.02), "platform");
+            ground3 = new Ground(width * 0.85, height * 0.6, (int) (width * 0.2), (int) (height * 0.02), "platform");
+            add(ground1);
+            add(ground2);
+            add(ground3);
         }
 
-        player1 = main.player1;
+        /*player1 = main.player1;
         player2 = main.player2;
 
         player1.setPlayer(1);
@@ -191,6 +198,7 @@ public class GameScene extends Scene {
         // background.setVisible(true);
         // background.rescale(1.65);
         // add(background);
+        */
     }
 
 

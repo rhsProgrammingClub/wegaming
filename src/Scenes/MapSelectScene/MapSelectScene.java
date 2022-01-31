@@ -28,14 +28,13 @@ public class MapSelectScene extends Scene{
 
     @Override
     public void initialize(){
-        
-
+    
         //values will increase as more maps are made
         for(int x = 0; x < height; x++){
             for(int y = 0; y < width; y++){
                 mapassets[x][y] = new Asset("assets/test.png", 
                 new Vector2D(Main.width * finalsizes[y], Main.height * 0.2), 
-                200, 200,
+                200, 100,
                 5);
                 mapassets[x][y].setVisible(true);
                 add(mapassets[x][y]);
@@ -53,6 +52,11 @@ public class MapSelectScene extends Scene{
             }
         }
 
+        mapassets[0][0].setImage("assets/misc/default.png");
+        mapassets[0][1].setImage("assets/misc/platformer.png");
+        mapassets[0][2].setImage("assets/misc/staircase.png");
+        mapassets[0][3].setImage("assets/misc/reversestaircase.png");
+
         displayname[0][0].setText("Default");
         displayname[0][1].setText("Platformer");
         displayname[0][2].setText("Staircase");
@@ -65,6 +69,7 @@ public class MapSelectScene extends Scene{
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes){
         if(keyCodes.contains(KeyEvent.VK_ESCAPE)){
+            initialize();
             main.setScene(1);
         }
 
@@ -92,7 +97,6 @@ public class MapSelectScene extends Scene{
             }
             mapassets[curselect[0]][curselect[1]].rescale(0.5);
             displayname[curselect[0]][curselect[1]].setVisible(true);
-            //displayname.setText(mapnames[curselect[0]][curselect[1]]);
         }
         if(keyCodes.contains(KeyEvent.VK_RIGHT) && right){
             right = false;
@@ -105,7 +109,6 @@ public class MapSelectScene extends Scene{
             }
             mapassets[curselect[0]][curselect[1]].rescale(0.5);
             displayname[curselect[0]][curselect[1]].setVisible(true);
-            //displayname.setText(mapnames[curselect[0]][curselect[1]]);
         }
         if(keyCodes.contains(KeyEvent.VK_DOWN) && down){
             down = false;
@@ -118,7 +121,6 @@ public class MapSelectScene extends Scene{
             }
             mapassets[curselect[0]][curselect[1]].rescale(0.5);
             displayname[curselect[0]][curselect[1]].setVisible(true);
-            //displayname.setText(mapnames[curselect[0]][curselect[1]]);
         }
         if(keyCodes.contains(KeyEvent.VK_UP) && up){
             up = false;
@@ -131,7 +133,6 @@ public class MapSelectScene extends Scene{
             }
             mapassets[curselect[0]][curselect[1]].rescale(0.5);
             displayname[curselect[0]][curselect[1]].setVisible(true);
-            //displayname.setText(mapnames[curselect[0]][curselect[1]]);
         }
 
         if(keyCodes.contains(KeyEvent.VK_ENTER)){
