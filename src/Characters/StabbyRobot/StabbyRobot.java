@@ -39,6 +39,20 @@ public class StabbyRobot extends Character {
         ultIcon = new Asset("assets/characters/stabbyrobot/ult_icon.png", new Vector2D(0, 0), 4);
 
         knifeSound = new AudioPlayer("assets/SFX/knife_swing.wav");
+        
+        if(getPlayer() == 1){
+            characterAsset = new Asset(new String[]{
+                "assets/characters/stabbyrobot/icon.png",
+                "assets/characters/stabbyrobot/icon.png"
+            }, new Vector2D(0, 0), 70, 140, 3);
+        }else{
+            characterAsset = new Asset(new String[]{
+                "assets/characters/stabbyrobot/icon.png",
+                "assets/characters/stabbyrobot/icon.png"
+            }, new Vector2D(0, 0), 70, 140, 3);
+        }
+        characterAsset.setVisible(true);
+        add(characterAsset);
     }
 
     double tempOffSet = 0;
