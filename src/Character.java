@@ -28,7 +28,7 @@ public abstract class Character extends CollisionEntity {
     private boolean flipped = false;
 
     private PlayerInput playerInput;
-    protected boolean canJump = false;
+    protected boolean onGround = false;
     protected Main main;
 
     protected enum Status {
@@ -97,15 +97,11 @@ public abstract class Character extends CollisionEntity {
         if (ce.getName().equals("ground")) {
             setVel(getVel().getX(), 0);
             setPos(new Vector2D(getX(), ce.getYCollisionBox().getY() - getCollisionBox().height / 2));
-            canJump = true;
+            onGround = true;
         } else if (ce.getName().equals("platform")) {
-            canJump = true;
-        }
-
-        if(ce.getName().equals("platform")){
-            //setVel(new Vector2D(getVel().getX(), 0));
+            setVel(new Vector2D(getVel().getX(), 0));
             setPos(new Vector2D(getX(), ce.getYCollisionBox().getY() - getCollisionBox().height / 2));
-            canJump = true;
+            onGround= true;
         }
     }
 
@@ -188,7 +184,7 @@ public abstract class Character extends CollisionEntity {
         }
 
         // reduce velocity
-        if (!canJump) {
+        if (!onGround) {
             if (getVel().getX() != 0) {
                 addVel(new Vector2D((getVel().getX() > 0 ? -1 : 1) * deltaT * 1200, 0));
             }
@@ -214,13 +210,13 @@ public abstract class Character extends CollisionEntity {
         }
 
         updateCharacter(deltaT, keyCodes);
-
+        onGround = false;
     }
 
     protected void jump() {
-        if (canJump) {
+        if (onGround) {
             setVel(getVel().getX(), -jumpHeight);
-            canJump = false;
+            onGround = false;
         }
     }
 

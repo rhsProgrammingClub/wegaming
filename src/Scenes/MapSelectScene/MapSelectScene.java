@@ -52,24 +52,24 @@ public class MapSelectScene extends Scene{
             }
         }
 
-        mapassets[0][0].setImage("assets/misc/default.png");
-        mapassets[0][1].setImage("assets/misc/platformer.png");
-        mapassets[0][2].setImage("assets/misc/staircase.png");
-        mapassets[0][3].setImage("assets/misc/reversestaircase.png");
+        mapassets[0][0].setImage("assets/maps/default.png");
+        mapassets[0][1].setImage("assets/maps/platformer.png");
+        mapassets[0][2].setImage("assets/maps/staircase.png");
+        mapassets[0][3].setImage("assets/maps/reversestaircase.png");
 
         displayname[0][0].setText("Default");
         displayname[0][1].setText("Platformer");
         displayname[0][2].setText("Staircase");
         displayname[0][3].setText("Reverse Staircase");
-        mapassets[0][0].rescale(0.5);
-        displayname[0][0].setVisible(true);
+
+        mapassets[curselect[0]][curselect[1]].rescale(0.5);
+        displayname[curselect[0]][curselect[1]].setVisible(true);
     
     }
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes){
         if(keyCodes.contains(KeyEvent.VK_ESCAPE)){
-            initialize();
             main.setScene(1);
         }
 
@@ -136,6 +136,8 @@ public class MapSelectScene extends Scene{
         }
 
         if(keyCodes.contains(KeyEvent.VK_ENTER)){
+            // mapassets[curselect[0]][curselect[1]].rescale(2);
+            // displayname[curselect[0]][curselect[1]].setVisible(true);
             finalselect[0] = curselect[0];
             finalselect[1] = curselect[1];
         }
