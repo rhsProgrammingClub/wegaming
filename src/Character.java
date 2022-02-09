@@ -1,4 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import ky.Asset;
 import ky.CollisionEntity;
 import ky.Vector2D;
@@ -31,6 +35,8 @@ public abstract class Character extends CollisionEntity {
     protected boolean onGround = false;
     protected Main main;
 
+    private File characterFile;
+
     protected enum Status {
         IDLE, ATTACKING, ABILITY, ULTIMATE, JUMPING
     }
@@ -61,6 +67,53 @@ public abstract class Character extends CollisionEntity {
         HP = maxHp;
         setCollision(false);
         setPlayer(player);
+    }
+
+    public void setStats(String filename) {
+        characterFile = new File(filename);
+        Scanner statScan;
+        try {
+            statScan = new Scanner(characterFile);
+        } catch (FileNotFoundException ex) {
+            return;
+        }
+        String statType;
+        double statValue;
+        while (statScan.hasNextLine()) {
+            statType = statScan.next();
+            statValue = statScan.nextDouble();
+            switch (statType) {
+                case "HP:":
+                    maxHP = statValue;
+                    break;
+                case "JUMP_HEIGHT:":
+                    jumpHeight = statValue;
+                    break;
+                case "GRAVITY:":
+                    gravity = statValue;
+                    break;
+                case "SPEED:":
+                    speed = statValue;
+                    break;
+                case "MAX_SPEED:":
+                    maxVelocity = statValue;
+                    break;
+                case "DEFENSE:":
+                    defense = statValue;
+                    break;
+                case "ULT_CD:":
+                    ultimateCooldown = statValue;
+                    break;
+                case "ABILITY_CD:":
+                    abilityCooldown = statValue;
+                    break;
+            }
+        }
+        HP = maxHP;
+        curAbilityCooldown = abilityCooldown;
+        curUltCooldown = ultimateCooldown;
+
+        statScan.close();
     }
 
     public void setPlayer(int player) {

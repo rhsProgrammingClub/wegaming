@@ -22,15 +22,7 @@ public class BoxRobot extends Character {
 
     @Override
     public void initialize() {
-        setDefense(0.4);
-        abilityCooldown = 4;
-        ultimateCooldown = 8;
-        jumpHeight = 500;
-        speed = 40000;
-        maxVelocity = 600;
-        curAbilityCooldown = abilityCooldown;
-        curUltCooldown = ultimateCooldown;
-
+        setStats("characterStats/boxrobot.stats");
         /*characterAsset = new Asset(new String[] {
                 "assets/characters/boxrobot/box_robot.png",
                 "assets/characters/boxrobot/box_robot_armour.png"

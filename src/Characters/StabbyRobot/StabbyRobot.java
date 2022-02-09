@@ -19,21 +19,9 @@ public class StabbyRobot extends Character {
 
     @Override
     public void initialize() {
-        // setIcon(new Asset("assets/characters/stabbyrobot/icon.png", new Vector2D(0,
-        // 0), 3));
-        /*
-         * characterAnimation = new AnimationAsset(images, position, animationTime,
-         * layer);
-         * characterAnimation.setVisible(true);
-         * add(characterAnimation);
-         */
+        setStats("characterStats/stabbyrobot.stats");
         sword = new Sword(main, new Vector2D(getX(), getY()), getPlayer(), 175);
         add(sword);
-        abilityCooldown = 5;
-        ultimateCooldown = 20;
-        curAbilityCooldown = abilityCooldown;
-        curUltCooldown = ultimateCooldown;
-        setDefense(0.25);
 
         abilityIcon = new Asset("assets/characters/stabbyrobot/ability_icon.png", new Vector2D(0, 0), 4);
         ultIcon = new Asset("assets/characters/stabbyrobot/ult_icon.png", new Vector2D(0, 0), 4);

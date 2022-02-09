@@ -44,13 +44,7 @@ public class Spaceship extends Character {
 
     @Override
     public void initialize() {
-        jumpHeight = 600;
-        gravity = 800;
-        ultimateCooldown = 15;
-        abilityCooldown = 6;
-        curUltCooldown = ultimateCooldown;
-        curAbilityCooldown = abilityCooldown;
-        setDefense(0.1);
+        setStats("characterStats/spaceship.stats");
 
         /*characterAsset = new Asset(new String[] {
                 "assets/characters/spaceship/spaceship_normal.png",
@@ -111,6 +105,7 @@ public class Spaceship extends Character {
         if (curRocket >= rockets.length) {
             curRocket = 0;
         }
+        rockets[curRocket].setDamage(500);
         rockets[curRocket].setPos(getPos());
         rockets[curRocket].homing = false;
         rockets[curRocket].setActive();
@@ -126,7 +121,7 @@ public class Spaceship extends Character {
             if (curRocket >= rockets.length) {
                 curRocket = 0;
             }
-            rockets[curRocket].setDamage(150);
+            rockets[curRocket].setDamage(250);
             rockets[curRocket].setPos(new Vector2D(getX(), getY() - 250 + i * 100));
             rockets[curRocket].setVisible(true);
             rockets[curRocket].canDamage = true;
