@@ -99,9 +99,12 @@ public abstract class Character extends CollisionEntity {
             setPos(new Vector2D(getX(), ce.getYCollisionBox().getY() - getCollisionBox().height / 2));
             onGround = true;
         } else if (ce.getName().equals("platform")) {
-            setVel(new Vector2D(getVel().getX(), 0));
-            setPos(new Vector2D(getX(), ce.getYCollisionBox().getY() - getCollisionBox().height / 2));
-            onGround= true;
+            if(getVel().getY() > 0) {
+                // System.out.println("Player: " + Double.toString(getCollisionBox().getY()) + ", Platform: " + Double.toString(ce.getYCollisionBox().getY()));
+                setVel(getVel().getX(), 0);
+                setPos(new Vector2D(getX(), ce.getYCollisionBox().getY() - getCollisionBox().height / 2));
+                onGround = true;
+            }
         }
     }
 
