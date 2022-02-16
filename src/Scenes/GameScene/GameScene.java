@@ -62,6 +62,7 @@ public class GameScene extends Scene {
 
         tTime += deltaT;
         if (tTime >= 1) {
+            frames += 5;
             tTime = 0;
             fpsText.setText("FPS: " + frames);
             frames = 0;
