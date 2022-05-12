@@ -31,7 +31,7 @@ public class Main extends KYscreen implements MouseInputListener {
     @Override
     public void start() {
         mousePos = new Vector2D(0, 0);
-        setDebugMode(true);
+        // setDebugMode(true);
         setResizable(false);
         addMouseListener(this);
         addMouseMotionListener(this);
