@@ -24,7 +24,7 @@ public class GameScene extends Scene {
     Asset[] p1LivesDisplay;
     Asset[] p2LivesDisplay;
     Asset pausedBackground;
-    int[] finalselect;
+    int finalselect;
     Button exitButton;
     Button resumeButton;
     Button resetButton;
@@ -77,11 +77,11 @@ public class GameScene extends Scene {
         add(ground);
 
         finalselect = MapSelectScene.getmap();
-        if (finalselect[0] == 0 && finalselect[1] == 1) {
+        if (finalselect == 1) {
             new Map("assets/maps/platformer.map", this);
-        } else if (finalselect[0] == 0 && finalselect[1] == 2) {
+        } else if (finalselect == 2) {
             new Map("assets/maps/staircase.map", this);
-        } else if(finalselect[0] == 0 && finalselect[1] == 3){
+        } else if(finalselect == 3){
             new Map("assets/maps/reversestaircase.map", this);
         }
 
