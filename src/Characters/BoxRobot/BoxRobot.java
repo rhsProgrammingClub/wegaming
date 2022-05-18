@@ -23,10 +23,6 @@ public class BoxRobot extends Character {
     @Override
     public void initialize() {
         setStats("characterStats/boxrobot.stats");
-        /*characterAsset = new Asset(new String[] {
-                "assets/characters/boxrobot/box_robot.png",
-                "assets/characters/boxrobot/box_robot_armour.png"
-        }, new Vector2D(0, 0), 3);*/
 
         if(getPlayer() == 1){
             characterAsset = new Asset(new String[] {
@@ -104,7 +100,7 @@ public class BoxRobot extends Character {
 
     @Override
     protected void ultimate() {
-        setDefense(0.8);
+        setDefense(0.9);
         characterAsset.setImageIndex(1);
         armourUpTime = 1.5;
     }

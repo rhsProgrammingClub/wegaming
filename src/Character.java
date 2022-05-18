@@ -152,7 +152,7 @@ public abstract class Character extends CollisionEntity {
             setPos(new Vector2D(getX(), ce.getYCollisionBox().getY() - getCollisionBox().height / 2));
             onGround = true;
         } else if (ce.getName().equals("platform")) {
-            if(getVel().getY() > 0 && getY() < ce.getY()) { // its inverted, velocity downwards is positive while upwards is negative
+            if(getVel().getY() > 0 && getY() + getCollisionBox().width/4 < ce.getY()) { // its inverted, velocity downwards is positive while upwards is negative
                 setVel(getVel().getX(), 0);
                 setPos(new Vector2D(getX(),  ce.getYCollisionBox().getY() - getCollisionBox().height / 2));
                 onGround = true;

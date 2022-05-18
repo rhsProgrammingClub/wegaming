@@ -62,7 +62,6 @@ public class GameScene extends Scene {
 
         tTime += deltaT;
         if (tTime >= 1) {
-            frames += 5;
             tTime = 0;
             fpsText.setText("FPS: " + frames);
             frames = 0;
@@ -176,11 +175,10 @@ public class GameScene extends Scene {
         pausedBackground.rescale(1.2);
         add(pausedBackground);
 
-        // Asset background = new Asset("assets/backgrounds/background-1.png", new
-        // Vector2D(width/2,height/2-200), 1);
-        // background.setVisible(true);
-        // background.rescale(1.65);
-        // add(background);
+        Asset background = new Asset("assets/backgrounds/background-1-scaled.png", new
+        Vector2D(width/2,height/2), 0);
+        background.setVisible(true);
+        add(background);
         
     }
 

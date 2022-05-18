@@ -143,9 +143,17 @@ public class Assassin extends Character {
         ultuptime = 4;
         asword.setDamage(400);
         characterAsset.setImageIndex(1);
-        if(lastDirection == Direction.RIGHT){
+
+        Character opp = this.getPlayer() == 1 ? main.player2 : main.player1;
+        if (lastDirection == Direction.RIGHT) {
+            if (opp.getX() > this.getX() && this.getX() + 700 > opp.getX()) { // if dashes throught, but doesnt check height
+                opp.HP -= 600;
+            }
             setPos(getX()+700, getY());
-        }else if(lastDirection == Direction.LEFT){
+        } else if(lastDirection == Direction.LEFT) {
+            if (opp.getX() < this.getX() && this.getX() - 700 < opp.getX()) {
+                opp.HP -= 600;
+            }
             setPos(getX()-700, getY());
         }
     }
