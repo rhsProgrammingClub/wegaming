@@ -1,8 +1,8 @@
-# Super Smosh Bros
+# Packing Some Smack!
 
 An amazing game made by the RHS Project Module
 
-Credits (subject to change):
+Credits:
 
 Game engine: https://github.com/j-ackyao/KY-Engine
 
