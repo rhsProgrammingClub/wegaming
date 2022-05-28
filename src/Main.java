@@ -31,12 +31,10 @@ public class Main extends KYscreen implements MouseInputListener {
     @Override
     public void start() {
         mousePos = new Vector2D(0, 0);
+        setTitle("Packing Some Smack!");
         // setDebugMode(true);
-        setResizable(false);
         addMouseListener(this);
         addMouseMotionListener(this);
-        // testAudio = new AudioPlayer("assets/SFX/idk.wav");
-        // testAudio.play();
         // backgroundMusic = new AudioPlayer("assets/SFX/background_music_test.wav");
         // backgroundMusic.setVolume(-8);
         // backgroundMusic.setLoop(true);

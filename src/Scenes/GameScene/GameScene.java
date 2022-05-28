@@ -34,8 +34,7 @@ public class GameScene extends Scene {
         super(main);
     }
 
-    private void updatePauseMenu(boolean paused)
-    {
+    private void updatePauseMenu(boolean paused) {
         this.paused = paused;
         exitButton.setVisible(paused);
         resumeButton.setVisible(paused);
@@ -45,7 +44,8 @@ public class GameScene extends Scene {
 
     @Override
     public void update(double deltaT, ArrayList<Integer> keyCodes) {
-        if(paused) return;
+        if (paused)
+            return;
 
         if (player1.lives <= 0 || player2.lives <= 0) {
             main.setScene(4);
@@ -81,7 +81,7 @@ public class GameScene extends Scene {
             new Map("assets/maps/platformer.map", this);
         } else if (finalselect == 2) {
             new Map("assets/maps/staircase.map", this);
-        } else if(finalselect == 3){
+        } else if (finalselect == 3) {
             new Map("assets/maps/reversestaircase.map", this);
         }
 
@@ -157,7 +157,7 @@ public class GameScene extends Scene {
             }
         };
         exitButton.setText("Exit");
-        
+
         resumeButton = new Button(new Vector2D(Main.width / 2, Main.height / 2 - 100), main) {
             @Override
             protected void onClick() {
@@ -171,21 +171,21 @@ public class GameScene extends Scene {
         exitButton.setVisible(false);
         resumeButton.setVisible(false);
 
-        pausedBackground = new Asset("assets/misc/pausedBackground.png", new Vector2D(Main.width/2 + 1, Main.height/2), 3);
+        pausedBackground = new Asset("assets/misc/pausedBackground.png",
+                new Vector2D(Main.width / 2 + 1, Main.height / 2), 3);
         pausedBackground.rescale(1.2);
         add(pausedBackground);
 
-        Asset background = new Asset("assets/backgrounds/background-1-scaled.png", new
-        Vector2D(width/2,height/2), 0);
+        Asset background = new Asset("assets/backgrounds/background-1-scaled.png", new Vector2D(width / 2, height / 2),
+                0);
         background.setVisible(true);
         add(background);
-        
-    }
 
+    }
 
     @Override
     public void keyPressed(int keyCode) {
-        if(keyCode == KeyEvent.VK_ESCAPE) {
+        if (keyCode == KeyEvent.VK_ESCAPE) {
             updatePauseMenu(!paused);
         }
     }

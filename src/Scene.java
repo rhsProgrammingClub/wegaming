@@ -25,6 +25,31 @@ public class Scene {
 		this.main = main;
 	}
 
+	public void setScale(double scale) { // scales everything in scene (not used yet)
+		for (ArrayList<Asset> layer : assetLayers) {
+			for (Asset e : layer) {
+				e.rescale(scale);
+			}
+		}
+		for (ArrayList<Entity> layer : entityLayers) {
+			for (Entity e : layer) {
+				for (Asset[] layerj : e.getAssetLayers()) {
+					for (Asset ej : layerj) {
+						ej.rescale(scale);
+					}
+				}
+			}
+		}
+		for (CollisionEntity e : collisionEntities) {
+			for (Asset[] layerj : e.getAssetLayers()) {
+				for (Asset ej : layerj) {
+					ej.rescale(scale);
+				}
+			}
+		}
+
+	}
+
 	public void delete() {
 		assetLayers = new ArrayList<ArrayList<Asset>>();
 		entityLayers = new ArrayList<ArrayList<Entity>>();
@@ -90,16 +115,16 @@ public class Scene {
 
 	}
 
-    public void keyPressed(int keyCode) {
+	public void keyPressed(int keyCode) {
 
-    }
+	}
 
-    public void keyReleased(int keyCode) {
+	public void keyReleased(int keyCode) {
 
-    }
+	}
 
-    public void keyTyped(int keyCode) {
+	public void keyTyped(int keyCode) {
 
-    }
+	}
 
 }
