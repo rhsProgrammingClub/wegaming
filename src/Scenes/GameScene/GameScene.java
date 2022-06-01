@@ -23,6 +23,8 @@ public class GameScene extends Scene {
     CooldownBar ultBarP2;
     Asset[] p1LivesDisplay;
     Asset[] p2LivesDisplay;
+    Asset p1Indicator;
+    Asset p2Indicator;
     Asset pausedBackground;
     int finalselect;
     Button exitButton;
@@ -50,6 +52,10 @@ public class GameScene extends Scene {
         if (player1.lives <= 0 || player2.lives <= 0) {
             main.setScene(4);
         }
+
+        // handle player indicator
+        p1Indicator.setPos(player1.getX(), player1.getY() - 75);
+        p2Indicator.setPos(player2.getX(), player2.getY() - 75);
 
         for (int i = 2; i >= 0; i--) {
             if (player1.lives < i + 1) {
@@ -176,10 +182,20 @@ public class GameScene extends Scene {
         pausedBackground.rescale(1.2);
         add(pausedBackground);
 
-        Asset background = new Asset("assets/backgrounds/background-1-scaled.png", new Vector2D(width / 2, height / 2),
-                0);
-        background.setVisible(true);
-        add(background);
+        // Asset background = new Asset("assets/backgrounds/background-1-scaled.png", new Vector2D(width / 2, height / 2),
+        //         0);
+        // background.setVisible(true);
+        // add(background);
+
+        // init player indicator
+        p1Indicator = new Asset("assets/misc/p1indicator.png", new Vector2D(width/2, height/2), 5);
+        p2Indicator = new Asset("assets/misc/p2indicator.png", new Vector2D(width/2, height/2), 5);
+        p1Indicator.rescale(.5);
+        p2Indicator.rescale(.5);
+        p1Indicator.setVisible(true);
+        p2Indicator.setVisible(true);
+        add(p1Indicator);
+        add(p2Indicator);
 
     }
 

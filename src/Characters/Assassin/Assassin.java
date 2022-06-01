@@ -18,11 +18,11 @@ public class Assassin extends Character {
     double temp = 1000;
 
     public Assassin(Main main){
-        super(new Vector2D(0, 0), 75, 100, 1000, main);
+        super(new Vector2D(0, 0), 75, 125, 1000, main);
     }
 
     public Assassin(Vector2D position, Main main){
-        super(position, 75, 100, 1000, main);
+        super(position, 75, 125, 1000, main);
     }
 
     @Override
