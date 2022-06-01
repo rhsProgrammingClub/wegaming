@@ -185,8 +185,8 @@ public class GameScene extends Scene {
         add(background);
 
         // init player indicator
-        p1Indicator = new Asset("assets/misc/p1indicator.png", new Vector2D(width/2, height/2), 5);
-        p2Indicator = new Asset("assets/misc/p2indicator.png", new Vector2D(width/2, height/2), 5);
+        p1Indicator = new Asset("assets/misc/p1indicator.png", new Vector2D(width/2, height/2), 2);
+        p2Indicator = new Asset("assets/misc/p2indicator.png", new Vector2D(width/2, height/2), 2);
         p1Indicator.rescale(.5);
         p2Indicator.rescale(.5);
         p1Indicator.setVisible(true);
