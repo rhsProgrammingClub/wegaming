@@ -26,11 +26,13 @@ public class GameScene extends Scene {
     Asset p1Indicator;
     Asset p2Indicator;
     Asset pausedBackground;
-    int finalselect;
+    int finalSelect;
     Button exitButton;
     Button resumeButton;
     Button resetButton;
     boolean paused = false;
+
+    String[] allMaps = {"assets/maps/default.map", "assets/maps/platformer.map", "assets/maps/staircase.map", "assets/maps/reversestaircase.map"};
 
     public GameScene(Main main) {
         super(main);
@@ -82,14 +84,9 @@ public class GameScene extends Scene {
         ground = new Ground(width * 0.5, height * 0.9, width, (int) (height * 0.2), "ground");
         add(ground);
 
-        finalselect = MapSelectScene.getmap();
-        if (finalselect == 1) {
-            new Map("assets/maps/platformer.map", this);
-        } else if (finalselect == 2) {
-            new Map("assets/maps/staircase.map", this);
-        } else if (finalselect == 3) {
-            new Map("assets/maps/reversestaircase.map", this);
-        }
+        finalSelect = MapSelectScene.getmap();
+
+        Map currentMap = new Map(allMaps[finalSelect], this);
 
         player1 = main.player1;
         player2 = main.player2;
@@ -182,10 +179,10 @@ public class GameScene extends Scene {
         pausedBackground.rescale(1.2);
         add(pausedBackground);
 
-        // Asset background = new Asset("assets/backgrounds/background-1-scaled.png", new Vector2D(width / 2, height / 2),
-        //         0);
-        // background.setVisible(true);
-        // add(background);
+        Asset background = new Asset(currentMap.backgroundPath, new Vector2D(width / 2, height / 2),
+                0);
+        background.setVisible(true);
+        add(background);
 
         // init player indicator
         p1Indicator = new Asset("assets/misc/p1indicator.png", new Vector2D(width/2, height/2), 5);

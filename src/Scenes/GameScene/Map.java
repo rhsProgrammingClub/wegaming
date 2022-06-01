@@ -1,13 +1,13 @@
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Map {
 
-    ArrayList<Ground> platforms;
+    ArrayList<Ground> platforms = new ArrayList<>();
     Scene scene;
     File mapFile;
+    String backgroundPath;
 
     public Map() {
 
@@ -22,26 +22,43 @@ public class Map {
     public void initialize() {
         if (mapFile.equals(null))
             return;
-        Scanner mapScan;
+
         try {
-            mapScan = new Scanner(mapFile);
-        } catch (FileNotFoundException ex) {
-            System.out.println(mapFile.getAbsolutePath() + " cannot be found.");
+            FileReader fr = new FileReader(mapFile);
+            String build = "";
+            int ch;
+            while ((ch=fr.read())!=-1) {
+                build += (char)ch;
+            }
+
+            String[] lines = build.split("\n");
+            for(String line : lines) {
+                // split by lines now, thank god
+                boolean isTraditional = line.matches("^(\\d.(\\d){1,} ){1,}(\\w){1,}$"); // should we use the traditional way of spawning assets?
+                String[] spaceSplit = line.split(" ");
+                if(isTraditional) {
+                    double x = Double.parseDouble(spaceSplit[0]) * Main.width;
+                    double y = Double.parseDouble(spaceSplit[1]) * Main.height;
+                    int width = (int)(Double.parseDouble(spaceSplit[2]) * Main.width);
+                    int height = (int)(Double.parseDouble(spaceSplit[3]) * Main.height);
+
+                    Ground newGround = new Ground(x,y,width,height, spaceSplit[4]);
+                    platforms.add(newGround);
+                    newGround.setVisible(true);
+                    scene.add(newGround);
+                } else if(line.matches("^assets\\/(.){1,} background$")) {
+                    backgroundPath = spaceSplit[0];
+                }
+            }
+
+            fr.close();
+                
+        } catch (Exception e) {
+            System.out.println("Caught an exception in map loading");
+            System.out.println(e);
             return;
         }
-
-        platforms = new ArrayList<>();
-
-        while (mapScan.hasNextLine()) {
-            platforms.add(new Ground(mapScan.nextDouble()*Main.width, mapScan.nextDouble()*Main.height,
-                (int)(mapScan.nextDouble()*Main.width), (int)(mapScan.nextDouble()*Main.height), 
-                mapScan.next()));
-            platforms.get(platforms.size()-1).setVisible(true);
-            scene.add(platforms.get(platforms.size()-1));
-        }
-
-        mapScan.close();
+        
         mapFile = null;
-        mapScan = null;
     }
 }
