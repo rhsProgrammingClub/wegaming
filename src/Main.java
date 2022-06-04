@@ -1,9 +1,13 @@
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.event.MouseInputListener;
 
+import ky.Asset;
 import ky.AudioPlayer;
+import ky.CollisionEntity;
+import ky.Entity;
 import ky.KYscreen;
 import ky.Vector2D;
 
@@ -11,6 +15,10 @@ public class Main extends KYscreen implements MouseInputListener {
 
     public static int width = 1500;
     public static int height = 800;
+
+    public static int STARTING_WIDTH = 1500;
+    public static int STARTING_HEIGHT = 800;
+
     public Character player1;
     public Character player2;
     public Character[][] characters;
@@ -32,13 +40,9 @@ public class Main extends KYscreen implements MouseInputListener {
     public void start() {
         mousePos = new Vector2D(0, 0);
         setTitle("Packing Some Smack!");
-        // setDebugMode(true);
+        setDebugMode(true);
         addMouseListener(this);
         addMouseMotionListener(this);
-        // backgroundMusic = new AudioPlayer("assets/SFX/background_music_test.wav");
-        // backgroundMusic.setVolume(-8);
-        // backgroundMusic.setLoop(true);
-        // backgroundMusic.play();
 
         scenes = new Scene[8];
         scenes[0] = new StartScene(this);
@@ -76,6 +80,20 @@ public class Main extends KYscreen implements MouseInputListener {
         characters[3][1] = new Assassin(this);
     }
 
+    public void setResolution(int newWidth, int newHeight) {
+        setSize(newWidth, newHeight);
+
+        width = newWidth;
+        height = newHeight;
+
+        setScene(currentScene);
+    }
+
+    public Vector2D getRelativeScaling() {
+        Vector2D ret = new Vector2D((double)width/(double)STARTING_WIDTH, (double)height/(double)STARTING_HEIGHT);
+        return ret;
+    }
+
     public void setScene(Scene scene) {
         // if(!scene.hasInitialized) {
 
@@ -88,6 +106,30 @@ public class Main extends KYscreen implements MouseInputListener {
         assetLayers = scene.getAssetLayers();
         entityLayers = scene.getEntityLayers();
         collisionEntities = scene.getCollisionEntities();
+        Vector2D factor = getRelativeScaling();
+
+        ArrayList<Asset> changed = new ArrayList<>();
+
+        for(ArrayList<Asset> aa : assetLayers) {
+            for(Asset a : aa) {
+                a.rescaleWithPos(factor);
+                changed.add(a);
+            }
+        }
+
+        for(ArrayList<Entity> ee : entityLayers) {
+            for(Entity e : ee) {
+                e.rescaleWithPos(factor, changed);
+                // e.rescaleWithPos(factor, new ArrayList<>());
+                // e.setPos(e.getX() * factor.getX(), e.getY() * factor.getY());
+            }
+        }
+
+        // There is no need to rescale collison entities, they are all in the entityLayers
+        // for(CollisionEntity ce : collisionEntities) {
+        //     ce.rescaleWithPos(factor, changed);
+        // }
+
         currentScene = scene;
 
         if (currentScene instanceof GameScene || currentScene instanceof CharacterSelectScene) {
@@ -104,6 +146,9 @@ public class Main extends KYscreen implements MouseInputListener {
     @Override
     public void keyPressed(int keyCode) {
         currentScene.keyPressed(keyCode);
+        if(keyCode == KeyEvent.VK_G) {
+            setResolution(1280, 720);
+        }
     }
 
     @Override

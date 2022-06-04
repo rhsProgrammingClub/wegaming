@@ -282,10 +282,19 @@ public class Asset {
 		return this.position.clone().getY();
 	}
 
+	public void rescale(Vector2D factor) {
+		this.width *= factor.getX();
+		this.height *= factor.getY();
+		this.rescaleFactor = Math.sqrt(factor.getX()*factor.getX() + factor.getY()*factor.getY());
+	}
+
+	public void rescaleWithPos(Vector2D factor) {
+		rescale(factor);
+		setPos(getX() * factor.getX(), getY() * factor.getY());
+	}
+
 	public void rescale(double factor) {
-		this.rescaleFactor = factor;
-		this.width *= factor;
-		this.height *= factor;
+		rescale(new Vector2D(factor, factor));
 	}
 	
 	public void setRotation(double degrees) {

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import ky.Asset;
 import ky.CollisionEntity;
 import ky.Entity;
+import ky.Vector2D;
 
 public class Scene {
 
@@ -77,7 +78,6 @@ public class Scene {
 	}
 
 	public void add(Entity entity) {
-
 		int difference = entity.getLayer() + 1 - entityLayers.size();// check if the indicated layer exists or not
 		if (difference > 0) { // if difference is greater than 0,
 			for (int i = 0; i < difference; i++) { // there needs to be filler layers to reach the indicated layer

@@ -14,7 +14,7 @@ public class Entity {
 	private String name = "";
 	private boolean visible = false;
 	private int layer;
-	private ArrayList<ArrayList<Asset>> entityAssetLayers = new ArrayList<ArrayList<Asset>>(); // assets of entity (no render order)
+	public ArrayList<ArrayList<Asset>> entityAssetLayers = new ArrayList<ArrayList<Asset>>(); // assets of entity (no render order)
 	
 	
 	public Entity(double x, double y, int layer) {
@@ -50,6 +50,18 @@ public class Entity {
 	
 	public int getLayer() {
 		return this.layer;
+	}
+
+	public void rescaleWithPos(Vector2D factor, ArrayList<Asset> compareList) {
+		for(ArrayList<Asset> aa : entityAssetLayers) {
+			for(Asset a : aa) {
+				if(!compareList.contains(a))
+					// a.rescaleWithPos(factor);
+					a.rescale(factor);
+			}
+		}
+
+		setPos(getX() * factor.getX(), getY() * factor.getY());
 	}
 	
 	public void add(Asset asset) {

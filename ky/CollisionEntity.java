@@ -43,6 +43,13 @@ public class CollisionEntity extends Entity {
 		this.xCollisionBox = new CollisionBox(position.getX(), position.getY() + collisionThreshold, collisionBoxWidth, collisionBoxHeight - 2 * collisionThreshold);
 		this.yCollisionBox = new CollisionBox(position.getX() + collisionThreshold, position.getY(), collisionBoxWidth - 2 * collisionThreshold, collisionBoxHeight);
 	}
+
+	// @TODO@ //
+	@Override
+	public void rescaleWithPos(Vector2D factor, ArrayList<Asset> compareList) {
+		super.rescaleWithPos(factor, compareList);
+		// setCollisionBoxDimensions((int)(getCollisionBox().x * factor.getX()), (int)(getCollisionBox().y * factor.getY()));
+	}
 	
 	public boolean getCollision() {
 		return this.collision;

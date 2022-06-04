@@ -19,7 +19,7 @@ public class StartScene extends Scene {
 
     @Override
     public void initialize(){
-        startscene = new Asset("assets/packingsomesmack.png", new Vector2D(width*0.5,height*0.5), width, height, 1);
+        startscene = new Asset("assets/packingsomesmack.png", new Vector2D(width*0.5,height*0.5+50), width, height, 1);
         add(startscene);
         startscene.setVisible(true);
         space = new Text("Press Space to Start", 
