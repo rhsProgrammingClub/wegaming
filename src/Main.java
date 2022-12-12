@@ -163,5 +163,5 @@ public class Main extends KYscreen implements MouseInputListener {
         System.setProperty("sun.java2d.uiScale", "1.0");
         new Main();
     }
-
+    // ASCII Numbers
 }
